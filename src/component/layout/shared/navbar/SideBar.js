@@ -49,13 +49,12 @@ const SideBar = () => {
       )}
 
       <div
-        dir="rtl"
         className={clsx(
           "fixed top-0 right-0 w-[300px] h-full bg-white z-50 shadow-xl px-4 py-5 transition-all duration-600 ease-[cubic-bezier(0.25,0.8,0.25,1)]",
           isOpen ? "translate-x-0" : "translate-x-full"
         )}
       >
-        <div className="flex justify-end mb-4">
+        <div className="flex justify-end mb-4" dir="rtl">
           <X
             className="text-[#00A693] cursor-pointer"
             onClick={() => setIsOpen(false)}
@@ -66,7 +65,7 @@ const SideBar = () => {
           <SearchNav />
         </div>
 
-        <ul className="flex flex-col gap-1 text-right px-2">
+        <ul className="flex flex-col gap-1 text-right px-2" dir="rtl">
           {navItems.map((item, index) => (
             <li key={index}>
               <div>

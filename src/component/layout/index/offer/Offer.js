@@ -94,7 +94,7 @@ const Offer = () => {
   }, []);
 
   return (
-    <div className="relative py-10 w-full md:h-[40rem] h-[31rem] mt-16 rounded-xl overflow-hidden bg-[url(/assets/img/Offer-1.jpg)] bg-no-repeat bg-top-right">
+    <div className="relative py-10 w-full md:h-[40rem] h-[31rem] mt-16 rounded-xl overflow-hidden bg-[url(/assets/img/offer-1.jpg)] bg-no-repeat bg-top-right">
       <div className="flex flex-wrap justify-center items-center content-center">
         {/*  */}
 

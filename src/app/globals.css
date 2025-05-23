@@ -1,0 +1,21 @@
+@import "tailwindcss";
+
+@theme {
+  --font-kalameh: var(--local-font-kalameh);
+}
+
+body {
+  @apply font-kalameh overflow-x-hidden;
+}
+
+@utility container {
+  @apply m-auto px-4 lg:px-24;
+}
+
+@utility flex-center {
+  @apply flex items-center justify-center;
+}
+.rtl {
+  direction: rtl;
+  text-align: right;
+}

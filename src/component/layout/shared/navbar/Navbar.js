@@ -1,0 +1,137 @@
+"use client";
+import React, { useRef, useState } from "react";
+import {
+  ShoppingBag,
+  User,
+  Search,
+  CalendarDays,
+  HelpCircle,
+  Phone,
+  ShoppingCart,
+} from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import SideBar from "./SideBar";
+
+const Navbar = () => {
+  const [submenuOpen, setSubmenuOpen] = useState(false);
+  const timeoutRef = useRef(null);
+  const pathname = usePathname();
+
+  const handleMouseEnter = () => {
+    clearTimeout(timeoutRef.current);
+    setSubmenuOpen(true);
+  };
+
+  const handleMouseLeave = () => {
+    timeoutRef.current = setTimeout(() => {
+      setSubmenuOpen(false);
+    }, 300);
+  };
+
+  const navLinks = [
+    { href: "/contact", icon: <Phone size={14} />, label: "تماس با ما" },
+    { href: "/about", icon: <HelpCircle size={14} />, label: "درباره ما" },
+    { href: "/blog", icon: <CalendarDays size={14} />, label: "وبلاگ" },
+  ];
+
+  return (
+    <header className="flex justify-between gap-4 items-center p-4 bg-white text-right border-b border-gray-200">
+      <div className="flex items-center gap-2">
+        <button className="p-3 rounded-full bg-[#F5F7FF]">
+          <ShoppingBag className="text-[#1C39BB]" size={20} />
+        </button>
+        <button className="p-3 rounded-full bg-[#F5F7FF]">
+          <Link href="/register">
+            <User className="text-[#1C39BB] " size={20} />
+          </Link>
+        </button>
+        <div className="relative max-[652px]:hidden">
+          <input
+            type="text"
+            placeholder="... جستجو"
+            className="pl-3 w-64 pr-3 outline-none py-3 text-base rounded-full bg-gray-100 text-right"
+          />
+          <Search className="absolute left-3 top-3.5 text-gray-500" size={20} />
+        </div>
+      </div>
+
+      <nav className="max-[970px]:hidden">
+        <ul className="flex gap-4 text-lg items-center">
+          {navLinks.map((item) => {
+            const isActive = pathname === item.href;
+            return (
+              <li key={item.href} className="relative group">
+                <Link
+                  href={item.href}
+                  className={`flex items-center gap-1 relative `}
+                >
+                  {item.icon}
+                  {item.label}
+                  <span
+                    className={`absolute bottom-0 left-1/2 -translate-x-1/2 h-[2px] w-full transition-transform duration-300 origin-center bg-emerald-100 ${
+                      isActive
+                        ? "scale-x-100"
+                        : "scale-x-0 group-hover:scale-x-100"
+                    }`}
+                  ></span>
+                </Link>
+              </li>
+            );
+          })}
+
+          <li
+            className="relative"
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+          >
+            <p className="flex items-center gap-1 cursor-pointer relative text-emerald-700 group">
+              <ShoppingCart size={14} />
+              فروشگاه
+              <span className="absolute bottom-0 left-1/2 -translate-x-1/2 h-[2px] w-full scale-x-0 bg-emerald-100 transition-transform duration-300 group-hover:scale-x-100 origin-center"></span>
+            </p>
+
+            {submenuOpen && (
+              <ul className="absolute top-full right-0 flex flex-col bg-gradient-to-br from-[#F8FAFC] to-[#EEF9F4] shadow-xl rounded-xl p-2 mt-2 z-50 min-w-[230px] text-sm border border-[#DCEEEE]">
+                {[
+                  { href: "/shop/category1", label: "نجوم و کیهان شناسی" },
+                  { href: "/shop/category2", label: "فیزیک و آزمایش های جذاب" },
+                  { href: "/shop/category3", label: "زیست شناسی و علوم زمین" },
+                  { href: "/shop/category4", label: "اینترنت اشیاء" },
+                  { href: "/shop/category5", label: "هوش مصنوعی و رباتیک" },
+                  { href: "/shop/category6", label: "محصولات جانبی" },
+                ].map((item) => (
+                  <li key={item.href} className="relative group">
+                    <Link
+                      href={item.href}
+                      className="block px-4 py-2 rounded-md text-[#1E293B] hover:bg-gradient-to-r from-[#CFFAFE] to-[#A7F3D0] hover:text-black transition-all duration-300 font-medium"
+                    >
+                      {item.label}
+                      <span className="absolute bottom-0 left-1/2 -translate-x-1/2 h-[2px] w-0 group-hover:w-full bg-[#10B981] transition-all duration-300 origin-center"></span>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </li>
+        </ul>
+      </nav>
+
+      <div className="flex items-center gap-2">
+        <Link href="/">
+          <Image
+            src="/assets/img/logo.svg"
+            alt="لوگو"
+            width={190}
+            height={190}
+          />
+        </Link>
+      </div>
+
+      <SideBar />
+    </header>
+  );
+};
+
+export default Navbar;

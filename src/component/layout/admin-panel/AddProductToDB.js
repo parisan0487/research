@@ -17,7 +17,7 @@ const AddProductsToDB = () => {
       producter: "تهران",
       images: [
         "/assets/img/handicrafts.png",
-        "/assets/img/handicrafts.png",
+        "/assets/img/product4.webp",
         "/assets/img/handicrafts.png",
       ],
       variants: [{ color: "مشکی", size: "2xl", stock: 10 }],
@@ -30,7 +30,7 @@ const AddProductsToDB = () => {
       description: "شکلات خوری چوبی معرق کاری",
       categories: ["b1", "b3", "b5"],
       producter: "تهران",
-      images: ["/assets/img/handicrafts.png"],
+      images: ["/assets/img/product4.webp"],
       variants: [{ color: "مشکی", size: "2xl", stock: 10 }],
     },
     {
@@ -41,7 +41,7 @@ const AddProductsToDB = () => {
       description: "شکلات خوری چوبی معرق کاری",
       categories: ["b4", "b5", "b3", "b1"],
       producter: "تهران",
-      images: ["/assets/img/handicrafts.png"],
+      images: ["/assets/img/product4.webp"],
       variants: [{ color: "مشکی", size: "2xl", stock: 10 }],
     },
   ];

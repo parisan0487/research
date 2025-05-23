@@ -91,12 +91,12 @@ const Navbar = () => {
             {submenuOpen && (
               <ul className="absolute top-full right-0 flex flex-col bg-gradient-to-br from-[#F8FAFC] to-[#EEF9F4] shadow-xl rounded-xl p-2 mt-2 z-50 min-w-[230px] text-sm border border-[#DCEEEE]">
                 {[
-                  { href: "/shop/category1", label: "نجوم و کیهان شناسی" },
-                  { href: "/shop/category2", label: "فیزیک و آزمایش های جذاب" },
-                  { href: "/shop/category3", label: "زیست شناسی و علوم زمین" },
-                  { href: "/shop/category4", label: "اینترنت اشیاء" },
-                  { href: "/shop/category5", label: "هوش مصنوعی و رباتیک" },
-                  { href: "/shop/category6", label: "محصولات جانبی" },
+                  { href: "/shop/astronomy", label: "نجوم و کیهان شناسی" },
+                  { href: "/shop/physics", label: "فیزیک و آزمایش های جذاب" },
+                  { href: "/shop/life", label: "زیست شناسی و علوم زمین" },
+                  { href: "/shop/net", label: "اینترنت اشیاء" },
+                  { href: "/shop/robot", label: "هوش مصنوعی و رباتیک" },
+                  { href: "/shop/lateral", label: "محصولات جانبی" },
                 ].map((item) => (
                   <li key={item.href} className="relative group">
                     <Link

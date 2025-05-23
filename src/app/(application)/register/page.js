@@ -39,8 +39,8 @@ export default function RegisterComp() {
 
     try {
       const endpoint = isLogin
-        ? "https://shadback-production.up.railway.app/api/users/login"
-        : "https://shadback-production.up.railway.app/api/users/register";
+        ? "https://researchback.onrender.com/api/users/login"
+        : "https://researchback.onrender.com/api/users/register";
 
       const res = await axios.post(endpoint, userData, {
         headers: { "Content-Type": "application/json" },

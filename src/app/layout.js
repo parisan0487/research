@@ -1,5 +1,6 @@
 import "./globals.css";
 import localFont from "next/font/local";
+import { Toaster } from "react-hot-toast";
 
 const kalameh = localFont({
   src: [
@@ -62,6 +63,7 @@ export default function RootLayout({ children }) {
     <html lang="fa" className={`${kalameh.variable}`}>
       <body className={`antialiased`} suppressHydrationWarning>
         {children}
+        <Toaster position="bottom-center" />
       </body>
     </html>
   );

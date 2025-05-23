@@ -1,11 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import Breadcrumb from "@/component/ui/Breadcrumb";
+import toast from "react-hot-toast";
 
 export default function RegisterComp() {
   const router = useRouter();
@@ -17,20 +16,16 @@ export default function RegisterComp() {
   const validateName = (name) => /^[\u0600-\u06FF\sA-Za-z]{3,}$/.test(name);
   const validatePhone = (phone) => /^09\d{9}$/.test(phone);
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!isLogin) {
       if (!validateName(name)) {
-        toast.info("نام کامل باید حداقل ۳ کاراکتر و فقط شامل حروف باشد.", {
-          theme: "colored",
-        });
+        toast("نام باید حداقل ۳ کاراکتر و فقط شامل حروف باشد");
         return;
       }
       if (!validatePhone(phone)) {
-        toast.info("شماره تلفن باید ۱۱ رقم و با ۰۹ شروع شود.", {
-          theme: "colored",
-        });
+        toast("شماره تلفن باید ۱۱ رقم و با ۰۹ شروع شود");
         return;
       }
     }
@@ -47,11 +42,9 @@ export default function RegisterComp() {
       });
 
       localStorage.setItem("token", res.data.token);
+
       toast.success(
-        isLogin ? "ورود موفقیت‌آمیز بود!" : "ثبت‌نام موفقیت‌آمیز بود!",
-        {
-          theme: "colored",
-        }
+        isLogin ? "ورود موفقیت‌آمیز بود" : "ثبت‌نام موفقیت‌آمیز بود"
       );
 
       setName("");
@@ -60,9 +53,11 @@ export default function RegisterComp() {
 
       router.push("/");
     } catch (err) {
-      toast.error("خطایی رخ داده است", {
-        theme: "colored",
-      });
+      const errorMessage =
+        err.response?.data?.message ||
+        "خطایی رخ داده است. لطفاً دوباره تلاش کنید.";
+      toast.error(errorMessage);
+      console.error("axios error:", err);
     }
   };
 
@@ -111,7 +106,7 @@ export default function RegisterComp() {
           <h2 className="text-2xl font-bold text-gray-800 mb-6">
             {isLogin ? "ورود به حساب" : "ایجاد حساب کاربری"}
           </h2>
-          <form>
+          <form onSubmit={handleSubmit}>
             {!isLogin && (
               <div className="mb-4">
                 <input
@@ -142,8 +137,8 @@ export default function RegisterComp() {
               />
             </div>
             <button
+              type="submit"
               className="w-full bg-green-600 text-white font-bold py-3 rounded-lg shadow-md hover:bg-[#44e4d1] transition"
-              onClick={handleSubmit}
             >
               {isLogin ? "بزن بریم" : "ثبت نام"}
             </button>

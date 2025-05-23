@@ -42,7 +42,7 @@ const AddProductsToDB = () => {
       categories: ["b4", "b5", "b3", "b1"],
       producter: "تهران",
       images: ["/assets/img/handicrafts.png"],
-      variants: [{ color: "مشکی", size: "", stock: 10 }],
+      variants: [{ color: "مشکی", size: "2xl", stock: 10 }],
     },
   ];
 

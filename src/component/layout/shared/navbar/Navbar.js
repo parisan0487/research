@@ -13,6 +13,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import SideBar from "./SideBar";
+import SearchNav from "../SearchNav";
 
 const Navbar = () => {
   const [submenuOpen, setSubmenuOpen] = useState(false);
@@ -48,12 +49,7 @@ const Navbar = () => {
           </Link>
         </button>
         <div className="relative max-[652px]:hidden">
-          <input
-            type="text"
-            placeholder="... جستجو"
-            className="pl-3 w-64 pr-3 outline-none py-3 text-base rounded-full bg-gray-100 text-right"
-          />
-          <Search className="absolute left-3 top-3.5 text-gray-500" size={20} />
+          <SearchNav />
         </div>
       </div>
 

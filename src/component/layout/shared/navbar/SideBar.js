@@ -2,6 +2,7 @@ import { useState } from "react";
 import { X, Search, ChevronDown } from "lucide-react";
 import clsx from "clsx";
 import Link from "next/link";
+import SearchNav from "../SearchNav";
 
 const SideBar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -61,13 +62,8 @@ const SideBar = () => {
           />
         </div>
 
-        <div className="flex items-center gap-2 bg-gray-100 px-3 py-2 rounded-xl mb-4">
-          <Search className="text-[#00A693]" size={18} />
-          <input
-            type="text"
-            placeholder="جستجوی محصولات"
-            className="bg-transparent outline-none text-sm w-full"
-          />
+        <div className=" mb-7">
+          <SearchNav />
         </div>
 
         <ul className="flex flex-col gap-1 text-right px-2">

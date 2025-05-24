@@ -125,7 +125,7 @@ function ProductShop({ data }) {
               setSearchQuery(e.target.value);
               setCurrentPage(1);
             }}
-            className="w-full bg-gray-200 px-4 py-3 mb-2 rounded-lg text-right"
+            className="w-full bg-gray-200 px-4 py-3 mb-2 rounded-lg text-right outline-0"
           />
           <button
             className="bg-gray-200 text-gray-700 px-4 py-2 rounded-md w-36"

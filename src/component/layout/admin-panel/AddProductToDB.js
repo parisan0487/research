@@ -12,7 +12,13 @@ const AddProductsToDB = () => {
       name: "شکلات خوری چوبی",
       discount: 97000,
       price: 697000,
-      description: "شکلات خوری چوبی معرق کاری",
+      feature: [
+        "شکلات خوری چوبی معرق کاری",
+        "دارای طراحی زیبا و منحصر به فرد",
+        "ساخته شده از مواد با کیفیت بالا",
+      ],
+      description:
+        "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و استفاده از طراحان گرافیک است.لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و استفاده از طراحان گرافیک است",
       categories: ["astronomy", "physics", "life", "net", "robot", "lateral"],
       producter: "تهران",
       images: [
@@ -27,7 +33,13 @@ const AddProductsToDB = () => {
       name: " ccشکلات خوری چوبی",
       discount: 97000,
       price: 697000,
-      description: "شکلات خوری چوبی معرق کاری",
+      feature: [
+        "شکلات خوری چوبی معرق کاری",
+        "دارای طراحی زیبا و منحصر به فرد",
+        "ساخته شده از مواد با کیفیت بالا",
+      ],
+      description:
+        "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و استفاده از طراحان گرافیک است.لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و استفاده از طراحان گرافیک است",
       categories: ["astronomy", "physics", "life", "net", "robot", "lateral"],
       producter: "تهران",
       images: ["/assets/img/product4.webp"],
@@ -38,7 +50,13 @@ const AddProductsToDB = () => {
       name: "ttشکلات خوری چوبی",
       discount: 97000,
       price: 697000,
-      description: "شکلات خوری چوبی معرق کاری",
+      feature: [
+        "شکلات خوری چوبی معرق کاری",
+        "دارای طراحی زیبا و منحصر به فرد",
+        "ساخته شده از مواد با کیفیت بالا",
+      ],
+      description:
+        "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و استفاده از طراحان گرافیک است.لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و استفاده از طراحان گرافیک است",
       categories: ["astronomy", "physics", "life", "net", "robot", "lateral"],
       producter: "تهران",
       images: ["/assets/img/product4.webp"],
@@ -49,7 +67,76 @@ const AddProductsToDB = () => {
       name: "شکلات خوری",
       discount: 97000,
       price: 697000,
-      description: "شکلات خوری چوبی معرق کاری",
+      feature: [
+        "شکلات خوری چوبی معرق کاری",
+        "دارای طراحی زیبا و منحصر به فرد",
+        "ساخته شده از مواد با کیفیت بالا",
+      ],
+      description:
+        "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و استفاده از طراحان گرافیک است.لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و استفاده از طراحان گرافیک است",
+      categories: ["astronomy", "physics", "life", "net", "robot", "lateral"],
+      producter: "تهران",
+      images: [
+        "/assets/img/handicrafts.png",
+        "/assets/img/product4.webp",
+        "/assets/img/handicrafts.png",
+      ],
+      variants: [{ color: "مشکی", size: "2xl", stock: 10 }],
+    },
+    {
+      id: "127",
+      name: "ظرف",
+      discount: 97000,
+      price: 697000,
+      feature: [
+        "شکلات خوری چوبی معرق کاری",
+        "دارای طراحی زیبا و منحصر به فرد",
+        "ساخته شده از مواد با کیفیت بالا",
+      ],
+      description:
+        "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و استفاده از طراحان گرافیک است.لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و استفاده از طراحان گرافیک است",
+      categories: ["astronomy", "physics", "life", "net", "robot", "lateral"],
+      producter: "تهران",
+      images: [
+        "/assets/img/handicrafts.png",
+        "/assets/img/product4.webp",
+        "/assets/img/handicrafts.png",
+      ],
+      variants: [{ color: "مشکی", size: "2xl", stock: 10 }],
+    },
+    {
+      id: "128",
+      name: "ظرف کاشی",
+      discount: 97000,
+      price: 697000,
+      feature: [
+        "شکلات خوری چوبی معرق کاری",
+        "دارای طراحی زیبا و منحصر به فرد",
+        "ساخته شده از مواد با کیفیت بالا",
+      ],
+      description:
+        "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و استفاده از طراحان گرافیک است.لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و استفاده از طراحان گرافیک است",
+      categories: ["astronomy", "physics", "life", "net", "robot", "lateral"],
+      producter: "تهران",
+      images: [
+        "/assets/img/handicrafts.png",
+        "/assets/img/product4.webp",
+        "/assets/img/handicrafts.png",
+      ],
+      variants: [{ color: "مشکی", size: "2xl", stock: 10 }],
+    },
+    {
+      id: "129",
+      name: "ظزف زیبا",
+      discount: 97000,
+      price: 697000,
+      feature: [
+        "شکلات خوری چوبی معرق کاری",
+        "دارای طراحی زیبا و منحصر به فرد",
+        "ساخته شده از مواد با کیفیت بالا",
+      ],
+      description:
+        "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و استفاده از طراحان گرافیک است.لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و استفاده از طراحان گرافیک است",
       categories: ["astronomy", "physics", "life", "net", "robot", "lateral"],
       producter: "تهران",
       images: [

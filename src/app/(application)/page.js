@@ -5,15 +5,26 @@ import Header from "../../component/layout/index/header/Header";
 import New from "../../component/layout/index/new/New";
 import Offer from "../../component/layout/index/offer/Offer";
 
-export default function Home() {
+export default async function Home() {
+  const res = await fetch("https://researchback.onrender.com/api/products/", {
+    cache: "no-store",
+  });
+  const allProducts = await res.json();
+
+  const offer = allProducts.filter((p) => p.categories?.includes("astronomy"));
+  const best = allProducts.filter((p) => p.categories?.includes("life"));
+  const newP = allProducts.filter((p) => p.categories?.includes("robot"));
+
+  console.log(allProducts);
+
   return (
     <div className="bg-white items-center justify-items-center min-h-screen font-kalameh font-norma">
       <Header />
-      <Offer />
+      <Offer products={offer} />
       <Baner />
-      <Best />
+      <Best products={best} />
       <Guide />
-      <New />
+      <New products={newP} />
     </div>
   );
 }

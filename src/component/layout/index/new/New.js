@@ -2,66 +2,12 @@
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Autoplay } from "swiper/modules";
-import Image from "next/image";
-import { useEffect, useState } from "react";
-
 import "swiper/css";
 import "swiper/css/navigation";
-import { ShoppingBag } from "lucide-react";
 import Link from "next/link";
+import ProductCard from "../../shared/ProductCard";
 
-const products = [
-  {
-    id: 1,
-    image: "/assets/img/product4.webp",
-    title: "بشقاب میناکاری",
-    oldPrice: 550000,
-    newPrice: 458000,
-    discount: 17,
-  },
-  {
-    id: 2,
-    image: "/assets/img/product4.webp",
-    title: "قابلمه مسی دسته دار",
-    oldPrice: 455000,
-    newPrice: 378000,
-    discount: 28,
-  },
-  {
-    id: 3,
-    image: "/assets/img/product4.webp",
-    title: "ست میناکاری قندان و فنجان",
-    oldPrice: 1530000,
-    newPrice: 1320000,
-    discount: 14,
-  },
-  {
-    id: 4,
-    image: "/assets/img/product4.webp",
-    title: "شکلات خوری چوبی معرق کاری",
-    oldPrice: 320000,
-    newPrice: 300000,
-    discount: 6,
-  },
-  {
-    id: 5,
-    image: "/assets/img/product4.webp",
-    title: "شکلات خوری چوبی معرق کاری",
-    oldPrice: 320000,
-    newPrice: 300000,
-    discount: 6,
-  },
-  {
-    id: 6,
-    image: "/assets/img/product4.webp",
-    title: "شکلات خوری چوبی معرق کاری",
-    oldPrice: 320000,
-    newPrice: 300000,
-    discount: 6,
-  },
-];
-
-const New = () => {
+const New = ({ products }) => {
   return (
     <div className="relative py-10 w-full md:h-[40rem] h-[40rem] rounded-xl overflow-hidden">
       <div className="flex items-center justify-between w-full mb-6 px-4">
@@ -105,54 +51,7 @@ const New = () => {
             >
               {products.map((product) => (
                 <SwiperSlide key={product.id}>
-                  <div
-                    className="bg-white rounded-2xl p-5 shadow-md relative text-right 
-  transition-transform duration-300 ease-in-out
-  hover:-translate-y-2 hover:z-10
-  group"
-                  >
-                    <div className="relative w-[95%] h-56 mb-4">
-                      <Image
-                        src={product.image}
-                        alt={product.title}
-                        fill
-                        className="object-contain"
-                      />
-                    </div>
-
-                    <h3 className="font-semibold text-gray-800 mb-2 text-sm">
-                      {product.title}
-                    </h3>
-
-                    {/* تخفیف و قیمت‌ها */}
-                    <div className="mb-2 text-sm">
-                      <span className="text-xs text-gray-400 line-through ml-2 block">
-                        {product.oldPrice.toLocaleString()} تومان
-                      </span>
-                      <div className="flex justify-between items-center">
-                        <button
-                          className="bg-emerald-100 text-emerald-700 text-xs font-medium px-2 py-1 rounded flex items-center gap-1
-        transition-colors duration-300
-        group-hover:bg-blue-100 group-hover:text-blue-700
-      "
-                        >
-                          <ShoppingBag
-                            size={20}
-                            className="transition-colors duration-300 group-hover:text-blue-700"
-                          />
-                          افزودن به
-                        </button>
-
-                        <span className="text-gray-800 font-bold">
-                          {product.newPrice.toLocaleString()} تومان
-                        </span>
-                      </div>
-                    </div>
-
-                    <div className="absolute top-3 right-3 bg-emerald-100 text-emerald-700 text-xs px-2 py-1 rounded-full font-bold">
-                      {product.discount}٪
-                    </div>
-                  </div>
+                  <ProductCard product={product} />
                 </SwiperSlide>
               ))}
             </Swiper>

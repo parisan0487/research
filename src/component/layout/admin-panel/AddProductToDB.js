@@ -44,6 +44,21 @@ const AddProductsToDB = () => {
       images: ["/assets/img/product4.webp"],
       variants: [{ color: "مشکی", size: "2xl", stock: 10 }],
     },
+    {
+      id: "126",
+      name: "شکلات خوری",
+      discount: 97000,
+      price: 697000,
+      description: "شکلات خوری چوبی معرق کاری",
+      categories: ["astronomy", "physics", "life", "net", "robot", "lateral"],
+      producter: "تهران",
+      images: [
+        "/assets/img/handicrafts.png",
+        "/assets/img/product4.webp",
+        "/assets/img/handicrafts.png",
+      ],
+      variants: [{ color: "مشکی", size: "2xl", stock: 10 }],
+    },
   ];
 
   const addProducts = async () => {

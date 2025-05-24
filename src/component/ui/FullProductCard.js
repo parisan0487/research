@@ -204,7 +204,7 @@ export default function FullProduct() {
             جدیدترین محصولات
           </h2>
 
-          <div className=" bg-[#44e4d1] p-16 px-3 rounded-2xl bg-[url(/assets/img/vector-3.svg)] bg-fixed">
+          <div className=" bg-[#44e4d1] p-16 px-3 rounded-2xl bg-[url(/assets/img/Vector-3.svg)] bg-fixed">
             <div className="w-[90%] md:w-full max-w-7xl mx-auto ">
               <Swiper
                 loop

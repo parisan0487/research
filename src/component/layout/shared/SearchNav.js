@@ -22,7 +22,7 @@ const SearchNav = () => {
   }, [search]);
 
   return (
-    <div className="relative w-64 h-[48px] rounded-2xl bg-[#F7F7F7] p-2 flex items-center gap-3 ml-5">
+    <div className="relative w-64 h-[48px] rounded-2xl bg-[#F7F7F7] p-2 flex items-center gap-3 md:ml-5">
       <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center shrink-0">
         <Image
           src="https://mehdibagheridev.ir/modista/wp-content/uploads/2024/12/Minimalistic-Magnifer.svg"

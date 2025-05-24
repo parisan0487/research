@@ -189,7 +189,7 @@ export default function FullProduct() {
       </div>
 
       {relatedProducts.length > 0 && (
-        <div className="mt-16">
+        <div className="mt-16 relative py-10 w-full md:h-[40rem] h-[40rem] rounded-xl overflow-hidden">
           <h2 className="sm:text-xl font-bold text-[#007F5F] mb-6 flex items-center gap-2 whitespace-nowrap flex-shrink-0">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -205,27 +205,29 @@ export default function FullProduct() {
           </h2>
 
           <div className=" bg-[#44e4d1] p-16 px-3 rounded-2xl bg-[url(/assets/img/Vector-3.svg)] bg-fixed">
-            <div className="w-[90%] md:w-full max-w-7xl mx-auto ">
-              <Swiper
-                loop
-                autoplay={{ delay: 3000, disableOnInteraction: false }}
-                slidesPerView={1}
-                spaceBetween={16}
-                breakpoints={{
-                  640: { slidesPerView: 1.5 },
-                  768: { slidesPerView: 2.5 },
-                  1024: { slidesPerView: 4 },
-                }}
-                modules={[Navigation, Autoplay]}
-                className="overflow-visible"
-                style={{ overflow: "visible" }}
-              >
-                {relatedProducts.map((product) => (
-                  <SwiperSlide key={product.id}>
-                    <ProductCard product={product} />
-                  </SwiperSlide>
-                ))}
-              </Swiper>
+            <div className="flex flex-wrap justify-center items-center content-center">
+              <div className="w-[90%] md:w-full max-w-7xl mx-auto ">
+                <Swiper
+                  loop
+                  autoplay={{ delay: 3000, disableOnInteraction: false }}
+                  slidesPerView={1}
+                  spaceBetween={16}
+                  breakpoints={{
+                    640: { slidesPerView: 1.5 },
+                    768: { slidesPerView: 2.5 },
+                    1024: { slidesPerView: 4 },
+                  }}
+                  modules={[Navigation, Autoplay]}
+                  className="overflow-visible"
+                  style={{ overflow: "visible" }}
+                >
+                  {relatedProducts.map((product) => (
+                    <SwiperSlide key={product.id}>
+                      <ProductCard product={product} />
+                    </SwiperSlide>
+                  ))}
+                </Swiper>
+              </div>
             </div>
           </div>
         </div>

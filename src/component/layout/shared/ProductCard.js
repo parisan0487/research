@@ -10,7 +10,7 @@ export default function ProductCard({ product }) {
           className="bg-white rounded-2xl p-5 shadow-md relative text-right 
   transition-transform duration-300 ease-in-out
   hover:-translate-y-2 hover:z-10
-  group"
+  group "
         >
           <div className="relative w-[95%] h-56 mb-4">
             <Image

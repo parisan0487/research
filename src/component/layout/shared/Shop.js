@@ -202,7 +202,7 @@ function ProductShop({ data }) {
                   key={product.id}
                   className="rounded-xl p-3 bg-gray-100 shadow-lg flex flex-col gap-2"
                 >
-                  <Link href={`/products/${product.id}`}>
+                  <Link href={`/products/${product.slug}`}>
                     <div className="w-full h-52 overflow-hidden rounded-lg bg-gray-100 cursor-pointer">
                       <img
                         src={mainImage}

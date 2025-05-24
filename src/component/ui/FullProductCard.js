@@ -159,10 +159,10 @@ export default function FullProduct() {
 
               <div className="flex justify-between items-center mt-6 mb-2">
                 <del className="text-gray-400 text-sm">
-                  {product?.originalPrice?.toLocaleString()} تومان
+                  {product?.discount?.toLocaleString()} تومان
                 </del>
                 <span className="bg-green-100 text-green-700 px-2 py-1 text-xs rounded-lg">
-                  {product?.discount}%
+                  15%
                 </span>
               </div>
 
@@ -184,7 +184,7 @@ export default function FullProduct() {
         </h2>
         <p className="text-gray-700 leading-relaxed text-sm">
           {product?.description ||
-            "توضیحات تکمیلی این محصول هنوز اضافه نشده است."}
+            "توضیحات تکمیلی این محصول هنوز اضافه نشده است"}
         </p>
       </div>
 

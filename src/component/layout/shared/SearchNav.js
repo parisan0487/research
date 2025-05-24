@@ -46,7 +46,7 @@ const SearchNav = () => {
         <div className="absolute top-14 left-0 w-full bg-white rounded-2xl shadow-lg p-3 flex flex-col gap-2 z-10 max-h-80 overflow-y-auto">
           {products.map((item) => (
             <Link
-              href={`/products/${item.id}`}
+              href={`/products/${item.slug}`}
               key={item.id}
               className="flex items-center justify-between gap-4 p-2 hover:bg-gray-100 rounded-xl transition-colors duration-200 cursor-pointer"
             >

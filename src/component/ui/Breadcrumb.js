@@ -11,7 +11,7 @@ function Breadcrumb({ items }) {
           <Link
             href={item.href}
             className={`transition-colors duration-200 hover:text-[#44e4d1] ${
-              i + 1 === items.length ? "text-green-600 font-semibold" : ""
+              i + 1 === items.length ? "text-[#00A693] font-semibold" : ""
             }`}
           >
             {item.text}

@@ -1,13 +1,20 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { X, Search, ChevronDown } from "lucide-react";
 import clsx from "clsx";
 import Link from "next/link";
 import SearchNav from "../SearchNav";
+import { usePathname } from "next/navigation";
 
 const SideBar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [submenuOpen, setSubmenuOpen] = useState(false);
   const currentPage = "صفحه اصلی";
+  const pathname = usePathname();
+
+  useEffect(() => {
+    setIsOpen(false);
+    setSubmenuOpen(false);
+  }, [pathname]);
 
   const navItems = [
     { title: "صفحه اصلی", href: "/" },

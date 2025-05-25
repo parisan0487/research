@@ -1,5 +1,5 @@
 "use client";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   ShoppingBag,
   User,
@@ -18,6 +18,7 @@ import SearchNav from "../SearchNav";
 const Navbar = () => {
   const [submenuOpen, setSubmenuOpen] = useState(false);
   const timeoutRef = useRef(null);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const pathname = usePathname();
 
   const handleMouseEnter = () => {
@@ -30,6 +31,13 @@ const Navbar = () => {
       setSubmenuOpen(false);
     }, 300);
   };
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    setIsLoggedIn(!!token);
+  }, []);
+
+  const linkHref = isLoggedIn ? "/account" : "/register";
 
   const navLinks = [
     { href: "/contact", icon: <Phone size={14} />, label: "تماس با ما" },
@@ -44,7 +52,7 @@ const Navbar = () => {
           <ShoppingBag className="text-[#1C39BB]" size={20} />
         </button>
         <button className="p-3 rounded-full bg-[#F5F7FF]">
-          <Link href="/register">
+          <Link href={linkHref}>
             <User className="text-[#1C39BB] " size={20} />
           </Link>
         </button>

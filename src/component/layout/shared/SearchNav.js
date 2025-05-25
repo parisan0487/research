@@ -3,13 +3,14 @@
 import { useDeferredValue, useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import axios from "axios";
+import { usePathname } from "next/navigation";
 import Fetch from "@/utils/Fetch";
 
 const SearchNav = () => {
   const [value, setValue] = useState("");
   const search = useDeferredValue(value);
   const [products, setProducts] = useState([]);
+  const pathname = usePathname();
 
   useEffect(() => {
     if (search.trim()) {
@@ -20,6 +21,12 @@ const SearchNav = () => {
       setProducts([]);
     }
   }, [search]);
+
+  useEffect(() => {
+    // پاک‌سازی جستجو و نتایج هنگام تغییر مسیر
+    setProducts([]);
+    setValue("");
+  }, [pathname]);
 
   return (
     <div className="relative w-64 h-[48px] rounded-2xl bg-[#F7F7F7] p-2 flex items-center gap-3 md:ml-5">

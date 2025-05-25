@@ -48,14 +48,16 @@ const Navbar = () => {
   return (
     <header className="flex justify-between gap-4 items-center p-4 bg-white text-right border-b border-gray-200">
       <div className="flex items-center gap-2">
-        <button className="p-3 rounded-full bg-[#F5F7FF]">
-          <ShoppingBag className="text-[#1C39BB]" size={20} />
-        </button>
-        <button className="p-3 rounded-full bg-[#F5F7FF]">
-          <Link href={linkHref}>
+        <Link href="/basket">
+          <button className="p-3 rounded-full bg-[#F5F7FF]">
+            <ShoppingBag className="text-[#1C39BB]" size={20} />
+          </button>
+        </Link>
+        <Link href={linkHref}>
+          <button className="p-3 rounded-full bg-[#F5F7FF]">
             <User className="text-[#1C39BB] " size={20} />
-          </Link>
-        </button>
+          </button>
+        </Link>
         <div className="relative max-[652px]:hidden">
           <SearchNav />
         </div>

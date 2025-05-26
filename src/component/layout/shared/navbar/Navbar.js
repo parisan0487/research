@@ -8,6 +8,9 @@ import {
   HelpCircle,
   Phone,
   ShoppingCart,
+  ShoppingBasket,
+  LucideShoppingBasket,
+  ShoppingCartIcon,
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -50,7 +53,7 @@ const Navbar = () => {
       <div className="flex items-center gap-2">
         <Link href="/basket">
           <button className="p-3 rounded-full bg-[#F5F7FF]">
-            <ShoppingBag className="text-[#1C39BB]" size={20} />
+            <ShoppingCartIcon className="text-[#1C39BB]" size={20} />
           </button>
         </Link>
         <Link href={linkHref}>

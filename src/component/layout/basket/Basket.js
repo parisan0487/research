@@ -96,28 +96,17 @@ export default function Basket() {
           </Link>
         </div>
       ) : (
-        <div className="flex flex-col-reverse md:flex-row-reverse gap-6 p-4 overflow-x-hidden text-right">
+        <div className="flex flex-col md:flex-row-reverse gap-6 p-4 overflow-x-hidden text-right">
           {/* محصولات (راست) */}
           <div className="w-full md:w-2/3 min-w-0" id="product-details">
             <div className="space-y-8 mb-[50px]">
               {cart.items.map((item) => (
                 <div
                   key={`${item.product?._id}`}
-                  className="flex flex-col sm:flex-row justify-between items-center bg-white rounded-xl shadow-md p-4 hover:scale-[1.02] transition-transform"
+                  className="flex flex-col md:flex-row-reverse justify-between items-center bg-white rounded-xl shadow-md p-4 hover:scale-[1.02] transition-transform"
                 >
-                  <div className="flex gap-2">
-                    <button className="bg-[#00A693] text-white px-3 py-1.5 rounded-full hover:bg-[#008B7A]">
-                      -
-                    </button>
-                    <p className="text-xl w-8 h-8 bg-gray-100 border border-gray-300 rounded-lg text-center leading-8">
-                      {item.quantity}
-                    </p>
-                    <button className="bg-[#44e4d1] text-white px-3 py-1.5 rounded-full hover:bg-[#29c6b5]">
-                      +
-                    </button>
-                  </div>
-
-                  <div className="flex items-center gap-4 mb-4 sm:mb-0">
+                  {/* بخش محصول + توضیحات (سمت راست در md به بالا) */}
+                  <div className="flex items-center gap-4 w-full md:w-auto justify-center md:justify-start">
                     <div>
                       <h3 className="text-base font-semibold truncate w-40">
                         {item.product?.name || "نام محصول"}
@@ -138,6 +127,19 @@ export default function Basket() {
                       height={60}
                       className="rounded-md border border-gray-300"
                     />
+                  </div>
+
+                  {/* دکمه‌های + و - (سمت چپ در md به بالا) */}
+                  <div className="flex gap-2 mt-4 md:mt-0">
+                    <button className="bg-[#00A693] text-white px-3 py-1.5 rounded-full hover:bg-[#008B7A]">
+                      -
+                    </button>
+                    <p className="text-xl w-8 h-8 bg-gray-100 border border-gray-300 rounded-lg text-center leading-8">
+                      {item.quantity}
+                    </p>
+                    <button className="bg-[#44e4d1] text-white px-3 py-1.5 rounded-full hover:bg-[#29c6b5]">
+                      +
+                    </button>
                   </div>
                 </div>
               ))}

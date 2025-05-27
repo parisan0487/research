@@ -1,15 +1,11 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
 import {
-  ShoppingBag,
   User,
-  Search,
   CalendarDays,
   HelpCircle,
   Phone,
   ShoppingCart,
-  ShoppingBasket,
-  LucideShoppingBasket,
   ShoppingCartIcon,
 } from "lucide-react";
 import Image from "next/image";
@@ -17,11 +13,13 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import SideBar from "./SideBar";
 import SearchNav from "../SearchNav";
+import useAuthStore from "@/store/authStore";
 
 const Navbar = () => {
   const [submenuOpen, setSubmenuOpen] = useState(false);
   const timeoutRef = useRef(null);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const isLoggedIn = useAuthStore((state) => state.isLoggedIn);
+  const checkAuth = useAuthStore((state) => state.checkAuth);
   const pathname = usePathname();
 
   const handleMouseEnter = () => {
@@ -36,8 +34,7 @@ const Navbar = () => {
   };
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
-    setIsLoggedIn(!!token);
+    checkAuth();
   }, []);
 
   const linkHref = isLoggedIn ? "/account" : "/register";

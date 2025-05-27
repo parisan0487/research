@@ -5,9 +5,11 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import Breadcrumb from "@/component/ui/Breadcrumb";
 import toast from "react-hot-toast";
+import useAuthStore from "@/store/authStore";
 
 export default function RegisterComp() {
   const router = useRouter();
+  const login = useAuthStore((state) => state.login);
   const [isLogin, setIsLogin] = useState(true);
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
@@ -42,6 +44,7 @@ export default function RegisterComp() {
       });
 
       localStorage.setItem("token", res.data.token);
+      login(res.data.token);
 
       toast.success(
         isLogin ? "ورود موفقیت‌آمیز بود" : "ثبت‌نام موفقیت‌آمیز بود"
@@ -52,6 +55,7 @@ export default function RegisterComp() {
       setPassword("");
 
       router.push("/");
+      router.refresh();
     } catch (err) {
       const errorMessage =
         err.response?.data?.message ||

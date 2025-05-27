@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@tanstack/react-query": "^5.77.2",
     "axios": "^1.9.0",
     "clsx": "^2.1.1",
     "lucide-react": "^0.511.0",
@@ -17,7 +18,8 @@
     "react-dom": "^19.0.0",
     "react-hot-toast": "^2.5.2",
     "react-spinners": "^0.17.0",
-    "swiper": "^11.2.7"
+    "swiper": "^11.2.7",
+    "zustand": "^5.0.5"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",

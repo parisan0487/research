@@ -1,8 +1,10 @@
 "use client";
 
 import Breadcrumb from "@/component/ui/Breadcrumb";
+import useAuthStore from "@/store/authStore";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
+import toast from "react-hot-toast";
 
 const menuItems = [
   { href: "/account/orders", label: "سفارش ها" },
@@ -18,6 +20,7 @@ function getCurrentPageTitle(pathname) {
 export default function AccountLayout({ children }) {
   const pathname = usePathname();
   const router = useRouter();
+  const logout = useAuthStore((state) => state.logout);
 
   const currentPage = getCurrentPageTitle(pathname);
 
@@ -32,8 +35,9 @@ export default function AccountLayout({ children }) {
 
   const handleLogout = () => {
     localStorage.removeItem("token");
+    logout();
+    toast.success("خروج موفقیت آمیزبود");
     router.push("/");
-    window.location.reload();
   };
 
   return (

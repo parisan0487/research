@@ -4,8 +4,8 @@ import { CreditCard, ShoppingCart, Truck } from "lucide-react";
 
 const steps = [
   { id: 1, title: "سبد خرید", icon: <ShoppingCart size={24} /> },
-  { id: 2, title: "ارسال", icon: <Truck size={24} /> },
-  { id: 3, title: "پرداخت", icon: <CreditCard size={24} /> },
+  { id: 2, title: "جزئیات پرداخت", icon: <Truck size={24} /> },
+  { id: 3, title: "تکمیل سفارش", icon: <CreditCard size={24} /> },
 ];
 
 const Stepper = ({ currentStep }) => {
@@ -28,7 +28,7 @@ const Stepper = ({ currentStep }) => {
           <div
             className={clsx(
               "flex flex-col items-center justify-center text-center transition-all",
-              "w-20 h-20 rounded-full border-4 p-4 bg-white",
+              "w-25 h-25 rounded-full border-4 p-4 bg-white",
               currentStep >= step.id
                 ? "border-[#44e4d1] text-black"
                 : "border-gray-300 text-gray-400"

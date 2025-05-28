@@ -344,11 +344,11 @@ function ProductShop({ data }) {
                 setSearchQuery(e.target.value);
                 setCurrentPage(1);
               }}
-              className="w-full bg-emerald-100 px-4 p-4 rounded-lg text-right outline-0"
+              className="w-full bg-gray-100 px-4 p-4 rounded-lg text-right outline-0"
             />
           </div>
 
-          <div className="bg-emerald-100 p-5 pb-4 rounded-2xl">
+          <div className="bg-gray-100 p-5 pb-4 rounded-2xl">
             <p className="text-lg font-bold text-center mb-4 text-gray-600 border-b">
               فیلتر بر اساس رنگ
             </p>
@@ -371,7 +371,7 @@ function ProductShop({ data }) {
             </div>
           </div>
 
-          <div className="bg-emerald-100 p-5 pb-4 mt-5 rounded-2xl">
+          <div className="bg-gray-100 p-5 pb-4 mt-5 rounded-2xl">
             <h3 className="text-lg font-bold text-center mb-4 border-b text-gray-600">
               فیلتر بر اساس سایز
             </h3>

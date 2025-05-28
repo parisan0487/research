@@ -1,19 +1,20 @@
 import Stepper from "@/component/ui/Stepper";
+import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 
 export default function Checkout() {
   return (
-    <div>
+    <div className="p-10">
       <Stepper currentStep={2} />
-      <div className="min-h-screen overflow-hidden p-5">
+      <div className="min-h-screen overflow-hidden">
         <div className="flex justify-center items-center">
-          <div className="w-full max-w-4xl shadow-xl bg-white rounded-2xl overflow-hidden">
-            <div className="md:grid-cols-2 gap-6 p-10">
+          <div className="w-full max-w-4xl  bg-white rounded-2xl overflow-hidden">
+            <div className="grid grid-cols-1  gap-6 p-6 sm:p-10">
               <div>
                 <h2 className="text-2xl font-semibold text-[#00A693] mb-6 text-center">
                   جزئیات صورت‌حساب
                 </h2>
-                <div className="grid grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                   <input
                     placeholder="نام خانوادگی"
                     className="p-3 border rounded-lg focus:ring-2 focus:ring-[#00A693] outline-none text-end"
@@ -32,7 +33,7 @@ export default function Checkout() {
                   />
                   <input
                     placeholder="آدرس خیابان"
-                    className="col-span-2 p-3 border rounded-lg focus:ring-2 focus:ring-[#00A693] outline-none text-end"
+                    className="sm:col-span-2 p-3 border rounded-lg focus:ring-2 focus:ring-[#00A693] outline-none text-end"
                   />
                   <input
                     placeholder="کدپستی"
@@ -44,7 +45,7 @@ export default function Checkout() {
                   />
                   <textarea
                     placeholder="توضیحات سفارش (اختیاری)"
-                    className="col-span-2 p-3 border rounded-lg focus:ring-2 focus:ring-[#00A693] outline-none resize-none h-32 text-end"
+                    className="sm:col-span-2 p-3 border rounded-lg focus:ring-2 focus:ring-[#00A693] outline-none resize-none h-32 text-end"
                   ></textarea>
                 </div>
                 <Link href="/basket/payment">
@@ -53,9 +54,11 @@ export default function Checkout() {
                   </button>
                 </Link>
               </div>
+
               <Link href="/basket">
-                <button className="mt-8 text-end bg-[#44e4d1] text-white p-3 rounded-lg hover:bg-[#00A693] transition-all duration-300 text-lg">
-                  برگشتن به سبد خرید
+                <button className="flex items-center justify-center gap-2 border border-gray-300 text-gray-600 hover:bg-gray-100 transition-all duration-300 px-6 py-3 rounded-xl text-base w-full sm:w-auto">
+                  <ArrowRight className="w-4 h-4" />
+                  بازگشت
                 </button>
               </Link>
             </div>

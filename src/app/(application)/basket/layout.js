@@ -31,10 +31,9 @@ export default function BasketLayout({ children }) {
   }
 
   return (
-    <>
+    <div>
       <Breadcrumb items={breadcrumbItems} />
-
-      <main className="px-3.5">{children}</main>
-    </>
+      <main className="bg-gray-100">{children}</main>
+    </div>
   );
 }

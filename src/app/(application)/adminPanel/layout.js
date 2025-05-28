@@ -2,16 +2,13 @@
 
 import Breadcrumb from "@/component/ui/Breadcrumb";
 import useAuthStore from "@/store/authStore";
-import axios from "axios";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
-import toast from "react-hot-toast";
 
 const menuItems = [
-  { href: "/account/orders", label: "سفارش ها" },
-  { href: "/account/address", label: "آدرس ها" },
-  { href: "/account/profile", label: "جزئیات حساب" },
+  { href: "/adminPanel/dashboard", label: "داشبورد آماری" },
+  { href: "/adminPanel/products", label: "محصولات" },
+  { href: "/adminPanel/orders", label: "سفارش ها" },
 ];
 
 function getCurrentPageTitle(pathname) {
@@ -19,52 +16,21 @@ function getCurrentPageTitle(pathname) {
   return found ? found.label : "پیشخوان";
 }
 
-export default function AccountLayout({ children }) {
+export default function AdminLayout({ children }) {
   const pathname = usePathname();
   const router = useRouter();
-  const [user, setUser] = useState(null);
   const logout = useAuthStore((state) => state.logout);
 
   const currentPage = getCurrentPageTitle(pathname);
 
   const breadcrumbItems = [
     { text: "صفحه اصلی", href: "/" },
-    { text: "حساب کاربری", href: "/account" },
+    { text: "پنل ادمین", href: "/adminPanel" },
   ];
 
-  if (pathname !== "/account") {
+  if (pathname !== "/adminPanel") {
     breadcrumbItems.push({ text: currentPage, href: pathname });
   }
-
-  useEffect(() => {
-    const fetchUserData = async () => {
-      try {
-        const token = localStorage.getItem("token");
-        if (!token) {
-          return;
-        }
-
-        const response = await axios.get(
-          "https://researchback.onrender.com/api/users",
-          {
-            headers: { Authorization: `Bearer ${token}` },
-          }
-        );
-
-        setUser(response.data);
-        console.log(response.data);
-      } catch (error) {}
-    };
-
-    fetchUserData();
-  }, []);
-
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-    logout();
-    toast.success("خروج موفقیت آمیزبود");
-    router.push("/");
-  };
 
   return (
     <>
@@ -91,24 +57,6 @@ export default function AccountLayout({ children }) {
                 </Link>
               </li>
             ))}
-            {user?.role === "admin" && (
-              <li>
-                <Link
-                  href="/adminPanel"
-                  className="block px-3 py-2 rounded-md transition-all text-gray-700 hover:text-[#00A693]"
-                >
-                  پنل ادمین
-                </Link>
-              </li>
-            )}
-            <li>
-              <button
-                onClick={handleLogout}
-                className="w-full text-right block px-3 py-2 rounded-md transition-all text-gray-700 hover:text-red-600"
-              >
-                خروج
-              </button>
-            </li>
           </ul>
         </aside>
 

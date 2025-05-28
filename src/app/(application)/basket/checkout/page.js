@@ -9,43 +9,43 @@ export default function Checkout() {
       <div className="min-h-screen overflow-hidden">
         <div className="flex justify-center items-center">
           <div className="w-full max-w-4xl  bg-white rounded-2xl overflow-hidden">
-            <div className="grid grid-cols-1  gap-6 p-6 sm:p-10">
+            <div className="grid grid-cols-1  shadow-xl gap-6 p-6 sm:p-10">
               <div>
-                <h2 className="text-2xl font-semibold text-[#00A693] mb-6 text-center">
+                <h1 className="text-3xl font-bold text-[#00A693] mb-10 text-center">
                   جزئیات صورت‌حساب
-                </h2>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                </h1>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 ">
                   <input
                     placeholder="نام خانوادگی"
-                    className="p-3 border rounded-lg focus:ring-2 focus:ring-[#00A693] outline-none text-end"
+                    className="p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#00A693] outline-none text-end"
                   />
                   <input
                     placeholder="نام"
-                    className="p-3 border rounded-lg focus:ring-2 focus:ring-[#00A693] outline-none text-end"
+                    className="p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#00A693] outline-none text-end"
                   />
                   <input
                     placeholder="شهر"
-                    className="p-3 border rounded-lg focus:ring-2 focus:ring-[#00A693] outline-none text-end"
+                    className="p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#00A693] outline-none text-end"
                   />
                   <input
                     placeholder="استان"
-                    className="p-3 border rounded-lg focus:ring-2 focus:ring-[#00A693] outline-none text-end"
+                    className="p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#00A693] outline-none text-end"
                   />
                   <input
                     placeholder="آدرس خیابان"
-                    className="sm:col-span-2 p-3 border rounded-lg focus:ring-2 focus:ring-[#00A693] outline-none text-end"
+                    className="sm:col-span-2 p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#00A693] outline-none text-end"
                   />
                   <input
                     placeholder="کدپستی"
-                    className="p-3 border rounded-lg focus:ring-2 focus:ring-[#00A693] outline-none text-end"
+                    className="p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#00A693] outline-none text-end"
                   />
                   <input
                     placeholder="تلفن"
-                    className="p-3 border rounded-lg focus:ring-2 focus:ring-[#00A693] outline-none text-end"
+                    className="p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#00A693] outline-none text-end"
                   />
                   <textarea
                     placeholder="توضیحات سفارش (اختیاری)"
-                    className="sm:col-span-2 p-3 border rounded-lg focus:ring-2 focus:ring-[#00A693] outline-none resize-none h-32 text-end"
+                    className="sm:col-span-2 p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#00A693] outline-none resize-none h-32 text-end"
                   ></textarea>
                 </div>
                 <Link href="/basket/payment">

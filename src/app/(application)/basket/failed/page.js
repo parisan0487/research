@@ -15,7 +15,7 @@ export default function Failed() {
             پرداخت ناموفق بود
           </h1>
           <p className="text-gray-700 text-base sm:text-lg">
-            متأسفانه پرداخت شما انجام نشد یا توسط شما لغو گردید.
+            متأسفانه پرداخت شما انجام نشد یا توسط شما لغو گردید
           </p>
           <button
             onClick={() => router.back()}

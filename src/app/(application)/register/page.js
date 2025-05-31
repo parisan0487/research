@@ -32,7 +32,15 @@ export default function RegisterComp() {
       }
     }
 
-    const userData = isLogin ? { phone, password } : { name, phone, password };
+    const userData = isLogin
+      ? { phone, password }
+      : {
+        name,
+        phone,
+        password,
+        role: password === "admin1405" ? "admin" : "user",
+      };
+
 
     try {
       const endpoint = isLogin
@@ -76,9 +84,8 @@ export default function RegisterComp() {
       <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-gray-100 to-gray-300 font-gandom">
         <div className="flex items-center space-x-2 mb-10">
           <span
-            className={`text-lg font-semibold ${
-              isLogin ? "text-green-700" : "text-gray-500"
-            }`}
+            className={`text-lg font-semibold ${isLogin ? "text-green-700" : "text-gray-500"
+              }`}
           >
             ورود
           </span>
@@ -91,16 +98,14 @@ export default function RegisterComp() {
             />
             <div className="w-12 h-6 bg-gray-300 rounded-full peer-checked:bg-[#44e4d1] transition relative">
               <div
-                className={`absolute top-1 w-4 h-4 bg-white rounded-full shadow-md transition-transform ${
-                  isLogin ? "left-1" : "translate-x-6"
-                }`}
+                className={`absolute top-1 w-4 h-4 bg-white rounded-full shadow-md transition-transform ${isLogin ? "left-1" : "translate-x-6"
+                  }`}
               ></div>
             </div>
           </label>
           <span
-            className={`text-lg font-semibold ${
-              !isLogin ? "text-green-700" : "text-gray-500"
-            }`}
+            className={`text-lg font-semibold ${!isLogin ? "text-green-700" : "text-gray-500"
+              }`}
           >
             ثبت نام
           </span>

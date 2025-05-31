@@ -1,14 +1,14 @@
 "use client";
 
-import { BarChart3, PackageCheck, ShoppingCart } from "lucide-react";
+import { BarChart3, PackageCheck, ShoppingCart, User2Icon } from "lucide-react";
 import Link from "next/link";
 
 export default function AdminPage() {
   const items = [
     {
-      title: "سفارش‌ها",
-      icon: <ShoppingCart className="w-10 h-10 text-[#00A693]" />,
-      href: "/adminPanel/orders",
+      title: "مدیریت کاربران",
+      icon: <User2Icon className="w-10 h-10 text-[#00A693]" />,
+      href: "/adminPanel/users",
     },
     {
       title: "مدیریت محصولات",
@@ -19,6 +19,11 @@ export default function AdminPage() {
       title: "داشبورد آماری",
       icon: <BarChart3 className="w-10 h-10 text-[#00A693]" />,
       href: "/adminPanel/dashboard",
+    },
+    {
+      title: "سفارش‌ها",
+      icon: <ShoppingCart className="w-10 h-10 text-[#00A693]" />,
+      href: "/adminPanel/orders",
     },
   ];
 

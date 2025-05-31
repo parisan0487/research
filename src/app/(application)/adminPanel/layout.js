@@ -8,6 +8,7 @@ import { usePathname, useRouter } from "next/navigation";
 const menuItems = [
   { href: "/adminPanel/dashboard", label: "داشبورد آماری" },
   { href: "/adminPanel/products", label: "محصولات" },
+  { href: "/adminPanel/users", label: "کاربران" },
   { href: "/adminPanel/orders", label: "سفارش ها" },
 ];
 

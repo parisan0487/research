@@ -22,7 +22,7 @@ export default function UsersPage() {
             setLoading(false);
         }
     };
-    
+
 
     const updateRole = async (id, newRole) => {
         try {
@@ -40,7 +40,7 @@ export default function UsersPage() {
             console.error("خطا در تغییر نقش:", err);
         }
     };
-    
+
 
     const deleteUser = async (id) => {
         if (!confirm("آیا از حذف کاربر مطمئن هستید؟")) return;
@@ -57,54 +57,63 @@ export default function UsersPage() {
             console.error("خطا در حذف کاربر:", err);
         }
     };
-    
+
 
     useEffect(() => {
         fetchUsers();
     }, []);
 
     return (
-        <div className="p-4 max-w-6xl mx-auto" dir="rtl">
-            <h1 className="text-2xl font-bold mb-4 text-[#00a693]">مدیریت کاربران</h1>
+        <div className="space-y-6 p-4" dir="rtl">
+            <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
+                <h1 className="text-2xl font-bold text-[#00786b]">مدیریت کاربران</h1>
+            </div>
 
             {loading ? (
                 <p>در حال بارگذاری...</p>
             ) : (
-                <div className="overflow-x-auto">
-                    <table className="min-w-full border text-right bg-white shadow-md rounded-md overflow-hidden text-sm md:text-base">
+                <div className="overflow-x-auto rounded-lg shadow-md">
+                    <table className="min-w-full bg-white text-sm">
                         <thead className="bg-[#e0f7f4] text-[#00786b]">
                             <tr>
-                                <th className="p-3">عملیات</th>
-                                <th className="p-3">نقش</th>
-                                <th className="p-3">شماره</th>
-                                <th className="p-3">نام</th>
+                                <th className="text-right py-3 px-4 font-semibold">نام</th>
+                                <th className="text-right py-3 px-4 font-semibold">شماره</th>
+                                <th className="text-right py-3 px-4 font-semibold">نقش</th>
+                                <th className="text-right py-3 px-4 font-semibold">عملیات</th>
                             </tr>
                         </thead>
                         <tbody>
                             {users.map((user) => (
                                 <tr
                                     key={user._id}
-                                    className="border-t hover:bg-[#f8fdfc] transition"
+                                    className="border-t hover:bg-[#f0fdfa] transition duration-150"
                                 >
-                                    <td className="p-3 space-x-2 space-x-reverse">
+                                    <td className="py-2 px-4 font-bold text-gray-900">
+                                        {user.name}
+                                    </td>
+                                    <td className="py-2 px-4 text-gray-700">{user.phone}</td>
+                                    <td className="py-2 px-4 text-gray-800 font-semibold">
+                                        {user.role === "admin" ? "ادمین" : "کاربر"}
+                                    </td>
+                                    <td className="py-2 px-4 flex gap-3">
                                         <button
                                             onClick={() =>
-                                                updateRole(user._id, user.role === "admin" ? "user" : "admin")
+                                                updateRole(
+                                                    user._id,
+                                                    user.role === "admin" ? "user" : "admin"
+                                                )
                                             }
-                                            className="text-white bg-[#00a693] px-3 py-1 rounded hover:bg-[#00917d] text-sm"
+                                            className="text-[#00786b] hover:underline font-medium"
                                         >
                                             تغییر نقش
                                         </button>
                                         <button
                                             onClick={() => deleteUser(user._id)}
-                                            className="text-red-600 hover:underline text-sm"
+                                            className="text-red-600 hover:underline font-medium"
                                         >
                                             حذف
                                         </button>
                                     </td>
-                                    <td className="p-3">{user.role}</td>
-                                    <td className="p-3">{user.phone}</td>
-                                    <td className="p-3">{user.name}</td>
                                 </tr>
                             ))}
                         </tbody>

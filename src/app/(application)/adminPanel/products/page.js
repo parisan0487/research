@@ -22,15 +22,18 @@ export default function ProductsPage() {
 
     return (
         <div className="space-y-6 p-4">
-            <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
+            <div className="flex justify-between items-center gap-2 flex-nowrap overflow-hidden">
                 <Link
                     href="/adminPanel/products/new"
-                    className="bg-[#00a693] hover:bg-[#00917d] text-white px-5 py-2 rounded-md text-sm font-semibold transition duration-200"
+                    className="bg-[#00a693] hover:bg-[#00917d] text-white px-3 sm:px-5 py-1.5 sm:py-2 rounded-md text-xs sm:text-sm font-semibold transition duration-200 whitespace-nowrap"
                 >
                     + محصول جدید
                 </Link>
-                <h1 className="text-2xl font-bold text-[#00786b]">مدیریت محصولات</h1>
+                <h1 className="text-lg sm:text-2xl font-bold text-[#00786b] whitespace-nowrap truncate">
+                    مدیریت محصولات
+                </h1>
             </div>
+
 
             <div className="overflow-x-auto rounded-lg shadow-md">
                 <table className="min-w-full bg-white text-sm">

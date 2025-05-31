@@ -23,7 +23,7 @@ export default function NewProductPage() {
 
             router.push("/adminPanel/products");
         } catch (error) {
-            console.error("Add Product Error:", error); // ← این خیلی کمک می‌کنه
+            console.error("Add Product Error:", error); 
             res.status(500).json({ message: "خطا در افزودن محصول" });
         }
 

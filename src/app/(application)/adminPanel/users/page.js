@@ -1,10 +1,13 @@
 "use client";
 
+import MiniLoading from "@/component/layout/loading/MiniLoading";
 import { useEffect, useState } from "react";
 
 export default function UsersPage() {
     const [users, setUsers] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [updatingUserId, setUpdatingUserId] = useState(null);
+    const [deletingUserId, setDeletingUserId] = useState(null);
 
     const fetchUsers = async () => {
         try {
@@ -25,6 +28,7 @@ export default function UsersPage() {
 
 
     const updateRole = async (id, newRole) => {
+        setUpdatingUserId(id);
         try {
             const token = localStorage.getItem("token");
             await fetch(`https://researchback.onrender.com/api/users/${id}`, {
@@ -35,15 +39,18 @@ export default function UsersPage() {
                 },
                 body: JSON.stringify({ role: newRole }),
             });
-            fetchUsers();
+            await fetchUsers();
         } catch (err) {
             console.error("خطا در تغییر نقش:", err);
+        } finally {
+            setUpdatingUserId(null);
         }
     };
 
 
     const deleteUser = async (id) => {
         if (!confirm("آیا از حذف کاربر مطمئن هستید؟")) return;
+        setDeletingUserId(id);
         try {
             const token = localStorage.getItem("token");
             await fetch(`https://researchback.onrender.com/api/users/${id}`, {
@@ -52,12 +59,13 @@ export default function UsersPage() {
                     "Authorization": `Bearer ${token}`
                 }
             });
-            fetchUsers();
+            await fetchUsers();
         } catch (err) {
             console.error("خطا در حذف کاربر:", err);
+        } finally {
+            setDeletingUserId(null);
         }
     };
-
 
     useEffect(() => {
         fetchUsers();
@@ -70,7 +78,7 @@ export default function UsersPage() {
             </div>
 
             {loading ? (
-                <p>در حال بارگذاری...</p>
+                <MiniLoading />
             ) : (
                 <div className="overflow-x-auto rounded-lg shadow-md">
                     <table className="min-w-full bg-white text-sm">
@@ -105,13 +113,13 @@ export default function UsersPage() {
                                             }
                                             className="text-[#00786b] hover:underline font-medium"
                                         >
-                                            تغییر نقش
+                                            {updatingUserId === user._id ? "در حال تغییر..." : "تغییر نقش"}
                                         </button>
                                         <button
                                             onClick={() => deleteUser(user._id)}
                                             className="text-red-600 hover:underline font-medium"
                                         >
-                                            حذف
+                                           {deletingUserId === user._id ? "در حال حذف..." : "حذف"}
                                         </button>
                                     </td>
                                 </tr>

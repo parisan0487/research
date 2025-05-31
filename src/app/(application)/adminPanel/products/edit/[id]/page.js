@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import ProductForm from "../../components/ProductForm";
+import MiniLoading from "@/component/layout/loading/MiniLoading";
 
 export default function EditProductPage() {
     const { id } = useParams();
@@ -24,7 +25,7 @@ export default function EditProductPage() {
         router.push("/adminPanel/products");
     };
 
-    if (!product) return <p>در حال بارگذاری</p>;
+    if (!product) return <MiniLoading />;
 
     return (
         <div className="max-w-2xl mx-auto mt-8 px-4">

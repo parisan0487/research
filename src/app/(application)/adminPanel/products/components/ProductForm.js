@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 
 export default function ProductForm({ initialData = {}, onSubmit }) {
+    const [isSubmitting, setIsSubmitting] = useState(false);
     const [formData, setFormData] = useState({
         name: "",
         price: "",
@@ -19,6 +20,7 @@ export default function ProductForm({ initialData = {}, onSubmit }) {
         variantInput: { color: "", size: "", stock: "", price: "" },
         ...initialData,
     });
+
 
     useEffect(() => {
         if (initialData?.categories) {
@@ -84,25 +86,32 @@ export default function ProductForm({ initialData = {}, onSubmit }) {
         }));
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
+        setIsSubmitting(true);
 
-        const dataToSend = {
-            ...formData,
-            price: Number(formData.price),
-            discount: Number(formData.discount),
-            producter: formData.producter || "نامشخص",
-        };
+        try {
+            const dataToSend = {
+                ...formData,
+                price: Number(formData.price),
+                discount: Number(formData.discount),
+                producter: formData.producter || "نامشخص",
+            };
+
+            delete dataToSend.categoryInput;
+            delete dataToSend.featureInput;
+            delete dataToSend.imagesInput;
+            delete dataToSend.variantInput;
 
 
-        delete dataToSend.categoryInput;
-        delete dataToSend.featureInput;
-        delete dataToSend.imagesInput;
-        delete dataToSend.variantInput;
-
-        console.log("Data being sent:", dataToSend);
-        onSubmit(dataToSend);
+            await onSubmit(dataToSend);
+        } catch (err) {
+            console.error("خطا در ذخیره محصول:", err);
+        } finally {
+            setIsSubmitting(false);
+        }
     };
+
 
 
     return (
@@ -343,10 +352,12 @@ export default function ProductForm({ initialData = {}, onSubmit }) {
 
             <button
                 type="submit"
-                className="bg-[#00a693] text-white px-6 py-2 rounded font-bold hover:bg-[#00917d]"
+                disabled={isSubmitting}
+                className="bg-[#00a693] text-white px-6 py-2 rounded font-bold hover:bg-[#00917d] disabled:opacity-50"
             >
-                ذخیره محصول
+                {isSubmitting ? "در حال ذخیره..." : "ذخیره محصول"}
             </button>
+
         </form>
     );
 }

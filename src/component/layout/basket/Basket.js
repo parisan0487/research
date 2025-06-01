@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import MiniLoading from "../loading/MiniLoading";
+import toast from "react-hot-toast";
 
 export default function Basket() {
   const [cart, setCart] = useState(null);
@@ -49,6 +50,7 @@ export default function Basket() {
             `https://researchback.onrender.com/api/cart/remove/${productId}`,
             { headers: { Authorization: `Bearer ${token}` } }
           );
+          toast.success("محصول با موفقیت حذف شد")
         } else {
           await axios.post(
             "https://researchback.onrender.com/api/cart/add",

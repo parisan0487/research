@@ -10,6 +10,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Autoplay } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
+import toast from "react-hot-toast";
 
 export default function FullProduct() {
   const [product, setProduct] = useState();
@@ -17,7 +18,6 @@ export default function FullProduct() {
   const [relatedProducts, setRelatedProducts] = useState([]);
 
   const params = useParams();
-  console.log(params.id);
   const slug = params.id;
 
   useEffect(() => {
@@ -56,10 +56,10 @@ export default function FullProduct() {
           },
         }
       );
-      alert("محصول با موفقیت به سبد خرید اضافه شد");
+      toast.success("محصول با موفقیت به سبد خرید اضافه شد");
       console.log(response);
     } catch (err) {
-      alert("خطا در افزودن محصول به سبد خرید");
+      toast.error("خطا در افزودن محصول به سبد خرید");
       console.error("Add to cart error:", err.response?.data || err.message);
     }
   };

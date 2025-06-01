@@ -6,6 +6,7 @@ import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import useOrderStore from "@/store/useOrderStore";
+import toast from "react-hot-toast";
 
 export default function Checkout() {
   const router = useRouter();
@@ -50,11 +51,11 @@ export default function Checkout() {
     const newErrors = {};
     if (!formData.firstName) newErrors.firstName = "پر کردن این فیلد الزامی است";
     if (!formData.lastName) newErrors.lastName = "پر کردن این فیلد الزامی است";
-    if (!formData.city) newErrors.city = "پر کردن این فیلد الزامی است";
-    if (!formData.province) newErrors.province = "پر کردن این فیلد الزامی است";
+    if (!formData.city) newErrors.city = "شهر الزامی است";
+    if (!formData.province) newErrors.province = "استان الزامی است";
     if (!formData.address) newErrors.address = "پر کردن این فیلد الزامی است";
-    if (!formData.postalCode) newErrors.postalCode = "پر کردن این فیلد الزامی است";
-    if (!formData.phone) newErrors.phone = "پر کردن این فیلد الزامی است";
+    if (!formData.postalCode) newErrors.postalCode = "کد پستی باید ۱۰ رقم باشد";
+    if (!formData.phone) newErrors.phone = "شماره تلفن باید 11 رقم باشد";
     return newErrors;
   };
 
@@ -106,10 +107,10 @@ export default function Checkout() {
 
         router.push("/basket/payment");
       } else {
-        alert("خطا در ثبت سفارش");
+        toast.error("خطا در ثبت سفارش");
       }
     } catch (err) {
-      alert("ارتباط با سرور برقرار نشد");
+      toast.error("ارتباط با سرور برقرار نشد");
     }
   };
 
@@ -122,7 +123,7 @@ export default function Checkout() {
           placeholder={placeholder}
           value={formData[name]}
           onChange={handleChange}
-          className={`p-3 border ${errors[name] ? "border-red-400" : "border-gray-300"
+          className={`p-3 border  "border-gray-300"
             } rounded-lg focus:ring-2 focus:ring-[#00A693] outline-none resize-none h-32 text-end`}
         />
       ) : (
@@ -131,7 +132,7 @@ export default function Checkout() {
           placeholder={placeholder}
           value={formData[name]}
           onChange={handleChange}
-          className={`p-3 border ${errors[name] ? "border-red-400" : "border-gray-300"
+          className={`p-3 border "border-gray-300"
             } rounded-lg focus:ring-2 focus:ring-[#00A693] outline-none text-end`}
         />
       )}

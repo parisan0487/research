@@ -176,7 +176,7 @@ export default function ProductForm({ initialData = {}, onSubmit }) {
             {/* دسته‌بندی‌ها */}
             <div>
                 <label className="block mb-1 font-semibold text-[#00a693]">دسته‌بندی‌ها</label>
-                <div className="flex gap-2">
+                <div className="sm:flex gap-2 grid">
                     <input
                         name="categoryInput"
                         value={formData.categoryInput}
@@ -192,7 +192,7 @@ export default function ProductForm({ initialData = {}, onSubmit }) {
                         افزودن
                     </button>
                 </div>
-                <div className="mt-2 flex flex-wrap gap-2">
+                <div className="mt-3 flex flex-wrap gap-2">
                     {formData.categories.map((cat, idx) => (
                         <span
                             key={idx}
@@ -214,7 +214,7 @@ export default function ProductForm({ initialData = {}, onSubmit }) {
             {/* تصاویر */}
             <div>
                 <label className="block mb-1 font-semibold text-[#00a693]">تصاویر (URL)</label>
-                <div className="flex gap-2">
+                <div className="sm:flex gap-2 grid">
                     <input
                         name="imagesInput"
                         value={formData.imagesInput}
@@ -230,7 +230,7 @@ export default function ProductForm({ initialData = {}, onSubmit }) {
                         افزودن
                     </button>
                 </div>
-                <ul className="mt-2 list-disc pr-5 text-sm text-gray-700">
+                <ul className="mt-5 list-disc pr-5 text-sm text-gray-700">
                     {formData.images.map((url, idx) => (
                         <li key={idx} className="flex items-center justify-between">
                             {url}
@@ -248,7 +248,7 @@ export default function ProductForm({ initialData = {}, onSubmit }) {
             {/* ویژگی‌ها */}
             <div>
                 <label className="block mb-1 font-semibold text-[#00a693]">ویژگی‌ها</label>
-                <div className="flex gap-2">
+                <div className="sm:flex gap-2 grid">
                     <input
                         name="featureInput"
                         value={formData.featureInput}
@@ -264,7 +264,7 @@ export default function ProductForm({ initialData = {}, onSubmit }) {
                         افزودن
                     </button>
                 </div>
-                <div className="mt-2 flex flex-wrap gap-2">
+                <div className="mt-5 flex flex-wrap gap-2">
                     {formData.feature.map((f, idx) => (
                         <span
                             key={idx}
@@ -286,7 +286,7 @@ export default function ProductForm({ initialData = {}, onSubmit }) {
             {/* واریانت‌ها */}
             <div>
                 <label className="block mb-1 font-semibold text-[#00a693]">تنوع‌ها (variants)</label>
-                <div className="grid grid-cols-4 gap-2">
+                <div className="sm:flex gap-2 grid">
                     <input
                         name="color"
                         placeholder="رنگ"
@@ -321,12 +321,12 @@ export default function ProductForm({ initialData = {}, onSubmit }) {
                 <button
                     type="button"
                     onClick={addVariant}
-                    className="mt-2 bg-[#00a693] text-white px-4 py-2 rounded"
+                    className="mt-5 bg-[#00a693] text-white px-4 py-2 rounded"
                 >
                     افزودن تنوع
                 </button>
 
-                <ul className="mt-3 text-sm text-gray-700 space-y-1">
+                <ul className="mt-5 text-sm text-gray-700 space-y-1">
                     {formData.variants.map((v, idx) => (
                         <li key={idx} className="flex justify-between items-center bg-[#f0fdfa] px-3 py-2 rounded">
                             <span>

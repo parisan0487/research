@@ -39,6 +39,33 @@ export default function FullProduct() {
     fetchProduct();
   }, [slug]);
 
+
+  const addToCart = async () => {
+    try {
+      const token = localStorage.getItem("token");
+      console.log("Adding product:", product?.id);
+      const response = await axios.post(
+        "https://researchback.onrender.com/api/cart/add",
+        {
+          productId: product._id,
+          quantity: 1,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      alert("محصول با موفقیت به سبد خرید اضافه شد");
+      console.log(response);
+    } catch (err) {
+      alert("خطا در افزودن محصول به سبد خرید");
+      console.error("Add to cart error:", err.response?.data || err.message);
+    }
+  };
+
+
+
   useEffect(() => {
     if (!product || !product.categories) return;
 
@@ -84,11 +111,10 @@ export default function FullProduct() {
                 <button
                   key={i}
                   onClick={() => setSelectedImageIndex(i)}
-                  className={`w-16 h-16 rounded border-2 ${
-                    selectedImageIndex === i
-                      ? "border-green-500"
-                      : "border-transparent"
-                  } overflow-hidden`}
+                  className={`w-16 h-16 rounded border-2 ${selectedImageIndex === i
+                    ? "border-green-500"
+                    : "border-transparent"
+                    } overflow-hidden`}
                 >
                   <Image
                     src={img}
@@ -171,7 +197,10 @@ export default function FullProduct() {
               </div>
             </div>
 
-            <button className="w-full bg-[#00B386] hover:bg-[#009C73] text-white font-semibold py-2 rounded-xl transition">
+            <button
+              onClick={addToCart}
+              className="w-full bg-[#00B386] hover:bg-[#009C73] text-white font-semibold py-2 rounded-xl transition"
+            >
               افزودن به سبد خرید
             </button>
           </div>

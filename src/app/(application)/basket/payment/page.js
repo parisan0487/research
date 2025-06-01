@@ -1,13 +1,26 @@
 "use client";
 
 import Stepper from "@/component/ui/Stepper";
+import useOrderStore from "@/store/useOrderStore";
 import { CreditCard, ArrowRight } from "lucide-react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
 
 export default function Payment() {
   const router = useRouter();
+  const { orderId, amount } = useOrderStore();
+  const [loading, setLoading] = useState(true);
+  
+  useEffect(() => {
+    if (orderId && amount) {
+      setLoading(false);
+    }
+  }, [orderId, amount]);
+
 
   const handlePay = async () => {
+    if (!amount) return;
+
     try {
       const res = await fetch("https://researchback.onrender.com/api/payment", {
         method: "POST",
@@ -15,8 +28,9 @@ export default function Payment() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          amount: 10000,
-          description: "خرید تستی از فروشگاه",
+          amount,
+          description: `پرداخت سفارش شماره ${orderId}`,
+          orderId,
         }),
       });
 
@@ -26,8 +40,7 @@ export default function Payment() {
         window.location.href = data.url;
       } else {
         alert(
-          `پرداخت ناموفق بود: ${
-            data?.message || data?.error || "خطای ناشناخته"
+          `پرداخت ناموفق بود: ${data?.message || data?.error || "خطای ناشناخته"
           }`
         );
         console.error("❌ Server error:", data);
@@ -38,6 +51,8 @@ export default function Payment() {
     }
   };
 
+  if (loading) return <p>در حال بارگذاری...</p>;
+
   return (
     <div className="min-h-screen bg-gray-50 p-5 sm:p-10">
       <Stepper currentStep={3} />
@@ -47,7 +62,7 @@ export default function Payment() {
         </h2>
         <p className="text-gray-600 mb-8 text-base sm:text-lg">
           مبلغ قابل پرداخت:{" "}
-          <span className="font-semibold text-black">10,000 تومان</span>
+          <span className="font-semibold text-black">{amount?.toLocaleString()} تومان</span>
           <br />
           با کلیک روی دکمه زیر، به درگاه بانکی متصل خواهید شد
         </p>

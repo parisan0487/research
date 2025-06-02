@@ -72,54 +72,65 @@ export default function UsersPage() {
     }, []);
 
     return (
-        <div className="space-y-6 p-4" dir="rtl">
-            <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
-                <h1 className="text-2xl font-bold text-[#00786b]">مدیریت کاربران</h1>
-            </div>
+        <div className="min-h-screen p-6" dir="rtl">
+            <h1 className="mb-8 text-3xl font-extrabold text-[#00786b] drop-shadow-md">
+                مدیریت کاربران
+            </h1>
 
             {loading ? (
                 <MiniLoading />
             ) : (
-                <div className="overflow-x-auto rounded-lg shadow-md">
-                    <table className="min-w-full bg-white text-sm">
-                        <thead className="bg-[#e0f7f4] text-[#00786b]">
+                <div className="overflow-x-auto rounded-xl shadow-lg border border-[#00a693] bg-white">
+                    <table className="min-w-full text-sm text-gray-800">
+                        <thead className="bg-[#00a693] text-white select-none">
                             <tr>
-                                <th className="text-right py-3 px-4 font-semibold">نام</th>
-                                <th className="text-right py-3 px-4 font-semibold">شماره</th>
-                                <th className="text-right py-3 px-4 font-semibold">نقش</th>
-                                <th className="text-right py-3 px-4 font-semibold">عملیات</th>
+                                <th className="text-right py-4 px-6 font-semibold tracking-wider">نام</th>
+                                <th className="text-right py-4 px-6 font-semibold tracking-wider">شماره</th>
+                                <th className="text-right py-4 px-6 font-semibold tracking-wider">نقش</th>
+                                <th className="text-right py-4 px-6 font-semibold tracking-wider">عملیات</th>
                             </tr>
                         </thead>
                         <tbody>
+                            {users.length === 0 && (
+                                <tr>
+                                    <td colSpan={4} className="text-center py-6 text-gray-500">
+                                        هیچ کاربری یافت نشد
+                                    </td>
+                                </tr>
+                            )}
                             {users.map((user) => (
                                 <tr
                                     key={user._id}
-                                    className="border-t hover:bg-[#f0fdfa] transition duration-150"
+                                    className="border-t border-gray-200 hover:bg-[#d4f5ef] transition-colors duration-200 cursor-pointer"
                                 >
-                                    <td className="py-2 px-4 font-bold text-gray-900">
-                                        {user.name}
+                                    <td className="py-3 px-6 font-semibold">{user.name}</td>
+                                    <td className="py-3 px-6">{user.phone || "-"}</td>
+                                    <td className="py-3 px-6 font-medium">
+                                        <span
+                                            className={`px-3 py-1 rounded-full text-white ${user.role === "admin" ? "bg-green-600" : "bg-gray-400"
+                                                }`}
+                                        >
+                                            {user.role === "admin" ? "ادمین" : "کاربر"}
+                                        </span>
                                     </td>
-                                    <td className="py-2 px-4 text-gray-700">{user.phone}</td>
-                                    <td className="py-2 px-4 text-gray-800 font-semibold">
-                                        {user.role === "admin" ? "ادمین" : "کاربر"}
-                                    </td>
-                                    <td className="py-2 px-4 flex gap-3">
+                                    <td className="py-3 px-6 flex gap-4">
                                         <button
                                             onClick={() =>
-                                                updateRole(
-                                                    user._id,
-                                                    user.role === "admin" ? "user" : "admin"
-                                                )
+                                                updateRole(user._id, user.role === "admin" ? "user" : "admin")
                                             }
-                                            className="text-[#00786b] hover:underline font-medium"
+                                            disabled={updatingUserId === user._id}
+                                            className={`text-[#00786b] font-semibold hover:underline transition ${updatingUserId === user._id ? "opacity-60 cursor-wait" : ""
+                                                }`}
                                         >
                                             {updatingUserId === user._id ? "در حال تغییر..." : "تغییر نقش"}
                                         </button>
                                         <button
                                             onClick={() => deleteUser(user._id)}
-                                            className="text-red-600 hover:underline font-medium"
+                                            disabled={deletingUserId === user._id}
+                                            className={`text-red-600 font-semibold hover:underline transition ${deletingUserId === user._id ? "opacity-60 cursor-wait" : ""
+                                                }`}
                                         >
-                                           {deletingUserId === user._id ? "در حال حذف..." : "حذف"}
+                                            {deletingUserId === user._id ? "در حال حذف..." : "حذف"}
                                         </button>
                                     </td>
                                 </tr>

@@ -2,6 +2,7 @@
 
 import MiniLoading from "@/component/layout/loading/MiniLoading";
 import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 
 export default function OrdersPage() {
   const [orders, setOrders] = useState([]);
@@ -53,11 +54,11 @@ export default function OrdersPage() {
       if (res.ok && data.url) {
         window.location.href = data.url;
       } else {
-        alert(`پرداخت ناموفق بود: ${data?.message || data?.error || "خطای ناشناخته"}`);
+        toast.error(`پرداخت ناموفق بود: ${data?.message || data?.error || "خطای ناشناخته"}`);
         console.error("❌ Server error:", data);
       }
     } catch (err) {
-      alert("خطا در برقراری ارتباط با سرور");
+      toast.error("خطا در برقراری ارتباط با سرور");
       console.error("❌ Fetch error:", err);
     }
   };

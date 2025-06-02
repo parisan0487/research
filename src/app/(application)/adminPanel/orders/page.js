@@ -21,6 +21,7 @@ export default function AdminOrdersPage() {
 
                 const data = await res.json();
                 setOrders(data);
+                console.log(data)
             } catch (err) {
                 console.error("خطا در گرفتن سفارشات:", err);
             } finally {
@@ -35,7 +36,7 @@ export default function AdminOrdersPage() {
 
     return (
         <div className="p-6 bg-[#f8f9fa] min-h-screen text-right rtl">
-            <h1 className="text-2xl font-bold text-[#00A693] mb-6 border-b-4 border-[#00A693] pb-2 w-fit">
+            <h1 className="mb-8 text-3xl font-extrabold text-[#00786b] drop-shadow-md">
                 سفارشات کاربران
             </h1>
 

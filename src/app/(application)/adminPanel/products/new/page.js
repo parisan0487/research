@@ -1,5 +1,6 @@
 "use client"
 
+import toast from "react-hot-toast";
 import ProductForm from "../components/ProductForm";
 import { useRouter } from "next/navigation";
 
@@ -17,7 +18,7 @@ export default function NewProductPage() {
             if (!res.ok) {
                 const err = await res.json();
                 console.error("Server error:", err);
-                alert("خطا در افزودن محصول. لطفاً ورودی‌ها را بررسی کنید.");
+                toast.error("خطا در افزودن محصول. لطفاً ورودی‌ها را بررسی کنید");
                 return;
             }
 

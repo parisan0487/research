@@ -70,7 +70,7 @@ export default function Checkout() {
     const token = localStorage.getItem("token");
 
     if (!cart || cart.items.length === 0) {
-      alert("سبد خرید شما خالی است");
+      toast("سبد خرید شما خالی است");
       return;
     }
 

@@ -27,61 +27,66 @@ export default function ProductsPage() {
     };
 
     return (
-        <div className="space-y-6 p-4">
-            <div className="flex justify-between items-center gap-2 flex-nowrap overflow-hidden">
-                <Link
-                    href="/adminPanel/products/new"
-                    className="bg-[#00a693] hover:bg-[#00917d] text-white px-3 sm:px-5 py-1.5 sm:py-2 rounded-md text-xs sm:text-sm font-semibold transition duration-200 whitespace-nowrap"
-                >
-                    + محصول جدید
-                </Link>
-                <h1 className="text-lg sm:text-2xl font-bold text-[#00786b] whitespace-nowrap truncate">
+        <div className="min-h-screen p-6 " dir="rtl">
+            <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3 overflow-hidden mb-8">
+                <h1 className="text-3xl  font-extrabold text-[#00786b] drop-shadow-md text-center sm:text-right">
                     مدیریت محصولات
                 </h1>
+                <Link
+                    href="/adminPanel/products/new"
+                    className="bg-[#00a693] hover:bg-[#00917d] text-white px-4 py-2 rounded-lg text-sm font-semibold shadow-md transition duration-300 whitespace-nowrap select-none text-center sm:text-right"
+                >
+                    محصول جدید +
+                </Link>
             </div>
 
+
             {loading ? (
-               <MiniLoading />
+                <MiniLoading />
             ) : (
-                <div className="overflow-x-auto rounded-lg shadow-md">
-                    <table className="min-w-full bg-white text-sm">
-                        <thead className="bg-[#e0f7f4] text-[#00786b]">
+                <div className="overflow-x-auto rounded-xl shadow-lg border border-[#00a693] bg-white">
+                    <table className="min-w-full text-gray-800 text-sm">
+                        <thead className="bg-[#00a693] text-white select-none">
                             <tr>
-                                <th className="text-right py-3 px-4 font-semibold">عملیات</th>
-                                <th className="text-right py-3 px-4 font-semibold">دسته‌بندی</th>
-                                <th className="text-right py-3 px-4 font-semibold">قیمت</th>
-                                <th className="text-right py-3 px-4 font-semibold">نام</th>
+                                <th className="text-right py-4 px-6 font-semibold tracking-wider">نام</th>
+                                <th className="text-right py-4 px-6 font-semibold tracking-wider">قیمت</th>
+                                <th className="text-right py-4 px-6 font-semibold tracking-wider">دسته‌بندی</th>
+                                <th className="text-right py-4 px-6 font-semibold tracking-wider">عملیات</th>
                             </tr>
                         </thead>
                         <tbody>
+                            {products.length === 0 && (
+                                <tr>
+                                    <td colSpan={4} className="text-center py-6 text-gray-500">
+                                        محصولی یافت نشد
+                                    </td>
+                                </tr>
+                            )}
                             {products.map((product) => (
                                 <tr
                                     key={product._id}
-                                    className="border-t hover:bg-[#f0fdfa] transition duration-150"
-                                    dir="rtl"
+                                    className="border-t border-gray-200 hover:bg-[#d4f5ef] transition-colors duration-200 cursor-pointer"
                                 >
-                                    <td className="py-2 px-4 flex gap-3">
-                                        <Link
-                                            href={`/adminPanel/products/edit/${product._id}`}
-                                            className="text-[#00786b] hover:underline font-medium"
-                                        >
-                                            ویرایش
-                                        </Link>
+                                    <td className="py-3 px-6 font-bold text-gray-900">{product.name}</td>
+                                    <td className="py-3 px-6 font-semibold text-gray-800">
+                                        {product.price.toLocaleString()} تومان
+                                    </td>
+                                    <td className="py-3 px-6 text-gray-700">
+                                        {product.categories?.join("، ") || "-"}
+                                    </td>
+                                    <td className="py-3 px-6 flex gap-5 justify-start">
                                         <button
                                             onClick={() => handleDelete(product._id)}
-                                            className="text-red-600 hover:underline font-medium"
+                                            className="text-red-600 font-semibold hover:underline transition select-none"
                                         >
                                             حذف
                                         </button>
-                                    </td>
-                                    <td className="py-2 px-4 text-gray-700">
-                                        {product.categories?.join("، ")}
-                                    </td>
-                                    <td className="py-2 px-4 text-gray-800 font-semibold">
-                                        {product.price.toLocaleString()} تومان
-                                    </td>
-                                    <td className="py-2 px-4 font-bold text-gray-900">
-                                        {product.name}
+                                        <Link
+                                            href={`/adminPanel/products/edit/${product._id}`}
+                                            className="text-[#00786b] font-semibold hover:underline transition select-none"
+                                        >
+                                            ویرایش
+                                        </Link>
                                     </td>
                                 </tr>
                             ))}

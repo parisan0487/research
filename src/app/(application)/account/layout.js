@@ -9,9 +9,9 @@ import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 
 const menuItems = [
-  { href: "/account/orders", label: "سفارش ها" },
-  { href: "/account/address", label: "آدرس ها" },
   { href: "/account/profile", label: "جزئیات حساب" },
+  { href: "/account/orders", label: "سفارش ها" },
+  { href: "/basket", label: "سبد خرید" },
 ];
 
 function getCurrentPageTitle(pathname) {
@@ -71,7 +71,6 @@ export default function AccountLayout({ children }) {
       <Breadcrumb items={breadcrumbItems} />
 
       <div className="flex flex-col md:flex-row-reverse mt-5 gap-6 font-gandom min-h-[70vh]">
-        {/* سایدبار */}
         <aside className="w-full md:max-w-xs rounded-2xl shadow-md bg-white p-4">
           <div className="bg-[#00A693] text-white text-center py-2 rounded-md font-bold mb-4">
             <Link href="/account">پیشخوان</Link>

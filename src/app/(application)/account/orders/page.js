@@ -31,6 +31,37 @@ export default function OrdersPage() {
     fetchOrders();
   }, []);
 
+  const handlePay = async (orderId, amount) => {
+    console.log(orderId, amount)
+    if (!orderId || !amount) return;
+
+    try {
+      const res = await fetch("https://researchback.onrender.com/api/payment", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          amount,
+          description: `پرداخت سفارش شماره ${orderId}`,
+          orderId,
+        }),
+      });
+
+      const data = await res.json();
+
+      if (res.ok && data.url) {
+        window.location.href = data.url;
+      } else {
+        alert(`پرداخت ناموفق بود: ${data?.message || data?.error || "خطای ناشناخته"}`);
+        console.error("❌ Server error:", data);
+      }
+    } catch (err) {
+      alert("خطا در برقراری ارتباط با سرور");
+      console.error("❌ Fetch error:", err);
+    }
+  };
+
   if (loading) {
     return <MiniLoading />;
   }
@@ -81,6 +112,17 @@ export default function OrdersPage() {
               <p className="text-sm text-gray-500">
                 📅 {new Date(order.createdAt).toLocaleDateString("fa-IR")}
               </p>
+
+              {order.status !== "paid" && (
+                <div className="pt-2 text-center">
+                  <button
+                    onClick={() => handlePay(order._id, order.amount)}
+                    className="mt-2 bg-[#00A693] text-white px-4 py-2 rounded-xl text-sm hover:bg-[#009481] transition"
+                  >
+                    💳 همین حالا پرداخت کن
+                  </button>
+                </div>
+              )}
             </li>
           ))}
         </ul>

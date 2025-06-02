@@ -45,7 +45,7 @@ const SearchNav = () => {
         dir="rtl"
         value={value}
         onChange={(e) => setValue(e.target.value)}
-        placeholder="دنبال چی میگردی؟"
+        placeholder= "جستجو..."
         className="w-full h-full pr-1 bg-transparent text-base text-black/70 placeholder:text-black/50 outline-none"
       />
 

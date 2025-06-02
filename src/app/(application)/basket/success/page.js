@@ -31,7 +31,7 @@ export default function SuccessPage() {
           }
         })
         .catch(() => {
-          setMessage("❌ خطا در بررسی پرداخت");
+          // setMessage("❌ خطا در بررسی پرداخت");
           router.push("/basket/failed");
         });
     } else {

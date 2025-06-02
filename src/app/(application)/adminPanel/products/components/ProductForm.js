@@ -292,14 +292,14 @@ export default function ProductForm({ initialData = {}, onSubmit }) {
                         placeholder="رنگ"
                         value={formData.variantInput.color}
                         onChange={handleVariantChange}
-                        className="border px-2 py-1 rounded"
+                        className="border px-2 py-1 rounded sm:w-32"
                     />
                     <input
                         name="size"
                         placeholder="سایز"
                         value={formData.variantInput.size}
                         onChange={handleVariantChange}
-                        className="border px-2 py-1 rounded"
+                        className="border px-2 py-1 rounded sm:w-32"
                     />
                     <input
                         name="stock"
@@ -307,7 +307,7 @@ export default function ProductForm({ initialData = {}, onSubmit }) {
                         type="number"
                         value={formData.variantInput.stock}
                         onChange={handleVariantChange}
-                        className="border px-2 py-1 rounded"
+                        className="border px-2 py-1 rounded sm:w-32"
                     />
                     <input
                         name="price"
@@ -315,7 +315,7 @@ export default function ProductForm({ initialData = {}, onSubmit }) {
                         type="number"
                         value={formData.variantInput.price}
                         onChange={handleVariantChange}
-                        className="border px-2 py-1 rounded"
+                        className="border px-2 py-1 rounded sm:w-32"
                     />
                 </div>
                 <button

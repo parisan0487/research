@@ -123,7 +123,7 @@ export default function Checkout() {
           placeholder={placeholder}
           value={formData[name]}
           onChange={handleChange}
-          className={`p-3 border  "border-gray-300"
+          className={`p-3 border border-gray-300
             } rounded-lg focus:ring-2 focus:ring-[#00A693] outline-none resize-none h-32 text-end`}
         />
       ) : (
@@ -132,7 +132,7 @@ export default function Checkout() {
           placeholder={placeholder}
           value={formData[name]}
           onChange={handleChange}
-          className={`p-3 border "border-gray-300"
+          className={`p-3 border border-gray-300
             } rounded-lg focus:ring-2 focus:ring-[#00A693] outline-none text-end`}
         />
       )}

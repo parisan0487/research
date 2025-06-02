@@ -15,8 +15,6 @@ export default async function Home() {
   const best = allProducts.filter((p) => p.categories?.includes("life"));
   const newP = allProducts.filter((p) => p.categories?.includes("robot"));
 
-  console.log(allProducts);
-
   return (
     <div className="bg-white items-center justify-items-center min-h-screen font-kalameh font-norma">
       <Header />

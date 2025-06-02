@@ -5,6 +5,7 @@ import useOrderStore from "@/store/useOrderStore";
 import { CreditCard, ArrowRight } from "lucide-react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 
 export default function Payment() {
   const router = useRouter();
@@ -39,14 +40,14 @@ export default function Payment() {
       if (res.ok && data.url) {
         window.location.href = data.url;
       } else {
-        alert(
+        toast.error(
           `پرداخت ناموفق بود: ${data?.message || data?.error || "خطای ناشناخته"
           }`
         );
         console.error("❌ Server error:", data);
       }
     } catch (err) {
-      alert("خطا در برقراری ارتباط با سرور");
+      toast.error("خطا در برقراری ارتباط با سرور");
       console.error("❌ Fetch error:", err);
     }
   };

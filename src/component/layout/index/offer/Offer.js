@@ -15,7 +15,6 @@ const Offer = ({ products }) => {
     seconds: 49,
   });
 
-  // Countdown logic
   useEffect(() => {
     const countdown = setInterval(() => {
       setTimeLeft((prev) => {

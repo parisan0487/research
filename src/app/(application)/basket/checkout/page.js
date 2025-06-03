@@ -7,6 +7,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import useOrderStore from "@/store/useOrderStore";
 import toast from "react-hot-toast";
+import Fetch from "@/utils/Fetch";
 
 export default function Checkout() {
   const router = useRouter();
@@ -27,14 +28,13 @@ export default function Checkout() {
 
   useEffect(() => {
     const fetchCart = async () => {
-      const token = localStorage.getItem("token");
-      const res = await fetch("https://researchback.onrender.com/api/cart", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      const data = await res.json();
-      setCart(data);
+      try {
+        const { data } = await Fetch.get('/api/cart', { requiresAuth: true });
+        setCart(data);
+      } catch (error) {
+        console.error("خطا در دریافت سبد خرید:", error);
+        toast.error("خطا در بارگذاری سبد خرید");
+      }
     };
 
     fetchCart();
@@ -92,26 +92,20 @@ export default function Checkout() {
     };
 
     try {
-      const res = await fetch("https://researchback.onrender.com/api/orders", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify(finalFormData),
-      });
+      const { data } = await Fetch.post('/api/orders', finalFormData, { requiresAuth: true });
 
-      if (res.ok) {
-        const { _id: orderId, amount } = await res.json();
-        useOrderStore.getState().setOrder(orderId, amount);
-        console.log(orderId, amount)
+      const { _id: orderId, amount } = data;
 
-        router.push("/basket/payment");
-      } else {
-        toast.error("خطا در ثبت سفارش");
-      }
+      useOrderStore.getState().setOrder(orderId, amount);
+      console.log(orderId, amount);
+
+      router.push('/basket/payment');
     } catch (err) {
-      toast.error("ارتباط با سرور برقرار نشد");
+      if (err.response) {
+        toast.error("خطا در ثبت سفارش");
+      } else {
+        toast.error("ارتباط با سرور برقرار نشد");
+      }
     }
   };
 

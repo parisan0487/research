@@ -1,6 +1,7 @@
 import axios from "axios";
 
 const Fetch = axios.create({
+  baseURL: "https://researchback.onrender.com",
   headers: { "Content-Type": "application/json" },
 });
 
@@ -10,7 +11,7 @@ Fetch.interceptors.request.use(
 
     if (config.token === true) {
       if (!token) {
-        return new Promise(() => {});
+        return Promise.reject(new Error("توکن یافت نشد"));
       }
       config.headers.Authorization = `Bearer ${token}`;
     } else {
@@ -25,7 +26,7 @@ Fetch.interceptors.request.use(
 );
 
 Fetch.interceptors.response.use(
-  (res) => res,
+  (response) => response,
   (error) => Promise.reject(error)
 );
 

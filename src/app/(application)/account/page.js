@@ -1,9 +1,9 @@
 "use client";
 
-import axios from "axios";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { MapPin, Package, UserRound } from "lucide-react";
+import Fetch from "@/utils/Fetch";
 
 export default function AccountPage() {
   const [user, setUser] = useState(null);
@@ -14,12 +14,7 @@ export default function AccountPage() {
         const token = localStorage.getItem("token");
         if (!token) return;
 
-        const response = await axios.get(
-          "https://researchback.onrender.com/api/users",
-          {
-            headers: { Authorization: `Bearer ${token}` },
-          }
-        );
+        const response = await Fetch.get("/api/users");
         setUser(response.data);
       } catch (error) {
         console.error("خطا در دریافت اطلاعات کاربر:", error);

@@ -1,7 +1,9 @@
 "use client";
 
+import MiniLoading from "@/component/layout/loading/MiniLoading";
 import Stepper from "@/component/ui/Stepper";
 import useOrderStore from "@/store/useOrderStore";
+import Fetch from "@/utils/Fetch";
 import { CreditCard, ArrowRight } from "lucide-react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -11,7 +13,7 @@ export default function Payment() {
   const router = useRouter();
   const { orderId, amount } = useOrderStore();
   const [loading, setLoading] = useState(true);
-  
+
   useEffect(() => {
     if (orderId && amount) {
       setLoading(false);
@@ -23,26 +25,21 @@ export default function Payment() {
     if (!amount) return;
 
     try {
-      const res = await fetch("https://researchback.onrender.com/api/payment", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
+      const { data } = await Fetch.post(
+        '/api/payment',
+        {
           amount,
           description: `پرداخت سفارش شماره ${orderId}`,
           orderId,
-        }),
-      });
+        },
+        { requiresAuth: false } 
+      );
 
-      const data = await res.json();
-
-      if (res.ok && data.url) {
+      if (data.url) {
         window.location.href = data.url;
       } else {
         toast.error(
-          `پرداخت ناموفق بود: ${data?.message || data?.error || "خطای ناشناخته"
-          }`
+          `پرداخت ناموفق بود: ${data?.message || data?.error || "خطای ناشناخته"}`
         );
         console.error("❌ Server error:", data);
       }
@@ -52,7 +49,8 @@ export default function Payment() {
     }
   };
 
-  if (loading) return <p>در حال بارگذاری...</p>;
+
+  if (loading) return <MiniLoading />;
 
   return (
     <div className="min-h-screen bg-gray-50 p-5 sm:p-10">

@@ -1,70 +1,70 @@
 "use client";
 
 import MiniLoading from "@/component/layout/loading/MiniLoading";
+import Fetch from "@/utils/Fetch";
 import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 
 export default function UsersPage() {
     const [users, setUsers] = useState([]);
     const [loading, setLoading] = useState(true);
     const [updatingUserId, setUpdatingUserId] = useState(null);
     const [deletingUserId, setDeletingUserId] = useState(null);
+    const [showDeleteModal, setShowDeleteModal] = useState(false);
+    const [selectedUserId, setSelectedUserId] = useState(null);
 
     const fetchUsers = async () => {
         try {
-            const token = localStorage.getItem("token");
-            const res = await fetch("https://researchback.onrender.com/api/users/getAll", {
-                headers: {
-                    "Authorization": `Bearer ${token}`
-                }
-            });
-            const data = await res.json();
+            const { data } = await Fetch.get('/api/users/getAll', { requiresAuth: true });
             setUsers(data);
         } catch (err) {
             console.error("خطا در دریافت کاربران", err);
+            toast.error("خطا در دریافت کاربران");
         } finally {
             setLoading(false);
         }
     };
 
-
     const updateRole = async (id, newRole) => {
         setUpdatingUserId(id);
         try {
-            const token = localStorage.getItem("token");
-            await fetch(`https://researchback.onrender.com/api/users/${id}`, {
-                method: "PUT",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Authorization": `Bearer ${token}`
-                },
-                body: JSON.stringify({ role: newRole }),
-            });
+            await Fetch.put(`/api/users/${id}`, { role: newRole }, { requiresAuth: true });
+            toast.success("نقش کاربر با موفقیت تغییر کرد");
             await fetchUsers();
         } catch (err) {
             console.error("خطا در تغییر نقش:", err);
+            toast.error("خطا در تغییر نقش کاربر");
         } finally {
             setUpdatingUserId(null);
         }
     };
 
 
-    const deleteUser = async (id) => {
-        if (!confirm("آیا از حذف کاربر مطمئن هستید؟")) return;
-        setDeletingUserId(id);
+    const openDeleteModal = (id) => {
+        setSelectedUserId(id);
+        setShowDeleteModal(true);
+    };
+
+    const confirmDelete = async () => {
+        setShowDeleteModal(false);
+        setDeletingUserId(selectedUserId);
         try {
-            const token = localStorage.getItem("token");
-            await fetch(`https://researchback.onrender.com/api/users/${id}`, {
-                method: "DELETE",
-                headers: {
-                    "Authorization": `Bearer ${token}`
-                }
-            });
+            await Fetch.delete(`/api/users/${selectedUserId}`, { requiresAuth: true });
+            toast.success("کاربر با موفقیت حذف شد");
             await fetchUsers();
         } catch (err) {
-            console.error("خطا در حذف کاربر:", err);
+            console.error("خطا در حذف کاربر", err);
+            toast.error("خطا در حذف کاربر");
         } finally {
             setDeletingUserId(null);
+            setSelectedUserId(null);
         }
+    };
+
+    
+    const cancelDelete = () => {
+        setShowDeleteModal(false);
+        setSelectedUserId(null);
     };
 
     useEffect(() => {
@@ -125,7 +125,7 @@ export default function UsersPage() {
                                             {updatingUserId === user._id ? "در حال تغییر..." : "تغییر نقش"}
                                         </button>
                                         <button
-                                            onClick={() => deleteUser(user._id)}
+                                            onClick={() => openDeleteModal(user._id)}
                                             disabled={deletingUserId === user._id}
                                             className={`text-red-600 font-semibold hover:underline transition ${deletingUserId === user._id ? "opacity-60 cursor-wait" : ""
                                                 }`}
@@ -139,6 +139,32 @@ export default function UsersPage() {
                     </table>
                 </div>
             )}
+
+            {showDeleteModal && (
+                <div className="fixed inset-0 flex items-center justify-center z-50">
+                    <div className="bg-white rounded-2xl p-8 w-[350px] max-w-full mx-4 shadow-2xl text-center">
+                        <p className="mb-8 text-xl font-semibold text-gray-900">
+                            آیا از حذف کاربر مطمئن هستید؟
+                        </p>
+                        <div className="flex justify-center gap-6">
+                            <button
+                                onClick={confirmDelete}
+                                className="flex-1 py-3 rounded-lg bg-red-600 text-white font-semibold hover:bg-red-700 transition-colors duration-300 shadow-md"
+                                autoFocus
+                            >
+                                حذف
+                            </button>
+                            <button
+                                onClick={cancelDelete}
+                                className="flex-1 py-3 rounded-lg bg-gray-200 text-gray-700 font-semibold hover:bg-gray-300 transition-colors duration-300 shadow-sm"
+                            >
+                                انصراف
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
+
         </div>
     );
 }

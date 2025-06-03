@@ -2,7 +2,7 @@
 
 import Breadcrumb from "@/component/ui/Breadcrumb";
 import useAuthStore from "@/store/authStore";
-import axios from "axios";
+import Fetch from "@/utils/Fetch";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -40,24 +40,19 @@ export default function AccountLayout({ children }) {
     const fetchUserData = async () => {
       try {
         const token = localStorage.getItem("token");
-        if (!token) {
-          return;
-        }
-
-        const response = await axios.get(
-          "https://researchback.onrender.com/api/users",
-          {
-            headers: { Authorization: `Bearer ${token}` },
-          }
-        );
-
+        if (!token) return;
+  
+        const response = await Fetch.get("/api/users", { token: true });
         setUser(response.data);
         console.log(response.data);
-      } catch (error) {}
+      } catch (error) {
+        console.error("خطا در دریافت اطلاعات کاربر:", error);
+      }
     };
-
+  
     fetchUserData();
   }, []);
+  
 
   const handleLogout = () => {
     localStorage.removeItem("token");

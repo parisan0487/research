@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { Users, PackageOpen, ShoppingCart, Banknote } from "lucide-react";
 import MiniLoading from "@/component/layout/loading/MiniLoading";
+import Fetch from "@/utils/Fetch";
 
 function StatCard({ icon, label, value, suffix }) {
     return (
@@ -27,32 +28,21 @@ export default function AdminDashboard() {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        const token = localStorage.getItem("token");
-        if (!token) return;
-
         const fetchStats = async () => {
-            try {
-                const res = await fetch(
-                    "https://researchback.onrender.com/api/admin/dashboard-stats",
-                    {
-                        headers: { Authorization: `Bearer ${token}` },
-                    }
-                );
-
-                if (!res.ok) throw new Error("خطا در دریافت آمار");
-
-                const statsData = await res.json();
-                setStats(statsData);
-                console.log(statsData)
-            } catch (err) {
-                console.error("خطا در دریافت آمار داشبورد:", err);
-            } finally {
-                setLoading(false);
-            }
+          try {
+            const res = await Fetch.get("/api/admin/dashboard-stats", { token: true });
+            setStats(res.data);
+            console.log(res.data);
+          } catch (err) {
+            console.error("خطا در دریافت آمار داشبورد:", err);
+          } finally {
+            setLoading(false);
+          }
         };
-
+      
         fetchStats();
-    }, []);
+      }, []);
+      
 
     if (loading || !stats) return <MiniLoading />;
 

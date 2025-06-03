@@ -1,18 +1,21 @@
 "use client";
+import MiniLoading from "@/component/layout/loading/MiniLoading";
+import Fetch from "@/utils/Fetch";
 import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 
 export default function ProfilePage() {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
-  const [message, setMessage] = useState("");
 
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const res = await fetch("https://researchback.onrender.com/api/users/");
-        const data = await res.json();
+        const res = await Fetch.get("/api/users/", { token: true });
+        const data = res.data;
+
         setName(data.name || "");
         setPhone(data.phone || "");
       } catch (err) {
@@ -25,33 +28,29 @@ export default function ProfilePage() {
     fetchUser();
   }, []);
 
+
   const handleSave = async () => {
     setSaving(true);
-    setMessage("");
     try {
-      const res = await fetch(
-        "https://researchback.onrender.com/api/users/update",
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ name, phone }),
-        }
+      const res = await Fetch.put(
+        "/api/users/update",
+        { name, phone },
+        { token: true }
       );
 
-      if (res.ok) {
-        setMessage("اطلاعات با موفقیت ذخیره شد ✅");
+      if (res.status >= 200 && res.status < 300) {
+        toast.success("اطلاعات با موفقیت ذخیره شد");
       } else {
-        setMessage("مشکلی در ذخیره اطلاعات به‌وجود آمد ❌");
+        toast.error("مشکلی در ذخیره اطلاعات به‌وجود آمد");
       }
     } catch (err) {
       console.error("خطا در ذخیره اطلاعات:", err);
-      setMessage("خطایی رخ داد ❌");
+      toast.error("خطایی رخ داد");
     } finally {
       setSaving(false);
     }
   };
+
 
   return (
     <div className="p-6 max-w-xl mx-auto text-right space-y-6">
@@ -60,7 +59,7 @@ export default function ProfilePage() {
       </h1>
 
       {loading ? (
-        <p className="text-gray-700">در حال بارگذاری</p>
+        <MiniLoading />
       ) : (
         <div className="space-y-4">
           <div>
@@ -92,10 +91,8 @@ export default function ProfilePage() {
             disabled={saving}
             className="bg-[#00A693] text-white px-6 py-3 rounded-lg font-semibold hover:bg-[#039a87] transition"
           >
-            {saving ? "در حال ذخیره..." : "ذخیره تغییرات"}
+            {saving ? "...در حال ذخیره" : "ذخیره تغییرات"}
           </button>
-
-          {message && <p className="text-sm mt-2 text-gray-700">{message}</p>}
         </div>
       )}
     </div>

@@ -1,6 +1,7 @@
 "use client";
 
 import MiniLoading from "@/component/layout/loading/MiniLoading";
+import Fetch from "@/utils/Fetch";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 
@@ -14,14 +15,11 @@ export default function OrdersPage() {
       if (!token) return;
 
       try {
-        const res = await fetch("https://researchback.onrender.com/api/orders/user-orders", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
+        const res = await Fetch.get("/api/orders/user-orders", {
+          token: true,
         });
 
-        const data = await res.json();
-        setOrders(data);
+        setOrders(res.data);
       } catch (err) {
         console.error("خطا در گرفتن سفارشات:", err);
       } finally {
@@ -32,26 +30,20 @@ export default function OrdersPage() {
     fetchOrders();
   }, []);
 
+
   const handlePay = async (orderId, amount) => {
-    console.log(orderId, amount)
     if (!orderId || !amount) return;
 
     try {
-      const res = await fetch("https://researchback.onrender.com/api/payment", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          amount,
-          description: `پرداخت سفارش شماره ${orderId}`,
-          orderId,
-        }),
+      const res = await Fetch.post("/api/payment", {
+        amount,
+        description: `پرداخت سفارش شماره ${orderId}`,
+        orderId,
       });
 
-      const data = await res.json();
+      const data = res.data;
 
-      if (res.ok && data.url) {
+      if (data.url) {
         window.location.href = data.url;
       } else {
         toast.error(`پرداخت ناموفق بود: ${data?.message || data?.error || "خطای ناشناخته"}`);
@@ -62,6 +54,7 @@ export default function OrdersPage() {
       console.error("❌ Fetch error:", err);
     }
   };
+
 
   if (loading) {
     return <MiniLoading />;

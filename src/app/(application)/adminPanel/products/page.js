@@ -3,28 +3,42 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import MiniLoading from "@/component/layout/loading/MiniLoading";
+import toast from "react-hot-toast";
+import Fetch from "@/utils/Fetch";
 
 export default function ProductsPage() {
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        fetch("https://researchback.onrender.com/api/products")
-            .then((res) => res.json())
-            .then((data) => {
-                setProducts(data);
+        const fetchProducts = async () => {
+            try {
+                const res = await Fetch.get("/api/products");
+                setProducts(res.data);
+            } catch (err) {
+                console.error("خطا در دریافت محصولات:", err);
+                toast.error("خطا در دریافت محصولات")
+            } finally {
                 setLoading(false);
-            })
-            .catch(() => setLoading(false));
+            }
+        };
+
+        fetchProducts();
     }, []);
 
     const handleDelete = async (id) => {
-        const confirm = window.confirm("مطمئنی که می‌خوای این محصول رو حذف کنی؟");
-        if (!confirm) return;
+        const confirmDelete = window.confirm("مطمئنی که می‌خوای این محصول رو حذف کنی؟");
+        if (!confirmDelete) return;
 
-        await fetch(`https://researchback.onrender.com/api/products/${id}`, { method: "DELETE" });
-        setProducts((prev) => prev.filter((p) => p._id !== id));
+        try {
+            await Fetch.delete(`/api/products/${id}`, { token: true });
+            setProducts((prev) => prev.filter((p) => p._id !== id));
+        } catch (err) {
+            console.error("خطا در حذف محصول", err);
+            toast.error("خطا در حذف محصول")
+        }
     };
+
 
     return (
         <div className="min-h-screen p-6 " dir="rtl">

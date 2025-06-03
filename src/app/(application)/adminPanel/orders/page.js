@@ -1,6 +1,7 @@
 "use client";
 
 import MiniLoading from "@/component/layout/loading/MiniLoading";
+import Fetch from "@/utils/Fetch";
 import { useEffect, useState } from "react";
 
 export default function AdminOrdersPage() {
@@ -13,15 +14,9 @@ export default function AdminOrdersPage() {
             if (!token) return;
 
             try {
-                const res = await fetch("https://researchback.onrender.com/api/orders/", {
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                    },
-                });
-
-                const data = await res.json();
-                setOrders(data);
-                console.log(data)
+                const res = await Fetch.get("/api/orders/", { token: true });
+                setOrders(res.data);
+                console.log(res.data);
             } catch (err) {
                 console.error("خطا در گرفتن سفارشات:", err);
             } finally {
@@ -31,6 +26,7 @@ export default function AdminOrdersPage() {
 
         fetchOrders();
     }, []);
+
 
     if (loading) return <MiniLoading />;
 

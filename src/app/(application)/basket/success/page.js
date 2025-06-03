@@ -1,12 +1,12 @@
 "use client";
-import MiniLoading from "@/component/layout/loading/MiniLoading";
+
 import { useSearchParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export default function SuccessPage() {
   const searchParams = useSearchParams();
   const router = useRouter();
-  const [message, setMessage] = useState(<MiniLoading />);
+  const [message, setMessage] = useState("درحال برسی پرداخت");
 
   useEffect(() => {
     const verifyPayment = async () => {

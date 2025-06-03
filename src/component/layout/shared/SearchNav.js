@@ -13,17 +13,26 @@ const SearchNav = () => {
   const pathname = usePathname();
 
   useEffect(() => {
-    if (search.trim()) {
-      Fetch.get(
-        `https://researchback.onrender.com/api/products/search?q=${search}`
-      ).then((res) => setProducts(res.data));
-    } else {
+    if (!search.trim()) {
       setProducts([]);
+      return;
     }
+
+    const debounceTimeout = setTimeout(() => {
+      Fetch.get(
+        `/api/products/search?q=${encodeURIComponent(search)}`
+      )
+        .then((res) => setProducts(res.data))
+        .catch((err) => {
+          console.error("خطا در جستجو:", err);
+          setProducts([]);
+        });
+    }, 400); 
+
+    return () => clearTimeout(debounceTimeout);
   }, [search]);
 
   useEffect(() => {
-    // پاک‌سازی جستجو و نتایج هنگام تغییر مسیر
     setProducts([]);
     setValue("");
   }, [pathname]);
@@ -45,7 +54,7 @@ const SearchNav = () => {
         dir="rtl"
         value={value}
         onChange={(e) => setValue(e.target.value)}
-        placeholder= "جستجو..."
+        placeholder="جستجو..."
         className="w-full h-full pr-1 bg-transparent text-base text-black/70 placeholder:text-black/50 outline-none"
       />
 

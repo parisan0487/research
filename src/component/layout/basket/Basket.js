@@ -6,6 +6,7 @@ import Link from "next/link";
 import Image from "next/image";
 import MiniLoading from "../loading/MiniLoading";
 import toast from "react-hot-toast";
+import Fetch from "@/utils/Fetch";
 
 export default function Basket() {
   const [cart, setCart] = useState(null);
@@ -17,45 +18,38 @@ export default function Basket() {
 
   const fetchCartData = async () => {
     try {
-      const token = localStorage.getItem("token");
-      if (!token) return;
-      const response = await axios.get("https://researchback.onrender.com/api/cart", {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      setCart(response.data);
+      const { data } = await Fetch.get("/api/cart", { requiresAuth: true });
+      setCart(data);
     } catch (error) {
       console.error("Error fetching cart:", error);
+      toast.error("خطا در دریافت سبد خرید");
     }
   };
 
   const handleQuantityChange = async (productId, action) => {
-    const token = localStorage.getItem("token");
-    if (!token) return;
-
     setLoadingItems((prev) => ({ ...prev, [productId]: true }));
 
     try {
       const item = cart.items.find((i) => i.product._id === productId);
-      if (!item) return;
+      if (!item) throw new Error("محصول یافت نشد");
 
       if (action === "increase") {
-        await axios.post(
-          "https://researchback.onrender.com/api/cart/add",
+        await Fetch.post(
+          "/api/cart/add",
           { productId, quantity: 1 },
-          { headers: { Authorization: `Bearer ${token}` } }
+          { requiresAuth: true }
         );
       } else if (action === "decrease") {
         if (item.quantity === 1) {
-          await axios.delete(
-            `https://researchback.onrender.com/api/cart/remove/${productId}`,
-            { headers: { Authorization: `Bearer ${token}` } }
-          );
-          toast.success("محصول با موفقیت حذف شد")
+          await Fetch.delete(`/api/cart/remove/${productId}`, {
+            requiresAuth: true,
+          });
+          toast.success("محصول با موفقیت حذف شد");
         } else {
-          await axios.post(
-            "https://researchback.onrender.com/api/cart/add",
+          await Fetch.post(
+            "/api/cart/add",
             { productId, quantity: -1 },
-            { headers: { Authorization: `Bearer ${token}` } }
+            { requiresAuth: true }
           );
         }
       }
@@ -63,10 +57,12 @@ export default function Basket() {
       await fetchCartData();
     } catch (error) {
       console.error("خطا در تغییر تعداد محصول:", error);
+      toast.error("خطا در تغییر تعداد محصول");
     } finally {
       setLoadingItems((prev) => ({ ...prev, [productId]: false }));
     }
   };
+
 
   if (!cart) return <MiniLoading />;
 

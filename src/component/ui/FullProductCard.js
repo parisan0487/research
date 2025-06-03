@@ -11,6 +11,7 @@ import { Navigation, Autoplay } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import toast from "react-hot-toast";
+import Fetch from "@/utils/Fetch";
 
 export default function FullProduct() {
   const [product, setProduct] = useState();
@@ -25,9 +26,7 @@ export default function FullProduct() {
 
     const fetchProduct = async () => {
       try {
-        const response = await axios.get(
-          `https://researchback.onrender.com/api/products/${slug}`
-        );
+        const response = await Fetch.get(`/api/products/${slug}`);
         if (response.status === 200) {
           setProduct(response.data);
         }
@@ -42,18 +41,15 @@ export default function FullProduct() {
 
   const addToCart = async () => {
     try {
-      const token = localStorage.getItem("token");
-      console.log("Adding product:", product?.id);
-      const response = await axios.post(
-        "https://researchback.onrender.com/api/cart/add",
+      console.log("Adding product:", product?._id);
+      const response = await Fetch.post(
+        "/api/cart/add",
         {
           productId: product._id,
           quantity: 1,
         },
         {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
+          token: true,
         }
       );
       toast.success("محصول با موفقیت به سبد خرید اضافه شد");
@@ -65,18 +61,15 @@ export default function FullProduct() {
   };
 
 
-
   useEffect(() => {
     if (!product || !product.categories) return;
 
     const fetchRelated = async () => {
       try {
-        const response = await axios.get(
-          `https://researchback.onrender.com/api/products/category/${product.categories[0]}`
-        );
+        const response = await Fetch.get(`/api/products/category/${product.categories[0]}`);
         if (response.status === 200) {
           // محصول فعلی رو حذف می‌کنیم از لیست مرتبط‌ها (تا خودش نمایش داده نشه)
-          const filtered = response.data.filter((p) => p.id !== product.id);
+          const filtered = response.data.filter((p) => p._id !== product._id);
           setRelatedProducts(filtered);
         }
       } catch (error) {

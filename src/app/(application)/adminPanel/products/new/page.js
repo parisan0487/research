@@ -5,21 +5,21 @@ import ProductForm from "../components/ProductForm";
 import { useRouter } from "next/navigation";
 import Fetch from "@/utils/Fetch";
 
+
 export default function NewProductPage() {
     const router = useRouter();
 
     const handleAdd = async (formData) => {
         try {
-          await Fetch.post("/api/products", formData, { token: true });
-          router.push("/adminPanel/products");
+            await Fetch.post("/api/products", formData, { token: true });
+            router.push("/adminPanel/products");
         } catch (error) {
-          console.error("Add Product Error:", error?.response?.data || error.message);
-          toast.error(
-            error?.response?.data?.message || "خطا در افزودن محصول. لطفاً ورودی‌ها را بررسی کنید"
-          );
+            console.error("Add Product Error:", error?.response?.data || error.message);
+            toast.error(
+                error?.response?.data?.message || "خطا در افزودن محصول. لطفاً ورودی‌ها را بررسی کنید"
+            );
         }
-      };
-      
+    };
 
 
     return (
@@ -29,8 +29,8 @@ export default function NewProductPage() {
                 dir="rtl"
             >
                 افزودن محصول جدید
-            </h1>    
-                <ProductForm onSubmit={handleAdd} />
+            </h1>
+            <ProductForm onSubmit={handleAdd} />
         </div>
     );
 }

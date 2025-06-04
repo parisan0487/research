@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 
 export default function ProductForm({ initialData = {}, onSubmit }) {
     const [isSubmitting, setIsSubmitting] = useState(false);
+    const [uploading, setUploading] = useState(false);
     const [formData, setFormData] = useState({
         name: "",
         price: "",
@@ -113,6 +114,39 @@ export default function ProductForm({ initialData = {}, onSubmit }) {
     };
 
 
+    const handleImageUpload = async (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+
+        const formData = new FormData();
+        formData.append("image", file);
+
+        try {
+            setUploading(true);
+
+            const res = await fetch("https://researchback.onrender.com/api/upload/image", {
+                method: "POST",
+                body: formData,
+            });
+
+            const data = await res.json();
+
+            if (res.ok) {
+                setFormData((prev) => ({
+                    ...prev,
+                    images: [...prev.images, data.imageUrl], // ✅ درست شد
+                }));
+            } else {
+                console.error("Upload failed:", data.message);
+            }
+        } catch (err) {
+            console.error("Error uploading image", err);
+        } finally {
+            setUploading(false);
+        }
+    };
+
+
 
     return (
         <form
@@ -212,37 +246,41 @@ export default function ProductForm({ initialData = {}, onSubmit }) {
             </div>
 
             {/* تصاویر */}
-            <div>
-                <label className="block mb-1 font-semibold text-[#00a693]">تصاویر (URL)</label>
-                <div className="sm:flex gap-2 grid">
-                    <input
-                        name="imagesInput"
-                        value={formData.imagesInput}
-                        onChange={handleChange}
-                        className="flex-1 border px-3 py-2 rounded"
-                        placeholder="افزودن URL تصویر"
-                    />
-                    <button
-                        type="button"
-                        onClick={() => addToList("images", "imagesInput")}
-                        className="bg-[#00a693] text-white px-4 py-2 rounded"
-                    >
-                        افزودن
-                    </button>
-                </div>
-                <ul className="mt-5 list-disc pr-5 text-sm text-gray-700">
-                    {formData.images.map((url, idx) => (
-                        <li key={idx} className="flex items-center justify-between">
-                            {url}
-                            <button
-                                onClick={() => removeFromList("images", url)}
-                                className="text-red-500 text-sm"
-                            >
-                                حذف
-                            </button>
-                        </li>
-                    ))}
-                </ul>
+            <div className="mb-6">
+                <label className="block mb-2 font-semibold text-[#00a693]">آپلود تصویر محصول</label>
+
+                <input
+                    type="file"
+                    accept="image/*"
+                    onChange={handleImageUpload}
+                    className="border px-3 py-2 rounded w-full"
+                />
+
+                {uploading && (
+                    <p className="text-sm text-gray-500 mt-2 animate-pulse">در حال آپلود...</p>
+                )}
+
+                {formData.images.length > 0 && (
+                    <>
+                        <div className="mt-4 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3">
+                            {formData.images.map((img, index) => (
+                                <div key={index} className="relative group rounded overflow-hidden border shadow-sm">
+                                    <img
+                                        src={img}
+                                        alt="product"
+                                        className="w-full aspect-square object-cover"
+                                    />
+                                    <button
+                                        onClick={() => removeFromList("images", img)}
+                                        className="absolute top-1 left-1 bg-white bg-opacity-80 text-red-600 text-xs px-2 py-0.5 rounded hidden group-hover:block transition duration-150"
+                                    >
+                                        حذف
+                                    </button>
+                                </div>
+                            ))}
+                        </div>
+                    </>
+                )}
             </div>
 
             {/* ویژگی‌ها */}
@@ -358,6 +396,6 @@ export default function ProductForm({ initialData = {}, onSubmit }) {
                 {isSubmitting ? "در حال ذخیره..." : "ذخیره محصول"}
             </button>
 
-        </form>
+        </form >
     );
 }

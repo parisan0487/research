@@ -32,7 +32,6 @@ export default function AdminDashboard() {
           try {
             const res = await Fetch.get("/api/admin/dashboard-stats", { token: true });
             setStats(res.data);
-            console.log(res.data);
           } catch (err) {
             console.error("خطا در دریافت آمار داشبورد:", err);
           } finally {

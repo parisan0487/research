@@ -6,8 +6,6 @@ export default async function ShopPage() {
   });
   const products = await res.json();
 
-  console.log(products);
-
   return (
     <div>
       <ProductShop data={products} />

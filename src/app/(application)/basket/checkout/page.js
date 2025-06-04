@@ -97,7 +97,6 @@ export default function Checkout() {
       const { _id: orderId, amount } = data;
 
       useOrderStore.getState().setOrder(orderId, amount);
-      console.log(orderId, amount);
 
       router.push('/basket/payment');
     } catch (err) {

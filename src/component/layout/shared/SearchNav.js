@@ -27,7 +27,7 @@ const SearchNav = () => {
           console.error("خطا در جستجو:", err);
           setProducts([]);
         });
-    }, 400); 
+    }, 400);
 
     return () => clearTimeout(debounceTimeout);
   }, [search]);
@@ -67,13 +67,17 @@ const SearchNav = () => {
               className="flex items-center justify-between gap-4 p-2 hover:bg-gray-100 rounded-xl transition-colors duration-200 cursor-pointer"
             >
               <div className="flex-shrink-0 w-12 h-12 overflow-hidden rounded-xl bg-gray-200">
-                <Image
-                  src={item.images[0]}
-                  width={48}
-                  height={48}
-                  alt="product-image"
-                  className="w-full h-full object-cover"
-                />
+                {item.images?.[0] ? (
+                  <Image
+                    src={item.images[0]}
+                    width={48}
+                    height={48}
+                    alt="product-image"
+                    className="w-full h-full object-cover"
+                  />
+                ) : (
+                  <div className="w-12 h-12 bg-gray-200 rounded-xl" />
+                )}
               </div>
               <span
                 dir="rtl"

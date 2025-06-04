@@ -41,7 +41,6 @@ export default function FullProduct() {
 
   const addToCart = async () => {
     try {
-      console.log("Adding product:", product?._id);
       const response = await Fetch.post(
         "/api/cart/add",
         {
@@ -53,7 +52,6 @@ export default function FullProduct() {
         }
       );
       toast.success("محصول با موفقیت به سبد خرید اضافه شد");
-      console.log(response);
     } catch (err) {
       toast.error("خطا در افزودن محصول به سبد خرید");
       console.error("Add to cart error:", err.response?.data || err.message);
@@ -78,7 +76,6 @@ export default function FullProduct() {
     };
 
     fetchRelated();
-    console.log("relatedProducts", relatedProducts);
   }, [product]);
 
   return (

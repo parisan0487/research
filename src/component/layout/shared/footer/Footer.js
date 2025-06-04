@@ -49,34 +49,34 @@ export default function Footer() {
             <ul className="space-y-2 text-gray-300 text-base">
               <li>
                 <a
-                  href="/categories/jewelry"
+                  href="/shop/astronomy"
                   className="hover:text-[#56bbaf] transition"
                 >
-                  زیورآلات
+                  نجوم و کیهان شناسی
                 </a>
               </li>
               <li>
                 <a
-                  href="/categories/handmade-leather"
+                  href="/shop/net"
                   className="hover:text-[#56bbaf] transition"
                 >
-                  چرم دست دوز
+                  اینترنت اشیاء
                 </a>
               </li>
               <li>
                 <a
-                  href="/categories/carpet"
+                  href="/shop/robot"
                   className="hover:text-[#56bbaf] transition"
                 >
-                  قالی دستیاف
+                  هوش مصنوعی
                 </a>
               </li>
               <li>
                 <a
-                  href="/categories/ceramic"
+                  href="/shop/lateral"
                   className="hover:text-[#56bbaf] transition"
                 >
-                  سفالی و سرامیکی
+                  محصولات جانبی 
                 </a>
               </li>
             </ul>
@@ -88,22 +88,22 @@ export default function Footer() {
             </h3>
             <ul className="space-y-2 text-gray-300 text-base">
               <li>
-                <a href="/support" className="hover:text-[#56bbaf] transition">
+                <a href="/contact" className="hover:text-[#56bbaf] transition">
                   مرکز پشتیبانی
                 </a>
               </li>
               <li>
-                <a href="/rules" className="hover:text-[#56bbaf] transition">
+                <a href="/contact" className="hover:text-[#56bbaf] transition">
                   قوانین و مقررات
                 </a>
               </li>
               <li>
-                <a href="/privacy" className="hover:text-[#56bbaf] transition">
+                <a href="/about" className="hover:text-[#56bbaf] transition">
                   حریم خصوصی
                 </a>
               </li>
               <li>
-                <a href="/guide" className="hover:text-[#56bbaf] transition">
+                <a href="/contact" className="hover:text-[#56bbaf] transition">
                   راهنمای خرید
                 </a>
               </li>
@@ -116,25 +116,25 @@ export default function Footer() {
             </h3>
             <ul className="space-y-2 text-gray-300 text-base">
               <li>
-                <a href="/about-us" className="hover:text-[#56bbaf] transition">
+                <a href="/about" className="hover:text-[#56bbaf] transition">
                   درباره ما
                 </a>
               </li>
               <li>
                 <a
-                  href="/contact-us"
+                  href="/contact"
                   className="hover:text-[#56bbaf] transition"
                 >
                   تماس با ما
                 </a>
               </li>
               <li>
-                <a href="/why-us" className="hover:text-[#56bbaf] transition">
+                <a href="/about" className="hover:text-[#56bbaf] transition">
                   چرا سایت ما
                 </a>
               </li>
               <li>
-                <a href="/guide" className="hover:text-[#56bbaf] transition">
+                <a href="/contact" className="hover:text-[#56bbaf] transition">
                   راهنمای خرید
                 </a>
               </li>

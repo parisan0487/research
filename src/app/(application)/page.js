@@ -1,6 +1,6 @@
 import Baner from "../../component/layout/index/baner/baner";
 import Best from "../../component/layout/index/best/best";
-import Guide from "../../component/layout/index/guide/Guide";
+import Guide from "../../component/layout/index/guide/Opinion";
 import Header from "../../component/layout/index/header/Header";
 import New from "../../component/layout/index/new/New";
 import Offer from "../../component/layout/index/offer/Offer";

@@ -57,10 +57,6 @@ export default function ProductCard({ product }) {
               </span>
             </div>
           </div>
-
-          <div className="absolute top-3 right-3 bg-emerald-100 text-emerald-700 text-xs px-2 py-1 rounded-full font-bold">
-            15٪
-          </div>
         </div>
       </Link>
     </div>

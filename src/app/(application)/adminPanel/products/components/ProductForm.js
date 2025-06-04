@@ -134,7 +134,7 @@ export default function ProductForm({ initialData = {}, onSubmit }) {
             if (res.ok) {
                 setFormData((prev) => ({
                     ...prev,
-                    images: [...prev.images, data.imageUrl], // ✅ درست شد
+                    images: [...prev.images, data.imageUrl], 
                 }));
             } else {
                 console.error("Upload failed:", data.message);

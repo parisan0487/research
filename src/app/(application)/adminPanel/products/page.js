@@ -59,7 +59,7 @@ export default function ProductsPage() {
                 </h1>
                 <Link
                     href="/adminPanel/products/new"
-                    className="bg-[#00a693] hover:bg-[#00917d] text-white px-4 py-2 rounded-lg text-sm font-semibold shadow-md transition duration-300"
+                    className="bg-[#00a693] hover:bg-[#00917d] text-white px-4 py-2 rounded-lg text-sm text-center font-semibold shadow-md transition duration-300"
                 >
                     محصول جدید +
                 </Link>

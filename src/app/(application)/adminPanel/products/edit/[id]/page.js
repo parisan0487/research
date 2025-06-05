@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import ProductForm from "../../components/ProductForm";
-import MiniLoading from "@/component/layout/loading/MiniLoading";
+import MiniLoading from "@/components/shared/loading/MiniLoading";
 
 export default function EditProductPage() {
     const { id } = useParams();

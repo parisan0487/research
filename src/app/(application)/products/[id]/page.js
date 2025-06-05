@@ -1,4 +1,4 @@
-import FullProduct from "@/component/ui/FullProductCard";
+import FullProduct from "@/components/product/FullProductCard";
 
 export default function ProductPage() {
   return (

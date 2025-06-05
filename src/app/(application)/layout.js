@@ -1,5 +1,5 @@
-import Footer from "../../component/layout/shared/footer/Footer";
-import Navbar from "../../component/layout/shared/navbar/Navbar";
+import Footer from "../../components/shared/footer/Footer";
+import Navbar from "../../components/shared/navbar/Navbar";
 
 function ApplicationLayout({ children }) {
   return (

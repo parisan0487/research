@@ -1,5 +1,5 @@
-import BasketComp from "@/component/layout/basket/Basket";
-import Stepper from "@/component/ui/Stepper";
+import BasketComp from "@/components/basket/Basket";
+import Stepper from "@/components/basket/Stepper";
 
 export default function BasketPage() {
   return (

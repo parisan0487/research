@@ -1,6 +1,6 @@
 "use client";
 
-import Breadcrumb from "@/component/ui/Breadcrumb";
+import Breadcrumb from "@/components/ui/Breadcrumb";
 import useAuthStore from "@/store/authStore";
 import Fetch from "@/utils/Fetch";
 import Link from "next/link";

@@ -1,9 +1,9 @@
-import Baner from "../../component/layout/index/baner/baner";
-import Best from "../../component/layout/index/best/best";
-import Guide from "../../component/layout/index/guide/Opinion";
-import Header from "../../component/layout/index/header/Header";
-import New from "../../component/layout/index/new/New";
-import Offer from "../../component/layout/index/offer/Offer";
+import Baner from "../../components/home/index/baner/baner";
+import Best from "../../components/home/index/best/best";
+import Guide from "../../components/home/index/guide/Opinion";
+import Header from "../../components/home/index/header/Header";
+import New from "../../components/home/index/new/New";
+import Offer from "../../components/home/index/offer/Offer";
 
 export default async function Home() {
   const res = await fetch("https://researchback.onrender.com/api/products/", {
@@ -16,7 +16,7 @@ export default async function Home() {
   const newP = allProducts.filter((p) => p.categories?.includes("robot"));
 
   return (
-    <div className="bg-white items-center justify-items-center min-h-screen font-kalameh font-norma">
+    <div className="bg-white items-center justify-items-center min-h-screen font-kalameh">
       <Header />
       <Offer products={offer} />
       <Baner />

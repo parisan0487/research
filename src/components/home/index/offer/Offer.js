@@ -6,7 +6,7 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import "swiper/css";
 import "swiper/css/navigation";
-import ProductCard from "../../shared/ProductCard";
+import ProductCard from "../../../shared/ProductCard";
 
 const Offer = ({ products }) => {
   const [timeLeft, setTimeLeft] = useState({

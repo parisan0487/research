@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import MiniLoading from "@/component/layout/loading/MiniLoading";
+import MiniLoading from "@/components/shared/loading/MiniLoading";
 import toast from "react-hot-toast";
 import Fetch from "@/utils/Fetch";
 

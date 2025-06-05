@@ -4,7 +4,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import MiniLoading from "../loading/MiniLoading";
+import MiniLoading from "../shared/loading/MiniLoading";
 import toast from "react-hot-toast";
 import Fetch from "@/utils/Fetch";
 

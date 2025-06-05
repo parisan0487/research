@@ -1,4 +1,4 @@
-import Breadcrumb from "@/component/ui/Breadcrumb";
+import Breadcrumb from "@/components/ui/Breadcrumb";
 import Link from "next/link";
 
 export default function About() {

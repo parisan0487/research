@@ -1,7 +1,7 @@
 "use client";
 
-import Breadcrumb from "@/component/ui/Breadcrumb";
-import Stepper from "@/component/ui/Stepper";
+import Breadcrumb from "@/components/ui/Breadcrumb";
+import Stepper from "@/components/basket/Stepper";
 import { usePathname } from "next/navigation";
 
 const menuItems = [

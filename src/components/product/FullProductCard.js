@@ -5,7 +5,7 @@ import { useParams } from "next/navigation";
 import Image from "next/image";
 import { Truck, ShieldCheck, RefreshCw, Wallet } from "lucide-react";
 import axios from "axios";
-import ProductCard from "../layout/shared/ProductCard";
+import ProductCard from "../shared/ProductCard";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Autoplay } from "swiper/modules";
 import "swiper/css";

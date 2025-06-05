@@ -1,9 +1,9 @@
 "use client";
 
 import Link from "next/link";
-import Navbar from "../component/layout/shared/navbar/Navbar";
-import Footer from "../component/layout/shared/footer/Footer";
-import Breadcrumb from "../component/ui/Breadcrumb";
+import Navbar from "../components/shared/navbar/Navbar";
+import Footer from "../components/shared/footer/Footer";
+import Breadcrumb from "../components/ui/Breadcrumb";
 
 function Error({ reset }) {
   return (

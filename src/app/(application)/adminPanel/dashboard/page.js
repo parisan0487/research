@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { Users, PackageOpen, ShoppingCart, Banknote } from "lucide-react";
-import MiniLoading from "@/component/layout/loading/MiniLoading";
+import MiniLoading from "@/components/shared/loading/MiniLoading";
 import Fetch from "@/utils/Fetch";
 
 function StatCard({ icon, label, value, suffix }) {

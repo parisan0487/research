@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Stepper from "@/component/ui/Stepper";
+import Stepper from "@/components/basket/Stepper";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";

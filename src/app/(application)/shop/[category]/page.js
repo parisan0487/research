@@ -1,4 +1,4 @@
-import ProductShop from "@/component/layout/shared/Shop";
+import ProductShop from "@/components/shop/Shop";
 
 async function getProductsByCategory(category) {
   const res = await fetch(

@@ -1,9 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
-import Navbar from "../component/layout/shared/navbar/Navbar";
-import Breadcrumb from "../component/ui/Breadcrumb";
-import Footer from "../component/layout/shared/footer/Footer";
-import BackToLastPageBtn from "../component/layout/error-pages/BackToLastPageBtn";
+import Navbar from "../components/shared/navbar/Navbar";
+import Breadcrumb from "../components/ui/Breadcrumb";
+import Footer from "../components/shared/footer/Footer";
+import BackToLastPageBtn from "../components/error/BackToLastPageBtn";
 
 function Notfound() {
   return (

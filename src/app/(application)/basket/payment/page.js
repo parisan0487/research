@@ -1,7 +1,7 @@
 "use client";
 
-import MiniLoading from "@/component/layout/loading/MiniLoading";
-import Stepper from "@/component/ui/Stepper";
+import MiniLoading from "@/components/shared/loading/MiniLoading";
+import Stepper from "@/components/basket/Stepper";
 import useOrderStore from "@/store/useOrderStore";
 import Fetch from "@/utils/Fetch";
 import { CreditCard, ArrowRight } from "lucide-react";

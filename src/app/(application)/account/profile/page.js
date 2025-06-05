@@ -1,5 +1,5 @@
 "use client";
-import MiniLoading from "@/component/layout/loading/MiniLoading";
+import MiniLoading from "@/components/shared/loading/MiniLoading";
 import Fetch from "@/utils/Fetch";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";

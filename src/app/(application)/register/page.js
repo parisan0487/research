@@ -3,7 +3,7 @@
 import { useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-import Breadcrumb from "@/component/ui/Breadcrumb";
+import Breadcrumb from "@/components/ui/Breadcrumb";
 import toast from "react-hot-toast";
 import useAuthStore from "@/store/authStore";
 

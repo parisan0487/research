@@ -2,8 +2,8 @@
 import { useState, useEffect } from "react";
 import React from "react";
 import Link from "next/link";
-import Loading from "../loading/Loading";
-import Breadcrumb from "@/component/ui/Breadcrumb";
+import Loading from "../shared/loading/Loading";
+import Breadcrumb from "@/components/ui/Breadcrumb";
 
 function ProductShop({ data }) {
   const [products, setProducts] = useState(data);

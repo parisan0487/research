@@ -1,4 +1,4 @@
-import ProductShop from "@/component/layout/shared/Shop";
+import ProductShop from "@/components/shop/Shop";
 
 export default async function ShopPage() {
   const res = await fetch("https://researchback.onrender.com/api/products/", {

@@ -1,4 +1,4 @@
-import Loading from "../component/layout/loading/Loading";
+import Loading from "../components/shared/loading/Loading";
 
 const loading = () => {
   return <Loading />;

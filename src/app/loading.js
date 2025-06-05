@@ -1,7 +1,7 @@
 import Loading from "../components/shared/loading/Loading";
 
-const loading = () => {
+export default function loading() {
   return <Loading />;
 };
 
-export default loading;
+

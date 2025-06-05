@@ -1,11 +1,10 @@
-import Image from "next/image";
 import Link from "next/link";
-import Navbar from "../components/shared/navbar/Navbar";
+import Navbar from "../components/shared/navigation/Navbar";
 import Breadcrumb from "../components/ui/Breadcrumb";
 import Footer from "../components/shared/footer/Footer";
 import BackToLastPageBtn from "../components/error/BackToLastPageBtn";
 
-function Notfound() {
+export default function Notfound() {
   return (
     <>
       <Navbar />
@@ -54,4 +53,4 @@ function Notfound() {
   );
 }
 
-export default Notfound;
+

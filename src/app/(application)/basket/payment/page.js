@@ -5,7 +5,7 @@ import Stepper from "@/components/basket/Stepper";
 import useOrderStore from "@/store/useOrderStore";
 import Fetch from "@/utils/Fetch";
 import { CreditCard, ArrowRight } from "lucide-react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 

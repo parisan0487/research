@@ -5,7 +5,7 @@ import Link from "next/link";
 import SearchNav from "../SearchNav";
 import { usePathname } from "next/navigation";
 
-const SideBar = () => {
+export default function Sidebar() {
   const [isOpen, setIsOpen] = useState(false);
   const [submenuOpen, setSubmenuOpen] = useState(false);
   const currentPage = "صفحه اصلی";
@@ -134,4 +134,4 @@ const SideBar = () => {
   );
 };
 
-export default SideBar;
+

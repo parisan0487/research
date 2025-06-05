@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation";
 
-function BackToLastPageBtn() {
+export default function BackToLastPageBtn() {
   const router = useRouter();
 
   const handleBack = () => {
@@ -19,4 +19,4 @@ function BackToLastPageBtn() {
   );
 }
 
-export default BackToLastPageBtn;
+

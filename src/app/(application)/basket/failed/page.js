@@ -1,9 +1,10 @@
 "use client";
 
 import { XCircle, ArrowRight } from "lucide-react";
-import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export default function Failed() {
+  const router = useRouter();
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col items-center justify-center text-center p-6">
@@ -16,14 +17,13 @@ export default function Failed() {
           <p className="text-gray-700 text-base sm:text-lg">
             متأسفانه پرداخت شما انجام نشد یا توسط شما لغو گردید
           </p>
-          <Link href="/basket">
           <button
+            onClick={() => router.push("/basket")}
             className="mt-6 inline-flex items-center gap-2 px-6 py-3 text-white bg-red-600 hover:bg-red-700 transition-all duration-300 rounded-lg shadow-md"
           >
             <ArrowRight className="w-4 h-4" />
-            بازگشت به صفحه قبل
+            بازگشت به سبد خرید
           </button>
-          </Link>
         </div>
       </div>
     </div>

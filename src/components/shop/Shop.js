@@ -5,7 +5,7 @@ import Link from "next/link";
 import Loading from "../shared/loading/Loading";
 import Breadcrumb from "@/components/ui/Breadcrumb";
 
-function ProductShop({ data }) {
+export default function ProductShop({ data }) {
   const [products, setProducts] = useState(data);
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedColors, setSelectedColors] = useState([]);
@@ -399,4 +399,4 @@ function ProductShop({ data }) {
   );
 }
 
-export default ProductShop;
+

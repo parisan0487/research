@@ -6,9 +6,9 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import "swiper/css";
 import "swiper/css/navigation";
-import ProductCard from "../../../shared/ProductCard";
+import ProductCard from "../../../product/ProductCard";
 
-const Offer = ({ products }) => {
+export default function Offer({ products }) {
   const [timeLeft, setTimeLeft] = useState({
     hours: 18,
     minutes: 42,
@@ -120,4 +120,4 @@ const Offer = ({ products }) => {
   );
 };
 
-export default Offer;
+

@@ -6,7 +6,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Fetch from "@/utils/Fetch";
 
-const SearchNav = () => {
+export default function SearchNav () {
   const [value, setValue] = useState("");
   const search = useDeferredValue(value);
   const [products, setProducts] = useState([]);
@@ -93,4 +93,4 @@ const SearchNav = () => {
   );
 };
 
-export default SearchNav;
+

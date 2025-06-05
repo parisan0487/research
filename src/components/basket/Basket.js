@@ -1,6 +1,6 @@
 "use client";
 
-import axios from "axios";
+
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
@@ -73,10 +73,31 @@ export default function Basket() {
   return (
     <div>
       {cart.items.length === 0 ? (
-        <div className="text-center grid">
-          <h2 className="text-2xl font-semibold text-gray-700">سبد خرید شما خالی است</h2>
-          <p className="text-gray-500 mt-4 mb-10">محصولی برای نمایش وجود ندارد</p>
-          <Link href="/" className="flex items-center w-60 gap-2 sm:text-lg bg-green-500 text-white font-medium py-2.5 px-4 rounded-xl">
+        <div className="flex flex-col items-center justify-center text-center px-4 py-12">
+          <h2 className="text-xl sm:text-2xl font-semibold text-gray-700">
+            سبد خرید شما خالی است
+          </h2>
+          <p className="text-gray-500 mt-3 mb-8 text-sm sm:text-base">
+            محصولی برای نمایش وجود ندارد
+          </p>
+          <Link
+            href="/"
+            className="inline-flex items-center gap-2 text-sm sm:text-base bg-green-500 hover:bg-green-600 transition-colors text-white font-medium py-2.5 px-4 rounded-xl"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+            >
+              <path
+                fillRule="evenodd"
+                clipRule="evenodd"
+                d="M20.5713 3.42859H6.857L3.50628 6.79171L8.42978 11.6974L3.69217 15.5605V20.5714H8.43942V11.707L17.1937 20.4295L20.5444 17.0666L11.6213 8.17584H20.5713V3.42859Z"
+                fill="white"
+              />
+            </svg>
             بازگشت به صفحه اصلی
           </Link>
         </div>

@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-function Breadcrumb({ items }) {
+export default function Breadcrumb({ items }) {
   return (
     <div className="border-t border-gray-100 py-6 flex flex-row-reverse items-center gap-x-1 text-gray-500 font-medium">
       {items.map((item, i) => (
@@ -39,4 +39,4 @@ function Breadcrumb({ items }) {
   );
 }
 
-export default Breadcrumb;
+

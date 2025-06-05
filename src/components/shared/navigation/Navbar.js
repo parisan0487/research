@@ -11,11 +11,11 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import SideBar from "./SideBar";
 import SearchNav from "../SearchNav";
 import useAuthStore from "@/store/authStore";
+import Sidebar from "./Sidebar";
 
-const Navbar = () => {
+export default function Navbar() {
   const [submenuOpen, setSubmenuOpen] = useState(false);
   const timeoutRef = useRef(null);
   const isLoggedIn = useAuthStore((state) => state.isLoggedIn);
@@ -135,9 +135,9 @@ const Navbar = () => {
         </Link>
       </div>
 
-      <SideBar />
+      <Sidebar />
     </header>
   );
 };
 
-export default Navbar;
+

@@ -1,4 +1,4 @@
-import { MapIcon, MapPin, PhoneCall } from "lucide-react";
+import {  MapPin, PhoneCall } from "lucide-react";
 import Image from "next/image";
 
 export default function Footer() {

@@ -5,9 +5,9 @@ import { Navigation, Autoplay } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import Link from "next/link";
-import ProductCard from "../../../shared/ProductCard";
+import ProductCard from "../../../product/ProductCard";
 
-const New = ({ products }) => {
+export default function New({ products }) {
   return (
     <div className="relative py-10 w-full md:h-[40rem] h-[40rem] rounded-xl overflow-hidden">
       <div className="flex items-center justify-between w-full mb-6 px-4">
@@ -62,4 +62,4 @@ const New = ({ products }) => {
   );
 };
 
-export default New;
+

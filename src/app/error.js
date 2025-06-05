@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import Navbar from "../components/shared/navbar/Navbar";
+import Navbar from "../components/shared/navigation/Navbar";
 import Footer from "../components/shared/footer/Footer";
 import Breadcrumb from "../components/ui/Breadcrumb";
 

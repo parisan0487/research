@@ -8,7 +8,7 @@ const steps = [
   { id: 3, title: "پرداخت", icon: <CreditCard size={24} /> },
 ];
 
-const Stepper = ({ currentStep }) => {
+export default function Stepper({ currentStep }) {
   const progressPercent = Math.max(
     ((currentStep - 1) / (steps.length - 1)) * 100,
     20
@@ -43,4 +43,4 @@ const Stepper = ({ currentStep }) => {
   );
 };
 
-export default Stepper;
+

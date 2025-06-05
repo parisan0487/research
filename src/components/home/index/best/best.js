@@ -5,9 +5,9 @@ import { Navigation, Autoplay } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import Link from "next/link";
-import ProductCard from "../../../shared/ProductCard";
+import ProductCard from "../../../product/ProductCard";
 
-const Best = ({ products }) => {
+export default function Best({ products }) {
   return (
     <div className="relative py-10 w-full md:h-[40rem] h-[31rem] md:mt-40 mt-28 rounded-xl overflow-hidden bg-[url(/assets/img/best.png)] bg-no-repeat">
       <div className="flex flex-wrap justify-center items-center content-center">
@@ -62,4 +62,4 @@ const Best = ({ products }) => {
   );
 };
 
-export default Best;
+

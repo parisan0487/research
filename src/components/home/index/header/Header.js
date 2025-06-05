@@ -14,7 +14,7 @@ const imagePaths = [
   "/assets/img/b5.jpg",
 ];
 
-const Header = () => {
+export default function Header() {
   return (
     <div className="w-full h-[500px] mt-5 rounded-2xl overflow-hidden">
       <Swiper
@@ -44,4 +44,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+

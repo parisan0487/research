@@ -69,7 +69,6 @@ export default function RegisterComp() {
         err.response?.data?.message ||
         "خطایی رخ داده است. لطفاً دوباره تلاش کنید.";
       toast.error(errorMessage);
-      console.error("axios error:", err);
     }
   };
 

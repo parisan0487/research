@@ -33,7 +33,6 @@ export default function AdminDashboard() {
             const res = await Fetch.get("/api/admin/dashboard-stats", { token: true });
             setStats(res.data);
           } catch (err) {
-            console.error("خطا در دریافت آمار داشبورد:", err);
           } finally {
             setLoading(false);
           }

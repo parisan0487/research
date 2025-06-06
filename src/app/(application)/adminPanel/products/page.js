@@ -18,7 +18,6 @@ export default function ProductsPage() {
                 const res = await Fetch.get("/api/products");
                 setProducts(res.data);
             } catch (err) {
-                console.error("خطا در دریافت محصولات:", err);
                 toast.error("خطا در دریافت محصولات")
             } finally {
                 setLoading(false);
@@ -44,7 +43,6 @@ export default function ProductsPage() {
             setProducts((prev) => prev.filter((p) => p._id !== deleteId));
             toast.success("محصول با موفقیت حذف شد");
         } catch (err) {
-            console.error("خطا در حذف محصول", err);
             toast.error("خطا در حذف محصول");
         } finally {
             cancelDelete();

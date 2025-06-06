@@ -17,7 +17,6 @@ export default function AdminOrdersPage() {
                 const res = await Fetch.get("/api/orders/", { token: true });
                 setOrders(res.data);
             } catch (err) {
-                console.error("خطا در گرفتن سفارشات:", err);
             } finally {
                 setLoading(false);
             }

@@ -44,9 +44,7 @@ export default function AccountLayout({ children }) {
   
         const response = await Fetch.get("/api/users", { token: true });
         setUser(response.data);
-      } catch (error) {
-        console.error("خطا در دریافت اطلاعات کاربر:", error);
-      }
+      } catch (error) {}
     };
   
     fetchUserData();

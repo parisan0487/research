@@ -19,7 +19,6 @@ export default function ProfilePage() {
         setName(data.name || "");
         setPhone(data.phone || "");
       } catch (err) {
-        console.error("خطا در دریافت اطلاعات کاربر:", err);
       } finally {
         setLoading(false);
       }
@@ -44,7 +43,6 @@ export default function ProfilePage() {
         toast.error("مشکلی در ذخیره اطلاعات به‌وجود آمد");
       }
     } catch (err) {
-      console.error("خطا در ذخیره اطلاعات:", err);
       toast.error("خطایی رخ داد");
     } finally {
       setSaving(false);

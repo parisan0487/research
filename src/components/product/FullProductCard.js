@@ -29,9 +29,7 @@ export default function FullProduct() {
         if (response.status === 200) {
           setProduct(response.data);
         }
-      } catch (error) {
-        console.error("خطا در دریافت محصول:", error);
-      }
+      } catch (error) {}
     };
 
     fetchProduct();
@@ -53,7 +51,6 @@ export default function FullProduct() {
       toast.success("محصول با موفقیت به سبد خرید اضافه شد");
     } catch (err) {
       toast.error("خطا در افزودن محصول به سبد خرید");
-      console.error("Add to cart error:", err.response?.data || err.message);
     }
   };
 
@@ -69,9 +66,7 @@ export default function FullProduct() {
           const filtered = response.data.filter((p) => p._id !== product._id);
           setRelatedProducts(filtered);
         }
-      } catch (error) {
-        console.error("خطا در دریافت محصولات مرتبط:", error);
-      }
+      } catch (error) {}
     };
 
     fetchRelated();

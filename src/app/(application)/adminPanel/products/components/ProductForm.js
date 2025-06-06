@@ -107,7 +107,6 @@ export default function ProductForm({ initialData = {}, onSubmit }) {
 
             await onSubmit(dataToSend);
         } catch (err) {
-            console.error("خطا در ذخیره محصول:", err);
         } finally {
             setIsSubmitting(false);
         }
@@ -137,10 +136,8 @@ export default function ProductForm({ initialData = {}, onSubmit }) {
                     images: [...prev.images, data.imageUrl], 
                 }));
             } else {
-                console.error("Upload failed:", data.message);
             }
         } catch (err) {
-            console.error("Error uploading image", err);
         } finally {
             setUploading(false);
         }

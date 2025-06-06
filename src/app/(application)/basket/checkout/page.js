@@ -32,7 +32,6 @@ export default function Checkout() {
         const { data } = await Fetch.get('/api/cart', { requiresAuth: true });
         setCart(data);
       } catch (error) {
-        console.error("خطا در دریافت سبد خرید:", error);
         toast.error("خطا در بارگذاری سبد خرید");
       }
     };

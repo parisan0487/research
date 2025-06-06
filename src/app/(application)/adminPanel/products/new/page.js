@@ -14,7 +14,6 @@ export default function NewProductPage() {
             await Fetch.post("/api/products", formData, { token: true });
             router.push("/adminPanel/products");
         } catch (error) {
-            console.error("Add Product Error:", error?.response?.data || error.message);
             toast.error(
                 error?.response?.data?.message || "خطا در افزودن محصول. لطفاً ورودی‌ها را بررسی کنید"
             );

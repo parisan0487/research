@@ -21,7 +21,6 @@ export default function Basket() {
       const { data } = await Fetch.get("/api/cart", { requiresAuth: true });
       setCart(data);
     } catch (error) {
-      console.error("Error fetching cart:", error);
       toast.error("خطا در دریافت سبد خرید");
     }
   };
@@ -56,7 +55,6 @@ export default function Basket() {
 
       await fetchCartData();
     } catch (error) {
-      console.error("خطا در تغییر تعداد محصول:", error);
       toast.error("خطا در تغییر تعداد محصول");
     } finally {
       setLoadingItems((prev) => ({ ...prev, [productId]: false }));

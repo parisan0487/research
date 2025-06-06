@@ -24,7 +24,6 @@ export default function SearchNav () {
       )
         .then((res) => setProducts(res.data))
         .catch((err) => {
-          console.error("خطا در جستجو:", err);
           setProducts([]);
         });
     }, 400);

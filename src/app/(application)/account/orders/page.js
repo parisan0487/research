@@ -21,7 +21,6 @@ export default function OrdersPage() {
 
         setOrders(res.data);
       } catch (err) {
-        console.error("خطا در گرفتن سفارشات:", err);
       } finally {
         setLoading(false);
       }
@@ -47,11 +46,9 @@ export default function OrdersPage() {
         window.location.href = data.url;
       } else {
         toast.error(`پرداخت ناموفق بود: ${data?.message || data?.error || "خطای ناشناخته"}`);
-        console.error("❌ Server error:", data);
       }
     } catch (err) {
       toast.error("خطا در برقراری ارتباط با سرور");
-      console.error("❌ Fetch error:", err);
     }
   };
 

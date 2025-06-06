@@ -41,11 +41,9 @@ export default function Payment() {
         toast.error(
           `پرداخت ناموفق بود: ${data?.message || data?.error || "خطای ناشناخته"}`
         );
-        console.error("❌ Server error:", data);
       }
     } catch (err) {
       toast.error("خطا در برقراری ارتباط با سرور");
-      console.error("❌ Fetch error:", err);
     }
   };
 

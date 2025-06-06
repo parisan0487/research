@@ -18,7 +18,6 @@ export default function UsersPage() {
             const { data } = await Fetch.get('/api/users/getAll', { requiresAuth: true });
             setUsers(data);
         } catch (err) {
-            console.error("خطا در دریافت کاربران", err);
             toast.error("خطا در دریافت کاربران");
         } finally {
             setLoading(false);
@@ -32,7 +31,6 @@ export default function UsersPage() {
             toast.success("نقش کاربر با موفقیت تغییر کرد");
             await fetchUsers();
         } catch (err) {
-            console.error("خطا در تغییر نقش:", err);
             toast.error("خطا در تغییر نقش کاربر");
         } finally {
             setUpdatingUserId(null);
@@ -53,7 +51,6 @@ export default function UsersPage() {
             toast.success("کاربر با موفقیت حذف شد");
             await fetchUsers();
         } catch (err) {
-            console.error("خطا در حذف کاربر", err);
             toast.error("خطا در حذف کاربر");
         } finally {
             setDeletingUserId(null);

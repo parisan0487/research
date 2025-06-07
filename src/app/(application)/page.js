@@ -11,18 +11,18 @@ export default async function Home() {
   });
   const allProducts = await res.json();
 
-  const offer = allProducts.filter((p) => p.categories?.includes("astronomy"));
-  const best = allProducts.filter((p) => p.categories?.includes("life"));
-  const newP = allProducts.filter((p) => p.categories?.includes("robot"));
+  const offerProducts = allProducts.filter((p) => p.categories?.includes("astronomy"));
+  const bestProducts = allProducts.filter((p) => p.categories?.includes("life"));
+  const newProducts = allProducts.filter((p) => p.categories?.includes("robot"));
 
   return (
     <div className="bg-white items-center justify-items-center min-h-screen font-kalameh">
       <Header />
-      <Offer products={offer} />
+      <Offer products={offerProducts} />
       <Baner />
-      <Best products={best} />
+      <Best products={bestProducts} />
       <Guide />
-      <New products={newP} />
+      <New products={newProducts} />
     </div>
   );
 }

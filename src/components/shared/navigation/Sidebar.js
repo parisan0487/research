@@ -30,9 +30,9 @@ export default function Sidebar() {
         { href: "/shop/lateral", title: "محصولات جانبی" },
       ],
     },
-    { title: "وبلاگ", href: "/blog" },
+    { title: "وبلاگ", href: "/shop/offer" },
     { title: "تماس با ما", href: "/contact" },
-    { title: "درباره ما", href: "/about" },
+    { title: "پیشنهاد ویژه", href: "/about" },
   ];
 
   return (

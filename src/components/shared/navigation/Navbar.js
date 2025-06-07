@@ -2,11 +2,11 @@
 import React, { useEffect, useRef, useState } from "react";
 import {
   User,
-  CalendarDays,
   HelpCircle,
   Phone,
   ShoppingCart,
   ShoppingCartIcon,
+  Flame,
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -40,9 +40,9 @@ export default function Navbar() {
   const linkHref = isLoggedIn ? "/account" : "/register";
 
   const navLinks = [
-    { href: "/contact", icon: <Phone size={14} />, label: "تماس با ما" },
-    { href: "/about", icon: <HelpCircle size={14} />, label: "درباره ما" },
-    { href: "/blog", icon: <CalendarDays size={14} />, label: "وبلاگ" },
+    { href: "/contact", icon: <Phone size={16} />, label: "تماس با ما" },
+    { href: "/about", icon: <HelpCircle size={16} />, label: "درباره ما" },
+    { href: "/shop/offer", icon: <Flame size={16} />, label: "پیشنهاد ویژه" },
   ];
 
   return (

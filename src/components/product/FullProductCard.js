@@ -11,6 +11,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import toast from "react-hot-toast";
 import Fetch from "@/utils/Fetch";
+import { getFinalPrice, getDiscountPercent, formatPrice } from "@/utils/Price";
 
 export default function FullProduct() {
   const [product, setProduct] = useState();
@@ -29,7 +30,7 @@ export default function FullProduct() {
         if (response.status === 200) {
           setProduct(response.data);
         }
-      } catch (error) {}
+      } catch (error) { }
     };
 
     fetchProduct();
@@ -66,7 +67,7 @@ export default function FullProduct() {
           const filtered = response.data.filter((p) => p._id !== product._id);
           setRelatedProducts(filtered);
         }
-      } catch (error) {}
+      } catch (error) { }
     };
 
     fetchRelated();
@@ -167,18 +168,29 @@ export default function FullProduct() {
                 </li>
               </ul>
 
-              <div className="flex justify-between items-center mt-6 mb-2">
-                <del className="text-gray-400 text-sm">
-                  {product?.discount?.toLocaleString()} تومان
-                </del>
-                <span className="bg-green-100 text-green-700 px-2 py-1 text-xs rounded-lg">
-                  15%
-                </span>
-              </div>
+              {product?.price && (
+                <>
+                  <div className="flex justify-between items-center mt-6 mb-2">
+                    <div className="min-h-[24px]">
+                      {product.discount > 0 && (
+                        <del className="text-gray-400 text-sm">
+                          {formatPrice(product.price)} تومان
+                        </del>
+                      )}
+                    </div>
 
-              <div className="text-xl font-bold text-[#007F5F] mb-4">
-                {product?.price?.toLocaleString()} تومان
-              </div>
+                    {product.discount > 0 && (
+                      <span className="text-white text-xs bg-[#44e4d1] px-2 py-1 rounded-md">
+                        {getDiscountPercent(product.price, product.discount)}٪ تخفیف
+                      </span>
+                    )}
+                  </div>
+
+                  <div className="text-xl font-bold text-[#007F5F] mb-4">
+                    {formatPrice(getFinalPrice(product.price, product.discount))} تومان
+                  </div>
+                </>
+              )}
             </div>
 
             <button

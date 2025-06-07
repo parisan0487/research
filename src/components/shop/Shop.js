@@ -4,6 +4,10 @@ import React from "react";
 import Link from "next/link";
 import Loading from "../shared/loading/Loading";
 import Breadcrumb from "@/components/ui/Breadcrumb";
+import { getFinalPrice, getDiscountPercent, formatPrice } from "@/utils/Price";
+import toast from "react-hot-toast";
+import Fetch from "@/utils/Fetch";
+
 
 export default function ProductShop({ data }) {
   const [products, setProducts] = useState(data);
@@ -15,6 +19,7 @@ export default function ProductShop({ data }) {
   const [isMobileFilterOpen, setIsMobileFilterOpen] = useState(false);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+
 
   const availableColors = ["سبز", "سفید", "مشکی", "ابی", "قرمز", "زرد"];
   const availableSizes = ["xs", "s", "m", "md", "lg", "xl", "2xl"];
@@ -34,15 +39,6 @@ export default function ProductShop({ data }) {
 
   const normalizeColor = (color) => color?.replace(/\s/g, "");
 
-  const extractDiscount = (desc) => {
-    const match = desc?.match(/(\d+)%/);
-    return match ? parseInt(match[1]) : 0;
-  };
-
-  const getFinalPrice = (price, discount) => {
-    return Math.round(price - (price * discount) / 100);
-  };
-
   const filteredProducts = products.filter((product) => {
     const matchesSearch = searchQuery
       ? product.name.toLowerCase().includes(searchQuery.toLowerCase())
@@ -51,19 +47,21 @@ export default function ProductShop({ data }) {
     const matchesColor =
       selectedColors.length > 0
         ? product.variants?.some((variant) =>
-            selectedColors.includes(normalizeColor(variant.color))
-          )
+          selectedColors.includes(normalizeColor(variant.color))
+        )
         : true;
 
     const matchesSize =
       selectedSizes.length > 0
         ? product.variants?.some((variant) =>
-            selectedSizes.includes(variant.size)
-          )
+          selectedSizes.includes(variant.size)
+        )
         : true;
 
     return matchesSearch && matchesColor && matchesSize;
   });
+
+
 
   const productsPerPage = 8;
   const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
@@ -72,15 +70,19 @@ export default function ProductShop({ data }) {
     currentPage * productsPerPage
   );
 
+
   const enhancedProducts = paginatedProducts.map((product) => {
-    const discount = extractDiscount(product.description);
-    const finalPrice = getFinalPrice(product.price, discount);
+    const finalPrice = getFinalPrice(product.price, product.discount);
+    const discountPercent = getDiscountPercent(product.price, product.discount);
+
     return {
       ...product,
-      discount: discount ? `${discount}%` : null,
       finalPrice,
+      discountPercent,
     };
   });
+
+
 
   const handleThumbnailClick = (productId, imgSrc, e) => {
     e.stopPropagation();
@@ -89,6 +91,25 @@ export default function ProductShop({ data }) {
       [productId]: imgSrc,
     }));
   };
+
+  const addToCart = async (productId) => {
+    try {
+      const response = await Fetch.post(
+        "/api/cart/add",
+        {
+          productId,
+          quantity: 1,
+        },
+        {
+          token: true,
+        }
+      );
+      toast.success("محصول با موفقیت به سبد خرید اضافه شد");
+    } catch (err) {
+      toast.error("خطا در افزودن محصول به سبد خرید");
+    }
+  };
+
 
   if (loading) return <Loading className="-top-30" />;
   if (error)
@@ -153,9 +174,8 @@ export default function ProductShop({ data }) {
                             setSelectedColors
                           )
                         }
-                        className={`w-8 h-8 rounded-full border-2 ${
-                          isSelected ? "border-[#44e4d1]" : "border-gray-400"
-                        }`}
+                        className={`w-8 h-8 rounded-full border-2 ${isSelected ? "border-[#44e4d1]" : "border-gray-400"
+                          }`}
                         style={{ backgroundColor: colorMap[color] }}
                       />
                     );
@@ -171,11 +191,10 @@ export default function ProductShop({ data }) {
                   {availableSizes.map((size) => (
                     <button
                       key={size}
-                      className={`px-3 py-1 rounded-full text-sm border ${
-                        selectedSizes.includes(size)
-                          ? "bg-[#44e4d1] text-white border-[#44e4d1]"
-                          : "text-gray-700 border-gray-300 hover:bg-gray-100"
-                      }`}
+                      className={`px-3 py-1 rounded-full text-sm border ${selectedSizes.includes(size)
+                        ? "bg-[#44e4d1] text-white border-[#44e4d1]"
+                        : "text-gray-700 border-gray-300 hover:bg-gray-100"
+                        }`}
                       onClick={() =>
                         toggleSelection(size, selectedSizes, setSelectedSizes)
                       }
@@ -203,12 +222,18 @@ export default function ProductShop({ data }) {
                   className="rounded-xl p-3 bg-gray-100 shadow-lg flex flex-col gap-2"
                 >
                   <Link href={`/products/${product.slug}`}>
-                    <div className="w-full h-52 overflow-hidden rounded-lg bg-gray-100 cursor-pointer">
+                    <div className="relative w-full h-52 overflow-hidden rounded-lg bg-gray-100 cursor-pointer">
                       <img
                         src={mainImage}
                         alt={product.name}
                         className="w-full h-full object-cover"
                       />
+
+                      {product.discount && (
+                        <span className="absolute top-2 left-2 bg-[#44e4d1] text-white text-xs px-2 py-1 rounded-md shadow-md">
+                          {product.discountPercent}%
+                        </span>
+                      )}
                     </div>
                   </Link>
 
@@ -216,11 +241,10 @@ export default function ProductShop({ data }) {
                     {imagesArray.map((img, i) => (
                       <div
                         key={i}
-                        className={`w-10 h-10 rounded-md overflow-hidden cursor-pointer border ${
-                          mainImage === img
-                            ? "border-[#44e4d1]"
-                            : "border-transparent"
-                        }`}
+                        className={`w-10 h-10 rounded-md overflow-hidden cursor-pointer border ${mainImage === img
+                          ? "border-[#44e4d1]"
+                          : "border-transparent"
+                          }`}
                         onClick={(e) =>
                           handleThumbnailClick(product.id, img, e)
                         }
@@ -234,81 +258,131 @@ export default function ProductShop({ data }) {
                     ))}
                   </div>
 
-                  <Link href={`/products/${product.id}`}>
+                  <Link href={`/products/${product.slug}`}>
                     <h2 className="text-center font-medium text-gray-800 cursor-pointer hover:text-[#44e4d1]">
                       {product.name}
                     </h2>
                   </Link>
 
-                  <div className="flex items-center gap-1 text-sm text-gray-600">
-                    {product.price && (
-                      <p className="line-through">
-                        {product.price.toLocaleString()}
-                      </p>
-                    )}
-                    {product.discount && (
-                      <span className="text-white text-xs bg-[#44e4d1] px-2 py-1 rounded-md">
-                        {product.discount}
-                      </span>
-                    )}
-                  </div>
+                  {product.discount ? (
+                    <>
+                      <div className="flex items-center gap-1 text-sm text-gray-600">
+                        <p className="line-through">
+                          {formatPrice(product.price)}
+                        </p>
+                      </div>
 
-                  <div className="flex justify-between items-center mt-auto">
-                    <div className="flex">
-                      <span className="text-black font-bold text-lg">
-                        {product.finalPrice.toLocaleString()}
-                      </span>
-                      <p className="text-gray-400 text-sm ml-1">تومان</p>
-                    </div>
-                    <button
-                      className="bg-[#44e4d1] text-white px-3 py-1 rounded-lg text-sm"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        e.stopPropagation();
-                      }}
-                    >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="25"
-                        height="34"
-                        viewBox="0 0 25 24"
-                        fill="none"
-                        className="stroke-white group-hover:stroke-[#fff]"
+                      <div className="flex justify-between items-center mt-auto">
+                        <div className="flex">
+                          <span className="text-black font-bold text-lg">
+                            {formatPrice(product.finalPrice)}
+                          </span>
+                          <p className="text-gray-400 text-sm ml-1">تومان</p>
+                        </div>
+
+                        <button
+                          className="bg-[#44e4d1] text-white px-3 py-1 rounded-lg text-sm"
+                          onClick={() => addToCart(product._id)}
+                        >
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="25"
+                            height="34"
+                            viewBox="0 0 25 24"
+                            fill="none"
+                            className="stroke-white group-hover:stroke-[#fff]"
+                          >
+                            <path
+                              d="M20 9.5L19.2896 6.89465C19.0157 5.89005 18.8787 5.38775 18.5978 5.00946C18.318 4.63273 17.9378 4.34234 17.5008 4.17152C17.0619 4 16.5413 4 15.5 4M5 9.5L5.7104 6.89465C5.98432 5.89005 6.12128 5.38775 6.40221 5.00946C6.68199 4.63273 7.06216 4.34234 7.49922 4.17152C7.93808 4 8.45872 4 9.5 4"
+                              strokeWidth="1.5"
+                            ></path>
+                            <path
+                              d="M9.5 4C9.5 3.44772 9.94772 3 10.5 3H14.5C15.0523 3 15.5 3.44772 15.5 4C15.5 4.55228 15.0523 5 14.5 5H10.5C9.94772 5 9.5 4.55228 9.5 4Z"
+                              strokeWidth="1.5"
+                            ></path>
+                            <path
+                              d="M8.5 13V17"
+                              strokeWidth="1.5"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            ></path>
+                            <path
+                              d="M16.5 13V17"
+                              strokeWidth="1.5"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            ></path>
+                            <path
+                              d="M12.5 13V17"
+                              strokeWidth="1.5"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            ></path>
+                            <path
+                              d="M4.36425 16.4552C4.90992 18.6379 5.18275 19.7292 5.99654 20.3646C6.81032 21 7.93525 21 10.1851 21H14.8158C17.0656 21 18.1906 21 19.0044 20.3646C19.8181 19.7292 20.091 18.6379 20.6366 16.4552C21.4946 13.0234 21.9236 11.3075 21.0227 10.1538C20.1219 9 18.3532 9 14.8158 9H10.1851C6.64769 9 4.87899 9 3.97816 10.1538C3.44937 10.831 3.37879 11.702 3.58422 13"
+                              strokeWidth="1.5"
+                              strokeLinecap="round"
+                            ></path>
+                          </svg>
+                        </button>
+                      </div>
+                    </>
+                  ) : (
+                    <div className="flex justify-between items-center mt-auto">
+                      <div className="flex">
+                        <span className="text-black font-bold text-lg">
+                          {formatPrice(product.price)}
+                        </span>
+                        <p className="text-gray-400 text-sm ml-1">تومان</p>
+                      </div>
+
+                      <button
+                        className="bg-[#44e4d1] text-white px-3 py-1 rounded-lg text-sm"
+                        onClick={() => addToCart(product._id)}
                       >
-                        <path
-                          d="M20 9.5L19.2896 6.89465C19.0157 5.89005 18.8787 5.38775 18.5978 5.00946C18.318 4.63273 17.9378 4.34234 17.5008 4.17152C17.0619 4 16.5413 4 15.5 4M5 9.5L5.7104 6.89465C5.98432 5.89005 6.12128 5.38775 6.40221 5.00946C6.68199 4.63273 7.06216 4.34234 7.49922 4.17152C7.93808 4 8.45872 4 9.5 4"
-                          strokeWidth="1.5"
-                        ></path>
-                        <path
-                          d="M9.5 4C9.5 3.44772 9.94772 3 10.5 3H14.5C15.0523 3 15.5 3.44772 15.5 4C15.5 4.55228 15.0523 5 14.5 5H10.5C9.94772 5 9.5 4.55228 9.5 4Z"
-                          strokeWidth="1.5"
-                        ></path>
-                        <path
-                          d="M8.5 13V17"
-                          strokeWidth="1.5"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        ></path>
-                        <path
-                          d="M16.5 13V17"
-                          strokeWidth="1.5"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        ></path>
-                        <path
-                          d="M12.5 13V17"
-                          strokeWidth="1.5"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        ></path>
-                        <path
-                          d="M4.36425 16.4552C4.90992 18.6379 5.18275 19.7292 5.99654 20.3646C6.81032 21 7.93525 21 10.1851 21H14.8158C17.0656 21 18.1906 21 19.0044 20.3646C19.8181 19.7292 20.091 18.6379 20.6366 16.4552C21.4946 13.0234 21.9236 11.3075 21.0227 10.1538C20.1219 9 18.3532 9 14.8158 9H10.1851C6.64769 9 4.87899 9 3.97816 10.1538C3.44937 10.831 3.37879 11.702 3.58422 13"
-                          strokeWidth="1.5"
-                          strokeLinecap="round"
-                        ></path>
-                      </svg>
-                    </button>
-                  </div>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="25"
+                          height="34"
+                          viewBox="0 0 25 24"
+                          fill="none"
+                          className="stroke-white group-hover:stroke-[#fff]"
+                        >
+                          <path
+                            d="M20 9.5L19.2896 6.89465C19.0157 5.89005 18.8787 5.38775 18.5978 5.00946C18.318 4.63273 17.9378 4.34234 17.5008 4.17152C17.0619 4 16.5413 4 15.5 4M5 9.5L5.7104 6.89465C5.98432 5.89005 6.12128 5.38775 6.40221 5.00946C6.68199 4.63273 7.06216 4.34234 7.49922 4.17152C7.93808 4 8.45872 4 9.5 4"
+                            strokeWidth="1.5"
+                          ></path>
+                          <path
+                            d="M9.5 4C9.5 3.44772 9.94772 3 10.5 3H14.5C15.0523 3 15.5 3.44772 15.5 4C15.5 4.55228 15.0523 5 14.5 5H10.5C9.94772 5 9.5 4.55228 9.5 4Z"
+                            strokeWidth="1.5"
+                          ></path>
+                          <path
+                            d="M8.5 13V17"
+                            strokeWidth="1.5"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          ></path>
+                          <path
+                            d="M16.5 13V17"
+                            strokeWidth="1.5"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          ></path>
+                          <path
+                            d="M12.5 13V17"
+                            strokeWidth="1.5"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          ></path>
+                          <path
+                            d="M4.36425 16.4552C4.90992 18.6379 5.18275 19.7292 5.99654 20.3646C6.81032 21 7.93525 21 10.1851 21H14.8158C17.0656 21 18.1906 21 19.0044 20.3646C19.8181 19.7292 20.091 18.6379 20.6366 16.4552C21.4946 13.0234 21.9236 11.3075 21.0227 10.1538C20.1219 9 18.3532 9 14.8158 9H10.1851C6.64769 9 4.87899 9 3.97816 10.1538C3.44937 10.831 3.37879 11.702 3.58422 13"
+                            strokeWidth="1.5"
+                            strokeLinecap="round"
+                          ></path>
+                        </svg>
+                      </button>
+                    </div>
+                  )}
                 </div>
               );
             })}
@@ -321,11 +395,10 @@ export default function ProductShop({ data }) {
                 <button
                   key={page}
                   onClick={() => setCurrentPage(page)}
-                  className={`px-3 py-1 rounded-md text-sm border transition-all ${
-                    currentPage === page
-                      ? "bg-black text-white border-black"
-                      : "text-gray-700 border-gray-300 hover:bg-gray-100"
-                  }`}
+                  className={`px-3 py-1 rounded-md text-sm border transition-all ${currentPage === page
+                    ? "bg-black text-white border-black"
+                    : "text-gray-700 border-gray-300 hover:bg-gray-100"
+                    }`}
                 >
                   {page}
                 </button>
@@ -361,9 +434,8 @@ export default function ProductShop({ data }) {
                     onClick={() =>
                       toggleSelection(color, selectedColors, setSelectedColors)
                     }
-                    className={`w-8 h-8 rounded-full border-2 ${
-                      isSelected ? "border-[#44e4d1]" : "border-gray-400"
-                    }`}
+                    className={`w-8 h-8 rounded-full border-2 ${isSelected ? "border-[#44e4d1]" : "border-gray-400"
+                      }`}
                     style={{ backgroundColor: colorMap[color] }}
                   />
                 );
@@ -379,11 +451,10 @@ export default function ProductShop({ data }) {
               {availableSizes.map((size) => (
                 <button
                   key={size}
-                  className={`px-3 py-1 rounded-full text-sm border ${
-                    selectedSizes.includes(size)
-                      ? "bg-[#44e4d1] text-white border-[#44e4d1]"
-                      : "text-gray-700 border-gray-300 hover:bg-gray-100"
-                  }`}
+                  className={`px-3 py-1 rounded-full text-sm border ${selectedSizes.includes(size)
+                    ? "bg-[#44e4d1] text-white border-[#44e4d1]"
+                    : "text-gray-700 border-gray-300 hover:bg-gray-100"
+                    }`}
                   onClick={() =>
                     toggleSelection(size, selectedSizes, setSelectedSizes)
                   }
@@ -394,9 +465,7 @@ export default function ProductShop({ data }) {
             </div>
           </div>
         </div>
-      </div>
+      </div >
     </>
   );
 }
-
-

@@ -281,7 +281,7 @@ export default function ProductShop({ data }) {
                         </div>
 
                         <button
-                          className="bg-[#44e4d1] text-white px-3 py-1 rounded-lg text-sm"
+                          className="bg-[#44e4d1] text-white px-3 py-1 rounded-lg text-sm hover:bg-[#00A693]"
                           onClick={() => addToCart(product._id)}
                         >
                           <svg
@@ -337,8 +337,9 @@ export default function ProductShop({ data }) {
                       </div>
 
                       <button
-                        className="bg-[#44e4d1] text-white px-3 py-1 rounded-lg text-sm"
+                        className="bg-[#44e4d1] text-white px-3 py-1 rounded-lg text-sm hover:bg-[#00A693]"
                         onClick={() => addToCart(product._id)}
+                        
                       >
                         <svg
                           xmlns="http://www.w3.org/2000/svg"

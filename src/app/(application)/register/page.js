@@ -17,6 +17,7 @@ export default function RegisterComp() {
 
   const validateName = (name) => /^[\u0600-\u06FF\sA-Za-z]{3,}$/.test(name);
   const validatePhone = (phone) => /^09\d{9}$/.test(phone);
+  const validatePassword = (password) => /^\S{5,}$/.test(password);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -28,6 +29,10 @@ export default function RegisterComp() {
       }
       if (!validatePhone(phone)) {
         toast("شماره تلفن باید ۱۱ رقم و با ۰۹ شروع شود");
+        return;
+      }
+      if (!validatePassword(password)) {
+        toast("رمز عبور باید حداقل ۵ کاراکتر باشد");
         return;
       }
     }
@@ -67,7 +72,7 @@ export default function RegisterComp() {
     } catch (err) {
       const errorMessage =
         err.response?.data?.message ||
-        "خطایی رخ داده است. لطفاً دوباره تلاش کنید.";
+        "خطایی رخ داده است. لطفاً دوباره تلاش کنید";
       toast.error(errorMessage);
     }
   };

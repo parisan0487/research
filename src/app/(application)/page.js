@@ -11,7 +11,7 @@ export default async function Home() {
   });
   const allProducts = await res.json();
 
-  const offerProducts = allProducts.filter((p) => p.categories?.includes("astronomy"));
+  const offerProducts = allProducts.filter((p) => p.categories?.includes("offer"));
   const bestProducts = allProducts.filter((p) => p.categories?.includes("life"));
   const newProducts = allProducts.filter((p) => p.categories?.includes("robot"));
 

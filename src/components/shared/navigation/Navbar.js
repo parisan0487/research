@@ -99,14 +99,13 @@ export default function Navbar() {
             </p>
 
             {submenuOpen && (
-              <ul className="absolute top-full right-0 flex flex-col bg-gradient-to-br from-[#F8FAFC] to-[#EEF9F4] shadow-xl rounded-xl p-2 mt-2 z-50 min-w-[230px] text-sm border border-[#DCEEEE]">
+              <ul className="absolute top-full right-0 flex flex-col bg-gradient-to-br from-[#F8FAFC] to-[#EEF9F4] shadow-xl rounded-xl p-2 mt-2 z-50 min-w-[205px] text-sm border border-[#DCEEEE]">
                 {[
-                  { href: "/shop/astronomy", label: "نجوم و کیهان شناسی" },
-                  { href: "/shop/physics", label: "فیزیک و آزمایش های جذاب" },
-                  { href: "/shop/life", label: "زیست شناسی و علوم زمین" },
-                  { href: "/shop/net", label: "اینترنت اشیاء" },
-                  { href: "/shop/robot", label: "هوش مصنوعی و رباتیک" },
-                  { href: "/shop/lateral", label: "محصولات جانبی" },
+                  { href: "/shop/handmade-jewelry", label: "زیورآلات دست ساز" },
+                  { href: "/shop/wooden-handicrufts", label: "صنایع دستی چوبی" },
+                  { href: "/shop/clay-crafts", label: "صنایع دستی صفالی" },
+                  { href: "/shop/metal-crafts", label: "صنایع دستی فلزی" },
+                  { href: "/shop/handmade-carpet", label: "فرش دستباف، گلیم و حصیر" },
                 ].map((item) => (
                   <li key={item.href} className="relative group">
                     <Link

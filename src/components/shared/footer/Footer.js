@@ -1,4 +1,4 @@
-import {  MapPin, PhoneCall } from "lucide-react";
+import { MapPin, PhoneCall } from "lucide-react";
 import Image from "next/image";
 
 export default function Footer() {
@@ -32,11 +32,21 @@ export default function Footer() {
               نماد اعتماد الکترونیک
             </p>
             <div className="flex gap-4">
-              <div className="rounded-md bg-white p-2 w-[60px] h-[60px] flex items-center justify-center text-black text-sm font-semibold">
-                مجوز ۱
+              <div className="rounded-md bg-white w-[60px] h-[60px] flex items-center justify-center text-black text-sm font-semibold">
+                <Image
+                  src="/assets/img/inamad.png"
+                  alt="لوگو"
+                  width={65}
+                  height={65}
+                />
               </div>
               <div className="rounded-md bg-white p-2 w-[60px] h-[60px] flex items-center justify-center text-black text-sm font-semibold">
-                مجوز ۲
+                <Image
+                  src="/assets/img/ethadie.png"
+                  alt="لوگو"
+                  width={65}
+                  height={65}
+                />
               </div>
             </div>
           </div>
@@ -49,34 +59,34 @@ export default function Footer() {
             <ul className="space-y-2 text-gray-300 text-base">
               <li>
                 <a
-                  href="/shop/astronomy"
+                  href="/shop/handmade-jewelry"
                   className="hover:text-[#56bbaf] transition"
                 >
-                  نجوم و کیهان شناسی
+                  زیورآلات دست ساز
                 </a>
               </li>
               <li>
                 <a
-                  href="/shop/net"
+                  href="/shop/wooden-handicrufts"
                   className="hover:text-[#56bbaf] transition"
                 >
-                  اینترنت اشیاء
+                  صنایع دستی چوبی
                 </a>
               </li>
               <li>
                 <a
-                  href="/shop/robot"
+                  href="/shop/clay-crafts"
                   className="hover:text-[#56bbaf] transition"
                 >
-                  هوش مصنوعی
+                  صنایع دستی سفالی
                 </a>
               </li>
               <li>
                 <a
-                  href="/shop/lateral"
+                  href="/shop/metal-crafts"
                   className="hover:text-[#56bbaf] transition"
                 >
-                  محصولات جانبی 
+                  صنایع دستی فلزی
                 </a>
               </li>
             </ul>

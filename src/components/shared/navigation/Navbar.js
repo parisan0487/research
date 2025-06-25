@@ -103,7 +103,7 @@ export default function Navbar() {
                 {[
                   { href: "/shop/handmade-jewelry", label: "زیورآلات دست ساز" },
                   { href: "/shop/wooden-handicrufts", label: "صنایع دستی چوبی" },
-                  { href: "/shop/clay-crafts", label: "صنایع دستی صفالی" },
+                  { href: "/shop/clay-crafts", label: "صنایع دستی سفالی" },
                   { href: "/shop/metal-crafts", label: "صنایع دستی فلزی" },
                   { href: "/shop/handmade-carpet", label: "فرش دستباف، گلیم و حصیر" },
                 ].map((item) => (

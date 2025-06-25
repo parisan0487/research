@@ -63,7 +63,7 @@ export default function AccountLayout({ children }) {
       <Breadcrumb items={breadcrumbItems} />
 
       <div className="flex flex-col md:flex-row-reverse mt-5 gap-6 font-gandom min-h-[70vh]">
-        <aside className="w-full md:max-w-xs rounded-2xl shadow-md bg-white p-4">
+        <aside className="w-full md:max-w-xs rounded-2xl shadow-md bg-white p-4 max-h-[470px]">
           <div className="bg-[#00A693] text-white text-center py-2 rounded-md font-bold mb-4">
             <Link href="/account">پیشخوان</Link>
           </div>

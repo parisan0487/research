@@ -209,7 +209,7 @@ export default function ProductShop({ data }) {
         </div>
 
         <div className="w-full md:w-4/5">
-          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
             {enhancedProducts.map((product) => {
               const imagesArray = Array.isArray(product.images)
                 ? product.images

@@ -24,14 +24,25 @@ export default function ProductForm({ initialData = {}, onSubmit }) {
 
 
     useEffect(() => {
-        if (initialData?.categories) {
-            setFormData((prev) => ({
-                ...prev,
-                categories: initialData.categories,
+        if (initialData && Object.keys(initialData).length > 0) {
+            setFormData({
+                name: initialData.name || "",
+                price: initialData.price || "",
+                discount: initialData.discount || "",
+                description: initialData.description || "",
+                producter: initialData.producter || "",
+                images: initialData.images || [],
+                feature: initialData.feature || [],
+                categories: initialData.categories || [],
+                variants: initialData.variants || [],
+                imagesInput: "",
+                featureInput: "",
                 categoryInput: "",
-            }));
+                variantInput: { color: "", size: "", stock: "", price: "" },
+            });
         }
     }, [initialData]);
+
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -133,7 +144,7 @@ export default function ProductForm({ initialData = {}, onSubmit }) {
             if (res.ok) {
                 setFormData((prev) => ({
                     ...prev,
-                    images: [...prev.images, data.imageUrl], 
+                    images: [...prev.images, data.imageUrl],
                 }));
             } else {
             }

@@ -105,7 +105,6 @@ export default function Navbar() {
                   { href: "/shop/wooden-handicrufts", label: "صنایع دستی چوبی" },
                   { href: "/shop/clay-crafts", label: "صنایع دستی سفالی" },
                   { href: "/shop/metal-crafts", label: "صنایع دستی فلزی" },
-                  { href: "/shop/handmade-carpet", label: "فرش دستباف، گلیم و حصیر" },
                 ].map((item) => (
                   <li key={item.href} className="relative group">
                     <Link

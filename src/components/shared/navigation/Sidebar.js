@@ -26,7 +26,6 @@ export default function Sidebar() {
         { href: "/shop/wooden-handicrufts", title: "صنایع دستی چوبی" },
         { href: "/shop/clay-crafts", title: "صنایع دستی سفالی" },
         { href: "/shop/metal-crafts", title: "صنایع دستی فلزی" },
-        { href: "/shop/handmade-carpet", title: "فرش دستباف، گلیم و حصیر" },
       ],
     },
     { title: "پیشنهاد ویژه", href: "/shop/offer" },

@@ -34,7 +34,7 @@ export default function Header() {
 
         <Link href="/shop">
           <motion.button
-            className="bg-[#00a693] hover:bg-[#008d7d] transition duration-500 px-6 py-2 rounded-full text-sm font-medium"
+            className="bg-[#00a693] hover:bg-[#008d7d] transition duration-500 px-6 py-3.5 rounded-full text-sm font-medium"
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5, delay: 0.6 }}

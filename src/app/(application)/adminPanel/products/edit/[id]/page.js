@@ -11,9 +11,13 @@ export default function EditProductPage() {
     const [product, setProduct] = useState(null);
 
     useEffect(() => {
-        fetch(`https://researchback.onrender.com/api/products/${id}`)
+        console.log("id دریافت شده:", id);
+        fetch(`https://researchback.onrender.com/api/products/id/${id}`)
             .then((res) => res.json())
-            .then((data) => setProduct(data));
+            .then((data) => {
+                setProduct(data);
+                console.log("datas", data);
+            })
     }, [id]);
 
     const handleEdit = async (formData) => {

@@ -21,6 +21,7 @@ export default function ProductForm({ initialData = {}, onSubmit }) {
         variantInput: { color: "", size: "", stock: "", price: "" },
         ...initialData,
     });
+    console.log(initialData)
 
 
     useEffect(() => {
@@ -41,6 +42,7 @@ export default function ProductForm({ initialData = {}, onSubmit }) {
                 variantInput: { color: "", size: "", stock: "", price: "" },
             });
         }
+        console.log(initialData)
     }, [initialData]);
 
 

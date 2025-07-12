@@ -12,8 +12,8 @@ export default async function Home() {
   const allProducts = await res.json();
 
   const offerProducts = allProducts.filter((p) => p.categories?.includes("offer"));
-  const bestProducts = allProducts.filter((p) => p.categories?.includes("life"));
-  const newProducts = allProducts.filter((p) => p.categories?.includes("robot"));
+  const bestProducts = allProducts.filter((p) => p.categories?.includes("best"));
+  const newProducts = allProducts.filter((p) => p.categories?.includes("new"));
 
   return (
     <div className="bg-white items-center justify-items-center min-h-screen font-kalameh">

@@ -22,7 +22,7 @@ export default function ProductShop({ data }) {
 
 
   const availableColors = ["سبز", "سفید", "مشکی", "ابی", "قرمز", "زرد"];
-  const availableSizes = ["xs", "s", "m", "md", "lg", "xl", "2xl"];
+  const availableSizes = ["md", "lg", "xl", "2xl"];
 
   useEffect(() => {
     setLoading(false);
@@ -63,7 +63,7 @@ export default function ProductShop({ data }) {
 
 
 
-  const productsPerPage = 8;
+  const productsPerPage = 9;
   const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
   const paginatedProducts = filteredProducts.slice(
     (currentPage - 1) * productsPerPage,
@@ -209,7 +209,7 @@ export default function ProductShop({ data }) {
         </div>
 
         <div className="w-full md:w-4/5">
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4" dir="rtl">
             {enhancedProducts.map((product) => {
               const imagesArray = Array.isArray(product.images)
                 ? product.images

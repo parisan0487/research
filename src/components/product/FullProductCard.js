@@ -42,7 +42,7 @@ export default function FullProduct() {
 
   const addToCart = async () => {
     if (!isLoggedIn) {
-      toast.error("برای افزودن به سبد خرید ابتدا وارد حساب کاربری شوید");
+      toast.error("ابتدا وارد حساب کاربری شوید");
       return;
     }
 

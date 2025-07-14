@@ -7,21 +7,32 @@ import Image from "next/image";
 import MiniLoading from "../shared/loading/MiniLoading";
 import toast from "react-hot-toast";
 import Fetch from "@/utils/Fetch";
+import useAuthStore from "@/store/authStore";
 
 export default function Basket() {
+  const { isLoggedIn, checkAuth } = useAuthStore();
   const [cart, setCart] = useState(null);
   const [loadingItems, setLoadingItems] = useState({});
 
   useEffect(() => {
-    fetchCartData();
+    checkAuth();
   }, []);
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      fetchCartData();
+    } else {
+      setCart({ items: [] });
+    }
+  }, [isLoggedIn]);
+
 
   const fetchCartData = async () => {
     try {
       const { data } = await Fetch.get("/api/cart", { requiresAuth: true });
       setCart(data);
     } catch (error) {
-      toast.error("خطا در دریافت سبد خرید");
+      toast.error("لطفا صفحه را رفرش کنید");
     }
   };
 
@@ -70,13 +81,13 @@ export default function Basket() {
 
   return (
     <div>
-      {cart.items.length === 0 ? (
+      {!isLoggedIn || cart.items.length === 0 ? (
         <div className="flex flex-col items-center justify-center text-center px-4 py-12">
           <h2 className="text-xl sm:text-2xl font-semibold text-gray-700">
             سبد خرید شما خالی است
           </h2>
           <p className="text-gray-500 mt-3 mb-8 text-sm sm:text-base">
-            محصولی برای نمایش وجود ندارد
+            {isLoggedIn ? "محصولی برای نمایش وجود ندارد" : "برای مشاهده سبد خرید، ابتدا وارد حساب کاربری شوید"}
           </p>
           <Link
             href="/"

@@ -12,11 +12,13 @@ import "swiper/css/navigation";
 import toast from "react-hot-toast";
 import Fetch from "@/utils/Fetch";
 import { getFinalPrice, getDiscountPercent, formatPrice } from "@/utils/Price";
+import useAuthStore from "@/store/authStore";
 
 export default function FullProduct() {
   const [product, setProduct] = useState();
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
   const [relatedProducts, setRelatedProducts] = useState([]);
+  const { isLoggedIn } = useAuthStore();
 
   const params = useParams();
   const slug = params.id;
@@ -37,9 +39,15 @@ export default function FullProduct() {
   }, [slug]);
 
 
+
   const addToCart = async () => {
+    if (!isLoggedIn) {
+      toast.error("برای افزودن به سبد خرید ابتدا وارد حساب کاربری شوید");
+      return;
+    }
+
     try {
-      const response = await Fetch.post(
+      await Fetch.post(
         "/api/cart/add",
         {
           productId: product._id,
@@ -54,6 +62,8 @@ export default function FullProduct() {
       toast.error("خطا در افزودن محصول به سبد خرید");
     }
   };
+
+
 
 
   useEffect(() => {

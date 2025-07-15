@@ -2,13 +2,17 @@ import { create } from "zustand";
 
 const useAuthStore = create((set) => ({
   isLoggedIn: false,
+  token: null,
+  user: null, 
 
-  login: (token) => {
+  login: (token, user) => {
     if (typeof window !== "undefined") {
       localStorage.setItem("token", token);
+      localStorage.setItem("user", JSON.stringify(user)); 
     }
-    set({ isLoggedIn: true });
+    set({ isLoggedIn: true, token, user });
   },
+  
 
   logout: () => {
     if (typeof window !== "undefined") {

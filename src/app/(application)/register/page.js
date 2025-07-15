@@ -53,7 +53,7 @@ export default function RegisterComp() {
       });
 
       localStorage.setItem("token", res.data.token);
-      login(res.data.token);
+      login(res.data.token, res.data.user);
 
       toast.success(isLogin ? "ورود موفقیت‌آمیز بود" : "ثبت‌نام موفقیت‌آمیز بود");
 

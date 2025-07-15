@@ -3,7 +3,7 @@
 import Breadcrumb from "@/components/ui/Breadcrumb";
 import useAuthStore from "@/store/authStore";
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 
 const menuItems = [
   { href: "/adminPanel/dashboard", label: "داشبورد آماری" },
@@ -19,8 +19,16 @@ function getCurrentPageTitle(pathname) {
 
 export default function AdminLayout({ children }) {
   const pathname = usePathname();
-  const router = useRouter();
-  const logout = useAuthStore((state) => state.logout);
+  const user = useAuthStore((state) => state.user);
+
+  useEffect(() => {
+    if (!user) {
+      router.push("/login");
+    } else if (user.role !== "admin") {
+      router.push("/not-found");
+    }
+  }, [user]);
+
 
   const currentPage = getCurrentPageTitle(pathname);
 
@@ -48,11 +56,10 @@ export default function AdminLayout({ children }) {
               <li key={item.href}>
                 <Link
                   href={item.href}
-                  className={`block px-3 py-2 rounded-md transition-all ${
-                    pathname.startsWith(item.href)
+                  className={`block px-3 py-2 rounded-md transition-all ${pathname.startsWith(item.href)
                       ? "bg-[#00A693]/10 text-[#00A693] font-bold"
                       : "text-gray-700 hover:text-[#00A693]"
-                  }`}
+                    }`}
                 >
                   {item.label}
                 </Link>

@@ -1,10 +1,10 @@
 "use client";
 
 import Breadcrumb from "@/components/ui/Breadcrumb";
-import useAuthStore from "@/store/authStore";
+import Fetch from "@/utils/Fetch";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const menuItems = [
   { href: "/adminPanel/dashboard", label: "داشبورد آماری" },
@@ -21,16 +21,32 @@ function getCurrentPageTitle(pathname) {
 export default function AdminLayout({ children }) {
   const pathname = usePathname();
   const router = useRouter();
-  const user = useAuthStore((state) => state.user);
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
-    if (!user) {
-      router.push("/register");
-    } else if (user.role !== "admin") {
-      router.push("/not-found");
-    }
-  }, [user]);
+    const fetchUserData = async () => {
+      try {
+        const token = localStorage.getItem("token");
+        if (!token) {
+          router.push("/register");
+          return;
+        }
 
+        const response = await Fetch.get("/api/users", { token: true });
+        const userData = response.data;
+
+        if (userData.role !== "admin") {
+          router.push("/not-found");
+        } else {
+          setUser(userData);
+        }
+      } catch (error) {
+        router.push("/register");
+      }
+    };
+
+    fetchUserData();
+  }, []);
 
   const currentPage = getCurrentPageTitle(pathname);
 
@@ -43,12 +59,14 @@ export default function AdminLayout({ children }) {
     breadcrumbItems.push({ text: currentPage, href: pathname });
   }
 
+  // اگر هنوز اطلاعات کاربر واکشی نشده، چیزی نمایش نده
+  if (!user) return null;
+
   return (
     <>
       <Breadcrumb items={breadcrumbItems} />
 
       <div className="flex flex-col lg:flex-row-reverse mt-5 gap-6 font-gandom min-h-[70vh]">
-        {/* سایدبار */}
         <aside className="w-full lg:max-w-xs rounded-2xl shadow-md bg-white p-4 max-h-[470px]">
           <div className="bg-[#00A693] text-white text-center py-2 rounded-md font-bold mb-4">
             <Link href="/account">پیشخوان</Link>

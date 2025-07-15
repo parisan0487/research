@@ -53,10 +53,17 @@ export default function Checkout() {
     if (!formData.city) newErrors.city = "شهر الزامی است";
     if (!formData.province) newErrors.province = "استان الزامی است";
     if (!formData.address) newErrors.address = "پر کردن این فیلد الزامی است";
-    if (!formData.postalCode) newErrors.postalCode = "کد پستی باید ۱۰ رقم باشد";
-    if (!formData.phone) newErrors.phone = "شماره تلفن باید 11 رقم باشد";
+    if (!/^\d{10}$/.test(formData.postalCode)) {
+      newErrors.postalCode = "کد پستی باید دقیقا ۱۰ رقم باشد";
+    }
+
+    if (!/^09\d{9}$/.test(formData.phone)) {
+      newErrors.phone = "شماره تلفن باید با 09 شروع شده و 11 رقم باشد";
+    }
     return newErrors;
   };
+
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -66,7 +73,6 @@ export default function Checkout() {
       return;
     }
 
-    const token = localStorage.getItem("token");
 
     if (!cart || cart.items.length === 0) {
       toast("سبد خرید شما خالی است");
@@ -125,8 +131,8 @@ export default function Checkout() {
           placeholder={placeholder}
           value={formData[name]}
           onChange={handleChange}
-          className={`p-3 border border-gray-300
-            } rounded-lg focus:ring-2 focus:ring-[#00A693] outline-none text-end`}
+          className={`p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#00A693] outline-none`}
+          dir="rtl"
         />
       )}
       {errors[name] && <p className="text-red-500 text-sm mt-1 text-end">{errors[name]}</p>}
@@ -143,20 +149,27 @@ export default function Checkout() {
               onSubmit={handleSubmit}
               className="grid grid-cols-1 shadow-xl gap-6 p-6 sm:p-10"
             >
-              <div>
+              <div dir="rtl">
                 <h1 className="text-3xl font-bold text-[#00A693] mb-10 text-center">
                   جزئیات صورت‌حساب
                 </h1>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   {renderInput("lastName", "نام خانوادگی")}
                   {renderInput("firstName", "نام")}
                   {renderInput("city", "شهر")}
                   {renderInput("province", "استان")}
-                  {renderInput("address", "آدرس خیابان", "sm:col-span-2")}
+                  {renderInput("address", "آدرس خیابان", "md:col-span-2")}
                   {renderInput("postalCode", "کدپستی")}
                   {renderInput("phone", "تلفن")}
-                  {renderInput("description", "توضیحات سفارش (اختیاری)", "sm:col-span-2", true)}
+                  {renderInput(
+                    "description",
+                    "توضیحات سفارش (اختیاری)",
+                    "md:col-span-2",
+                    true
+                  )}
                 </div>
+
                 <button
                   type="submit"
                   className="mt-8 w-full bg-[#00A693] text-white p-3 rounded-lg hover:bg-[#008B7A] transition-all duration-300 text-lg"

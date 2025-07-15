@@ -4,6 +4,7 @@ import Breadcrumb from "@/components/ui/Breadcrumb";
 import useAuthStore from "@/store/authStore";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useEffect } from "react";
 
 const menuItems = [
   { href: "/adminPanel/dashboard", label: "داشبورد آماری" },

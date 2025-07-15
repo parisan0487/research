@@ -46,7 +46,7 @@ export default function ProductForm({ initialData = {}, onSubmit }) {
     }, [initialData]);
 
 
-    const availableCategories = ["handmade-jewelry", "wooden-handicrufts", "clay-crafts", "metal-crafts"];
+    const availableCategories = ["handmade-jewelry", "wooden-handicrufts", "clay-crafts", "metal-crafts", "new", "offer", "best"];
 
 
     const handleChange = (e) => {
@@ -244,31 +244,6 @@ export default function ProductForm({ initialData = {}, onSubmit }) {
                         </label>
                     ))}
                 </div>
-
-                {formData.categories?.length > 0 && (
-                    <div className="mt-4 flex flex-wrap gap-2">
-                        {formData.categories.map((cat) => (
-                            <span
-                                key={cat}
-                                className="bg-[#e0f7f4] text-[#00786b] px-3 py-1 rounded-full flex items-center gap-2"
-                            >
-                                {cat}
-                                <button
-                                    type="button"
-                                    onClick={() =>
-                                        setFormData((prev) => ({
-                                            ...prev,
-                                            categories: prev.categories.filter((c) => c !== cat),
-                                        }))
-                                    }
-                                    className="text-red-500"
-                                >
-                                    ×
-                                </button>
-                            </span>
-                        ))}
-                    </div>
-                )}
             </div>
 
 

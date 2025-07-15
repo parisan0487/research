@@ -3,7 +3,7 @@
 import Breadcrumb from "@/components/ui/Breadcrumb";
 import useAuthStore from "@/store/authStore";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useEffect } from "react";
 
 const menuItems = [
@@ -20,6 +20,7 @@ function getCurrentPageTitle(pathname) {
 
 export default function AdminLayout({ children }) {
   const pathname = usePathname();
+  const router = useRouter();
   const user = useAuthStore((state) => state.user);
 
   useEffect(() => {

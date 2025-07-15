@@ -19,6 +19,15 @@ export default function RegisterComp() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isRedirecting, setIsRedirecting] = useState(false);
 
+
+  const toEnglishDigits = (str) => {
+    const persianDigits = "۰۱۲۳۴۵۶۷۸۹";
+    const englishDigits = "0123456789";
+  
+    return str.replace(/[۰-۹]/g, (w) => englishDigits[persianDigits.indexOf(w)]);
+  };
+  
+
   const validateName = (name) => /^[\u0600-\u06FF\sA-Za-z]{3,}$/.test(name);
   const validatePhone = (phone) => /^09\d{9}$/.test(phone);
   const validatePassword = (password) => /^\S{5,}$/.test(password);
@@ -138,7 +147,7 @@ export default function RegisterComp() {
                 className="w-full p-3 border rounded-lg shadow-sm focus:ring-2 focus:ring-[#44e4d1] text-end"
                 placeholder="شماره تلفن (مثال: 09123456789)"
                 value={phone}
-                onChange={(e) => setPhone(e.target.value)}
+                onChange={(e) => setPhone(toEnglishDigits(e.target.value))}
               />
             </div>
             <div className="mb-4">
@@ -147,7 +156,7 @@ export default function RegisterComp() {
                 className="w-full p-3 border rounded-lg shadow-sm focus:ring-2 focus:ring-[#44e4d1] text-end"
                 placeholder="رمز عبور"
                 value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                onChange={(e) => setPassword(toEnglishDigits(e.target.value))}
               />
             </div>
             <button

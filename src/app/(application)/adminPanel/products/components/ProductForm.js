@@ -21,7 +21,7 @@ export default function ProductForm({ initialData = {}, onSubmit }) {
         variantInput: { color: "", size: "", stock: "", price: "" },
         ...initialData,
     });
-    console.log(initialData)
+
 
 
     useEffect(() => {
@@ -44,6 +44,9 @@ export default function ProductForm({ initialData = {}, onSubmit }) {
         }
         console.log(initialData)
     }, [initialData]);
+
+
+    const availableCategories = ["handmade-jewelry", "wooden-handicrufts", "clay-crafts", "metal-crafts"];
 
 
     const handleChange = (e) => {
@@ -220,40 +223,54 @@ export default function ProductForm({ initialData = {}, onSubmit }) {
             {/* دسته‌بندی‌ها */}
             <div>
                 <label className="block mb-1 font-semibold text-[#00a693]">دسته‌بندی‌ها</label>
-                <div className="sm:flex gap-2 grid">
-                    <input
-                        name="categoryInput"
-                        value={formData.categoryInput}
-                        onChange={handleChange}
-                        className="flex-1 border px-3 py-2 rounded"
-                        placeholder="افزودن دسته‌بندی"
-                    />
-                    <button
-                        type="button"
-                        onClick={() => addToList("categories", "categoryInput")}
-                        className="bg-[#00a693] text-white px-4 py-2 rounded"
-                    >
-                        افزودن
-                    </button>
-                </div>
-                <div className="mt-3 flex flex-wrap gap-2">
-                    {formData.categories.map((cat, idx) => (
-                        <span
-                            key={idx}
-                            className="bg-[#e0f7f4] text-[#00786b] px-3 py-1 rounded-full flex items-center gap-2"
-                        >
-                            {cat}
-                            <button
-                                type="button"
-                                onClick={() => removeFromList("categories", cat)}
-                                className="text-red-500"
-                            >
-                                ×
-                            </button>
-                        </span>
+                <div className="grid sm:grid-cols-2 gap-2 mt-2">
+                    {availableCategories.map((cat) => (
+                        <label key={cat} className="flex items-center gap-2 cursor-pointer">
+                            <input
+                                type="checkbox"
+                                value={cat}
+                                checked={formData.categories?.includes(cat)}
+                                onChange={(e) => {
+                                    const isChecked = e.target.checked;
+                                    setFormData((prev) => {
+                                        const newList = isChecked
+                                            ? [...(prev.categories || []), cat]
+                                            : prev.categories.filter((c) => c !== cat);
+                                        return { ...prev, categories: newList };
+                                    });
+                                }}
+                            />
+                            <span>{cat}</span>
+                        </label>
                     ))}
                 </div>
+
+                {formData.categories?.length > 0 && (
+                    <div className="mt-4 flex flex-wrap gap-2">
+                        {formData.categories.map((cat) => (
+                            <span
+                                key={cat}
+                                className="bg-[#e0f7f4] text-[#00786b] px-3 py-1 rounded-full flex items-center gap-2"
+                            >
+                                {cat}
+                                <button
+                                    type="button"
+                                    onClick={() =>
+                                        setFormData((prev) => ({
+                                            ...prev,
+                                            categories: prev.categories.filter((c) => c !== cat),
+                                        }))
+                                    }
+                                    className="text-red-500"
+                                >
+                                    ×
+                                </button>
+                            </span>
+                        ))}
+                    </div>
+                )}
             </div>
+
 
             {/* تصاویر */}
             <div className="mb-6">

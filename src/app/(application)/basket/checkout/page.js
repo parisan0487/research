@@ -42,8 +42,19 @@ export default function Checkout() {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
+    const cleanValue = ["phone", "postalCode"].includes(name)
+      ? toEnglishDigits(value)
+      : value;
+    setFormData({ ...formData, [name]: cleanValue });
     setErrors((prev) => ({ ...prev, [name]: "" }));
+  };
+
+
+  const toEnglishDigits = (str) => {
+    const persianDigits = "۰۱۲۳۴۵۶۷۸۹";
+    const englishDigits = "0123456789";
+
+    return str.replace(/[۰-۹]/g, (w) => englishDigits[persianDigits.indexOf(w)]);
   };
 
   const validate = () => {
@@ -56,7 +67,7 @@ export default function Checkout() {
     if (!/^\d{10}$/.test(formData.postalCode)) {
       newErrors.postalCode = "کد پستی باید دقیقا ۱۰ رقم باشد";
     }
-  
+
     if (!/^09\d{9}$/.test(formData.phone)) {
       newErrors.phone = "شماره تلفن باید با 09 شروع شده و 11 رقم باشد";
     }

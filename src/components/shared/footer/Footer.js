@@ -168,7 +168,7 @@ export default function Footer() {
             </div>
           </div>
           <p className="text-gray-300 text-xs font-semibold text-left">
-            © طراحی و توسعه سایت : پریسان غلامی
+            © طراحی و توسعه سایت توسط پریسان غلامی
           </p>
         </div>
       </div>

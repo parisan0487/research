@@ -168,7 +168,7 @@ export default function Footer() {
             </div>
           </div>
           <p className="text-gray-300 text-xs font-semibold text-left">
-            © تمامی حقوق متعلق به فروشگاه صنایع دستی می‌باشد
+            © طراحی و توسعه سایت : پریسان غلامی
           </p>
         </div>
       </div>

@@ -16,6 +16,7 @@ export default function AdminOrdersPage() {
             try {
                 const res = await Fetch.get("/api/orders/", { token: true });
                 setOrders(res.data);
+                console.log(res.data)
             } catch (err) {
             } finally {
                 setLoading(false);
@@ -47,7 +48,7 @@ export default function AdminOrdersPage() {
                         >
                             <div className="border-b pb-3 space-y-2">
                                 <p className="font-medium text-gray-700">
-                                    👤 <span className="text-[#00A693]">{order.userId?.name || "-"}</span> ({order.userId?.phone})
+                                    👤 <span className="text-[#00A693]">{"-"}</span> ({order.firstName})
                                 </p>
                                 <p className="text-sm text-gray-600">
                                     شماره سفارش: <span className="font-semibold">{order._id}</span>

@@ -136,7 +136,7 @@ export default function FullProduct() {
               <span className=" w-46 h-0.5 bg-gray-300 mt-2"></span>
 
               <div className="flex items-center gap-3 text-gray-500 text-sm mt-1">
-                <span>محصولات جانبی</span>
+                <span>صنایع دستی</span>
               </div>
 
               <h3 className="text-[#007F5F] font-bold text-lg mt-4 mb-2">
